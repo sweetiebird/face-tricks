@@ -2,7 +2,7 @@ import React from 'react';
 import NavigationTestUtils from 'react-navigation/NavigationTestUtils';
 import renderer from 'react-test-renderer';
 
-import App from '../App';
+import AppMain from '../App';
 
 jest.mock('expo', () => ({
   AppLoading: 'AppLoading',
@@ -18,12 +18,12 @@ describe('App', () => {
   });
 
   it(`renders the loading screen`, () => {
-    const tree = renderer.create(<App />).toJSON();
+    const tree = renderer.create(<AppMain />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it(`renders the root without loading screen`, () => {
-    const tree = renderer.create(<App skipLoadingScreen />).toJSON();
+    const tree = renderer.create(<AppMain skipLoadingScreen />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

@@ -2,24 +2,27 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import TabBarIcon from 'components/TabBarIcon';
+import { CreateScreen } from 'modules/create/components';
+import { HistoryScreen } from 'modules/history/components';
+import { UserScreen } from 'modules/user/components';
+
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
 });
 
-const HomeStack = createStackNavigator(
+const CreateStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    Create: {
+      screen: CreateScreen,
+    },
   },
   config
 );
 
-HomeStack.navigationOptions = {
+CreateStack.navigationOptions = {
   tabBarLabel: 'Create',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -29,44 +32,48 @@ HomeStack.navigationOptions = {
   ),
 };
 
-HomeStack.path = '';
+CreateStack.path = '';
 
-const LinksStack = createStackNavigator(
+const HistoryStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    History: {
+      screen: HistoryScreen,
+    },
   },
   config
 );
 
-LinksStack.navigationOptions = {
+HistoryStack.navigationOptions = {
   tabBarLabel: 'History',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-contacts' : 'md-contacts'} />
   ),
 };
 
-LinksStack.path = '';
+HistoryStack.path = 'history';
 
-const SettingsStack = createStackNavigator(
+const UserStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    User: {
+      screen: UserScreen,
+    },
   },
   config
 );
 
-SettingsStack.navigationOptions = {
+UserStack.navigationOptions = {
   tabBarLabel: 'Settings',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
 };
 
-SettingsStack.path = '';
+UserStack.path = 'user';
 
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
+  CreateStack,
+  HistoryStack,
+  UserStack,
 });
 
 tabNavigator.path = '';

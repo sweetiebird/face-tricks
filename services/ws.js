@@ -1,44 +1,54 @@
-import { websocketEndpoint } from '../constants/Api';
-import { encode } from 'base-64';
+import { websocketEndpoint } from 'constants/Api';
 
-export const ws = new WebSocket(websocketEndpoint);
 
-export function arrayBufferToBase64(buffer) {
-  let binary = '';
-  const bytes = new Uint8Array(buffer);
-  for (let i = 0, len = bytes.byteLength; i < len; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return encode(binary);
+const ws = new WebSocket(websocketEndpoint);
+
+class Sockets {
+  static isConnected = () => ws.readyState === WebSocket.OPEN;
+
+  queue = [];
+  timer = null;
+
+  clearTimer = () => {
+    clearTimeout(this.timer);
+    this.timer = null;
+  };
+
+  hasQueue = () => this.queue.length > 0;
+
+  emptyQueue = () => {
+    if (Sockets.isConnected()) {
+      this.clearTimer();
+
+      while (this.hasQueue()) {
+        ws.send(this.queue.shift());
+      }
+    }
+  };
+
+  sendMessage = (message) => {
+    if (Sockets.isConnected()) {
+      this.queue.push(message);
+      this.emptyQueue();
+    } else {
+      this.queue.push(message);
+      this.timer = setTimeout(this.emptyQueue, 10);
+    }
+  };
+
+  setOnClose = (callback) => {
+    ws.onclose = callback;
+  };
+
+  setOnMessage = (callback) => {
+    ws.onmessage = callback;
+  };
+
+  setOnOpen = (callback) => {
+    ws.onopen = () => {
+      callback(ws);
+    };
+  };
 }
 
-ws.onopen = () => {
-  console.log('websocket open');
-  // sendMessage(`(ado
-  //
-  // (mac w/size (w h rest: body)
-  //   \`(let img (do ,@body)
-  //       (if (image? img)
-  //           (resize-image img '(,w ,h))
-  //         img)))
-  //
-  // (await (set-data data*.13))
-  // (await (set-estimate))
-  // (await (process))
-  // ;(await (send-image doomguy))
-  //
-  // (w/size 128 128
-  //   (grab-image nil 0.8 '(0.5 smile 0.5 fear 0.5 anger 5.0 hair_blond 3 age_young)))
-  //
-  // )`);
-};
-
-ws.onclose = (evt) => {
-  console.log('websocket closed', evt.code, evt.reason);
-};
-
-
-
-export const sendMessage = (message) => {
-  ws.send(message);
-};
+export default Sockets;

@@ -1,6 +1,6 @@
-import * as Websockets from './ws';
+import Sockets from './ws';
 
 
 export {
-  Websockets,
+  Sockets,
 };
