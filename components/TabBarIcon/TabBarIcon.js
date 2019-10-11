@@ -1,7 +1,7 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
-import Colors from 'constants/Colors';
+import { colors } from 'constants';
 
 import { styles } from './styled';
 
@@ -12,7 +12,7 @@ const TabBarIcon = (props) => {
       name={props.name}
       size={26}
       style={styles}
-      color={props.focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+      color={props.focused ? colors.primaryHover : colors.tabIconDefault}
     />
   );
 };

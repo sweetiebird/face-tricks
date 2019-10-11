@@ -19,6 +19,14 @@ const AppMain = ({ skipLoadingScreen }) => {
           await Promise.all([
             Font.loadAsync({
               ...Ionicons.font,
+              'roboto-black': require('assets/fonts/Roboto-Black.ttf'),
+              'roboto-black-italic': require('assets/fonts/Roboto-BlackItalic.ttf'),
+              'roboto-italic': require('assets/fonts/Roboto-Italic.ttf'),
+              'roboto-light': require('assets/fonts/Roboto-Light.ttf'),
+              'roboto-light-italic': require('assets/fonts/Roboto-LightItalic.ttf'),
+              'roboto-medium': require('assets/fonts/Roboto-Medium.ttf'),
+              'roboto-regular': require('assets/fonts/Roboto-Regular.ttf'),
+              'roboto-thin': require('assets/fonts/Roboto-Thin.ttf'),
             }),
           ])
         }}

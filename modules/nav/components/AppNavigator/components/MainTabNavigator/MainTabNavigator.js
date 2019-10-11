@@ -2,6 +2,8 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
+import { colors } from 'constants';
+
 import TabBarIcon from 'components/TabBarIcon';
 import { CreateScreen } from 'modules/create/components';
 import { HistoryScreen } from 'modules/history/components';
@@ -74,6 +76,11 @@ const tabNavigator = createBottomTabNavigator({
   CreateStack,
   HistoryStack,
   UserStack,
+}, {
+  tabBarOptions: {
+    activeTintColor: colors.primaryHover,
+    inactiveTintColor: colors.tabIconDefault,
+  },
 });
 
 tabNavigator.path = '';
