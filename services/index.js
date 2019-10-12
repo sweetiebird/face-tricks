@@ -1,4 +1,4 @@
-import Sockets from './ws';
+import Sockets from './sockets';
 
 
 export {

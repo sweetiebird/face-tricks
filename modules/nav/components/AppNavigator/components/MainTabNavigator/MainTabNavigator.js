@@ -4,10 +4,11 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import { colors } from 'constants';
 
-import TabBarIcon from 'components/TabBarIcon';
 import { CreateScreen } from 'modules/create/components';
 import { HistoryScreen } from 'modules/history/components';
 import { UserScreen } from 'modules/user/components';
+
+import { TabBarIcon } from 'components';
 
 
 const config = Platform.select({

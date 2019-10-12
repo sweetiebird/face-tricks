@@ -24,6 +24,7 @@
     "expo-font": "^7.0.0",
     "expo-image-picker": "~7.0.0",
     "expo-web-browser": "^7.0.0",
+    "firebase": "^7.2.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "16.8.3",

@@ -37,7 +37,7 @@ const AppMain = ({ skipLoadingScreen }) => {
   } else {
     return (
       <MainView>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar />
         <AppNavigator />
       </MainView>
     );
