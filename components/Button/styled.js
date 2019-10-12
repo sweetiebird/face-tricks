@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components/native';
 
 import { colors } from 'constants';
 
+
 const primaryCss = css`
   background-color: ${colors.primary};
   border-color: ${colors.primary};

@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
-import { View } from 'react-native';
+
+import { icons } from 'constants';
 
 import { InvertedButton, PreviewImage } from 'components';
 
-import { ContainerStyled, ScrollViewStyled } from './styled';
+import {
+  ButtonViewStyled,
+  ContainerStyled,
+  ScrollViewStyled,
+} from './styled';
 
 
 const CreateScreen = () => {
@@ -15,9 +20,9 @@ const CreateScreen = () => {
   return (
     <ContainerStyled>
       <ScrollViewStyled contentContainerStyle={{ paddingTop: 30 }}>
-        <View style={{ width: '60%', marginLeft: '20%', marginRight: '20%', marginBottom: 40 }}>
+        <ButtonViewStyled>
           <InvertedButton
-            icon="md-cloud-upload"
+            icon={icons.ADD_IMAGE}
             onPress={() => {
               ImagePicker.launchImageLibraryAsync({
                 allowsEditing: true,
@@ -32,13 +37,9 @@ const CreateScreen = () => {
           >
             Add Image
           </InvertedButton>
-        </View>
+        </ButtonViewStyled>
 
-        {!!imageData && (
-          <PreviewImage
-            uri={imageData.uri}
-          />
-        )}
+        {!!imageData && <PreviewImage uri={imageData.uri} />}
       </ScrollViewStyled>
     </ContainerStyled>
   );

@@ -1,6 +1,8 @@
-import Sockets from './sockets';
+import Auth from './auth';
+import Socket from './socket';
 
 
 export {
-  Sockets,
+  Auth,
+  Socket,
 };
