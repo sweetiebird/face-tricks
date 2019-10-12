@@ -1,9 +1,9 @@
 import * as types from './types';
 
 
-const name = 'user';
+export const name = 'user';
 
-const initialState = {
+export const initialState = {
   displayName: null,
   email: null,
   isAnonymous: undefined,
@@ -14,7 +14,7 @@ const initialState = {
   uid: null,
 };
 
-const reducer = (state = {}, action) => {
+export const reducer = (state = {}, action) => {
   switch (action.type) {
     case types.LOGIN_SUCCESS:
       return {
@@ -40,10 +40,3 @@ const reducer = (state = {}, action) => {
       return state;
   }
 };
-
-
-export {
-  initialState,
-  name,
-};
-export default reducer;

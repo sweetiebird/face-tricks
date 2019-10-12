@@ -12,7 +12,7 @@ const TabBarIcon = (props) => {
       name={props.name}
       size={26}
       style={styles}
-      color={props.focused ? colors.primaryHover : colors.tabIconDefault}
+      color={props.isFocused ? colors.primaryHover : colors.tabIconDefault}
     />
   );
 };

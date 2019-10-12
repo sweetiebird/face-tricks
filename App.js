@@ -1,18 +1,19 @@
-import bugsnag from '@bugsnag/expo';
-
 import React from 'react';
+import bugsnag from '@bugsnag/expo';
 import { Provider } from 'react-redux';
 
 import createStore from 'store';
 
 import AppMain from './AppMain';
 
-import settings from './app.json';
+import getEnv from './environment';
 
+
+const env = getEnv();
 
 const store = createStore();
 
-global.bugsnagClient = bugsnag(settings.expo.extra.bugsnag.apiKey);
+global.bugsnagClient = bugsnag(env.bugsnag.key);
 
 const App = ({ skipLoadingScreen }) => (
   <Provider store={store}>

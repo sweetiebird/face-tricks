@@ -1,12 +1,11 @@
 import { combineReducers } from 'redux';
 
+import { reducer as user } from 'modules/user';
 
-const appReducer = (state = {}, action = {}) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
+
+const appReducer = combineReducers({
+  [user.name]: user.reducer,
+});
 
 
 export default appReducer;

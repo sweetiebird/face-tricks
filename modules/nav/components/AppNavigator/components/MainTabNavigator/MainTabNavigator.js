@@ -2,7 +2,7 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import { colors } from 'constants';
+import { colors, icons } from 'constants';
 
 import { CreateScreen } from 'modules/create/components';
 import { HistoryScreen } from 'modules/history/components';
@@ -16,62 +16,63 @@ const config = Platform.select({
   default: {},
 });
 
+// =========
+// 'create' tab
+// =========
+
 const CreateStack = createStackNavigator(
-  {
-    Create: {
-      screen: CreateScreen,
-    },
-  },
+  { Create: CreateScreen },
   config
 );
 
 CreateStack.navigationOptions = {
   tabBarLabel: 'Create',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-color-wand' : 'md-color-wand'}
-    />
+    <TabBarIcon isFocused={focused} name={icons.CREATE} />
   ),
 };
 
 CreateStack.path = '';
 
+// =========
+// 'history' tab
+// =========
+
 const HistoryStack = createStackNavigator(
-  {
-    History: {
-      screen: HistoryScreen,
-    },
-  },
+  { History: HistoryScreen },
   config
 );
 
 HistoryStack.navigationOptions = {
   tabBarLabel: 'History',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-contacts' : 'md-contacts'} />
+    <TabBarIcon isFocused={focused} name={icons.HISTORY} />
   ),
 };
 
 HistoryStack.path = 'history';
 
+// =========
+// 'user' tab
+// =========
+
 const UserStack = createStackNavigator(
-  {
-    User: {
-      screen: UserScreen,
-    },
-  },
+  { User: UserScreen },
   config
 );
 
 UserStack.navigationOptions = {
   tabBarLabel: 'Settings',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    <TabBarIcon isFocused={focused} name={icons.USER} />
   ),
 };
 
 UserStack.path = 'user';
+
+// =========
+// base stack
+// =========
 
 const tabNavigator = createBottomTabNavigator({
   CreateStack,
@@ -85,5 +86,6 @@ const tabNavigator = createBottomTabNavigator({
 });
 
 tabNavigator.path = '';
+
 
 export default tabNavigator;

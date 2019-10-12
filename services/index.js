@@ -1,5 +1,5 @@
-import Auth from './auth';
 import Socket from './socket';
+import { Auth } from './firebase';
 
 
 export {

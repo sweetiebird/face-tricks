@@ -32,5 +32,5 @@ const configureStore = (hydrate = {}) => {
 };
 
 
-export { storeAccessor };
+export { storeAccessor as store };
 export default configureStore;
