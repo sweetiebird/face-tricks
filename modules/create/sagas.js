@@ -1,5 +1,5 @@
-import { eventChannel } from 'redux-saga'
-import { all, call, fork, put, take, takeEvery } from 'redux-saga/effects';
+import { eventChannel, END } from 'redux-saga'
+import { all, call, fork, put, take, takeEvery, takeLatest } from 'redux-saga/effects';
 
 import { Socket } from 'services';
 
@@ -10,6 +10,7 @@ import * as types from './types';
 
 async function socketChannel(id) {
   const socket = await Socket.init();
+  let count = 0;
 
   return () => {
     return eventChannel((emitter) => {
@@ -48,7 +49,16 @@ async function socketChannel(id) {
       const handleResult = async (e) => {
         const buffer = e.data;
         const uri = await parse.image(buffer);
+
         emitter({ resultUri: uri });
+
+        count += 1;
+
+        if (count >= 11) {
+          count = 0;
+          emitter({ finished: true });
+          emitter(END);
+        }
       };
 
       socket.setOnMessage(handleResult);
@@ -64,8 +74,11 @@ async function socketChannel(id) {
 
 function* imageSuccess(payload) {
   try {
+    console.log(payload);
     if (payload.resultUri) {
       yield put(actions.sendImageSuccess(payload.resultUri));
+    } else if (payload.finished) {
+      yield put(actions.imageResultFinish());
     }
   } catch (err) {
     yield put(actions.sendImageFailure(err.message, err));
@@ -81,14 +94,16 @@ function* sendImage(image) {
   }
 }
 
-function* watchEvents() {
-  const { payload } = yield take(types.IMAGE_RESULT_ID);
-
-  const makeChannel = yield call(socketChannel, payload.resultId);
+function* watchEvents(action) {
+  const makeChannel = yield call(socketChannel, action.payload.resultId);
 
   const chan = yield call(makeChannel);
 
   yield takeEvery(chan, imageSuccess);
+}
+
+function* watchForResultId() {
+  yield takeLatest(types.IMAGE_RESULT_ID, watchEvents);
 }
 
 function* watch() {
@@ -110,5 +125,5 @@ function* watch() {
 }
 
 export default function* rootSaga() {
-  yield all([watch(), watchEvents()]);
+  yield all([watch(), watchForResultId()]);
 }

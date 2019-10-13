@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 
 export const ButtonViewStyled = styled.View`
-  margin: 40px 20%;
+  margin: 20px 20% 40px;
   width: 60%;
 `;
 

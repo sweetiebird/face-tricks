@@ -5,6 +5,7 @@ import { colors } from 'constants';
 
 const italicCss = css`
   font-family: roboto-italic;
+  opacity: 0.8;
 `;
 
 export const DefaultTextStyled = styled.Text`

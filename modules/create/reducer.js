@@ -21,7 +21,7 @@ export const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isFetching: true,
-        result: [],
+        results: [],
       };
 
     case types.SEND_IMAGE_SUCCESS:
@@ -32,6 +32,12 @@ export const reducer = (state = initialState, action = {}) => {
       };
 
     case types.SEND_IMAGE_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+      };
+
+    case types.IMAGE_RESULT_FINISH:
       return {
         ...state,
         isFetching: false,

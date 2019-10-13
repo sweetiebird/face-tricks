@@ -11,6 +11,7 @@ import {
   DefaultText,
   InvertedButton,
   PreviewImage,
+  Progress,
   SuccessButton,
 } from 'components';
 
@@ -65,6 +66,24 @@ const CreateScreen = (props) => {
           </View>
         )}
 
+        {results.length > 0 && (
+          <View
+            style={{
+              position: 'relative',
+              width: size,
+              height: size * 0.8,
+              marginTop: 20,
+            }}
+          >
+            {results.map(uri => (
+              <PreviewImage
+                key={uri}
+                uri={uri}
+              />
+            ))}
+          </View>
+        )}
+
         {isFetching && (
           <DefaultText
             italic
@@ -78,36 +97,24 @@ const CreateScreen = (props) => {
           </DefaultText>
         )}
 
-        {results.length > 0 && (
-          <View
-            style={{
-              position: 'relative',
-              width: size,
-              height: size * 0.8,
-            }}
-          >
-            {results.map(uri => (
-              <PreviewImage
-                key={uri}
-                uri={uri}
-              />
-            ))}
-          </View>
+        {isFetching && (
+          <Progress progress={results.length ? results.length * 0.1 : 0} />
         )}
 
-        <ButtonViewStyled>
-          <SuccessButton
-            icon={icons.CREATE}
-            isDisabled={isFetching || !imageData}
-            isLoading={isFetching}
-            onPress={async () => {
-              const file = await FS.getFile(imageData.uri);
-              sendImage(file);
-            }}
-          >
-            Generate
-          </SuccessButton>
-        </ButtonViewStyled>
+        {!isFetching && (
+          <ButtonViewStyled>
+            <SuccessButton
+              icon={icons.CREATE}
+              isDisabled={!imageData}
+              onPress={async () => {
+                const file = await FS.getFile(imageData.uri);
+                sendImage(file);
+              }}
+            >
+              Generate
+            </SuccessButton>
+          </ButtonViewStyled>
+        )}
       </ScrollViewStyled>
     </ContainerStyled>
   );

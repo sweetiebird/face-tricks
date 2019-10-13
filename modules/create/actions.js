@@ -20,3 +20,7 @@ export const sendImageFailure = (message, error) => ({
   payload: { message, error },
   type: types.SEND_IMAGE_FAILURE,
 });
+
+export const imageResultFinish = () => ({
+  type: types.IMAGE_RESULT_FINISH,
+});
