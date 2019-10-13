@@ -6,8 +6,8 @@ import 'firebase/storage';
 import getEnv from 'config/environment';
 
 import Auth from './auth';
-// import Database from './database';
-// import Storage from './storage';
+import Database from './database';
+import Storage from './storage';
 
 
 const env = getEnv();
@@ -26,12 +26,12 @@ const config = {
 firebase.initializeApp(config);
 
 Auth.init(firebase);
-// Database.init(firebase);
-// Storage.init(firebase);
+Database.init(firebase);
+Storage.init(firebase);
 
 
 export {
   Auth,
-  // Database,
-  // Storage
+  Database,
+  Storage
 };
