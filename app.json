@@ -36,6 +36,11 @@
       "package": "com.emilykolar.FaceWeave",
       "googleServicesFile": "config/google-services.json"
     },
+    "extra": {
+      "bugsnag": {
+        "apiKey": "b95c6436c75580ea061b8380aaf446bd"
+      }
+    },
     "hooks": {
       "postPublish": [
         {
