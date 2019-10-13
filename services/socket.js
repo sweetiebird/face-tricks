@@ -1,52 +1,58 @@
 import { api } from 'constants';
 
 
-const ws = new WebSocket(api.websocketEndpoint);
-
 class Socket {
-  static queue = [];
-  static timer = null;
+  ws = new WebSocket(api.websocketEndpoint);
+  queue = [];
+  timer = null;
 
-  static clearTimer = () => {
-    clearTimeout(Socket.timer);
-    Socket.timer = null;
+  static init = async () => {
+    return new Promise((resolve) => {
+      const socket = new Socket();
+      socket.ws.onopen = () => resolve(socket);
+    });
   };
 
-  static emptyQueue = () => {
-    Socket.clearTimer();
+  clearTimer = () => {
+    clearTimeout(this.timer);
+    this.timer = null;
+  };
 
-    if (Socket.isConnected()) {
-      while (Socket.hasQueue()) {
-        ws.send(Socket.queue.shift());
+  emptyQueue = () => {
+    this.clearTimer();
+
+    if (this.isConnected()) {
+      while (this.hasQueue()) {
+        this.ws.send(this.queue.shift());
       }
     } else {
-      Socket.startQueueTimer();
+      this.startQueueTimer();
     }
   };
 
-  static hasQueue = () => Socket.queue.length > 0;
+  hasQueue = () => this.queue.length > 0;
 
-  static isConnected = () => ws.readyState === WebSocket.OPEN;
+  isConnected = () => this.ws.readyState === WebSocket.OPEN;
 
-  static sendMessage = (message) => {
-    Socket.queue.push(message);
-    Socket.emptyQueue();
+  sendMessage = (message) => {
+    this.queue.push(message);
+    this.emptyQueue();
   };
 
-  static setOnClose = (callback) => {
-    ws.onclose = callback;
+  setOnClose = (callback) => {
+    this.ws.onclose = callback;
   };
 
-  static setOnMessage = (callback) => {
-    ws.onmessage = callback;
+  setOnMessage = (callback) => {
+    this.ws.onmessage = callback;
   };
 
-  static setOnOpen = (callback) => {
-    ws.onopen = callback;
+  setOnOpen = (callback) => {
+    this.ws.onopen = callback;
   };
 
-  static startQueueTimer = () => {
-    Socket.timer = setTimeout(Socket.emptyQueue, 10);
+  startQueueTimer = () => {
+    this.timer = setTimeout(this.emptyQueue, 10);
   };
 }
 

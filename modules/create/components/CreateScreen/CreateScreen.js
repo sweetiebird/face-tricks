@@ -20,7 +20,7 @@ import {
 
 
 const CreateScreen = (props) => {
-  const { result, sendImage } = props;
+  const { isFetching, result, sendImage } = props;
   const [imageData, setImageData] = useState(null);
 
   return (
@@ -51,6 +51,7 @@ const CreateScreen = (props) => {
         <ButtonViewStyled>
           <SuccessButton
             icon={icons.CREATE}
+            isDisabled={isFetching}
             onPress={async () => {
               const file = await FS.getFile(imageData.uri);
               sendImage(file);
@@ -65,11 +66,13 @@ const CreateScreen = (props) => {
 };
 
 CreateScreen.propTypes = {
+  isFetching: PropTypes.bool,
   sendImage: PropTypes.func.isRequired,
   result: PropTypes.any,
 };
 
 CreateScreen.defaultProps = {
+  isFetching: false,
   result: null,
 };
 

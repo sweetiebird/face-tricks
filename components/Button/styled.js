@@ -33,8 +33,8 @@ export const ButtonStyled = styled.View`
   padding: 0 18px;
   ${props => props.primary ? primaryCss : ''}
   ${props => props.inverted ? invertedCss : ''}
-  ${props => props.disabled ? disabledCss : ''}
   ${props => props.success ? successCss : ''}
+  ${props => props.disabled ? disabledCss : ''}
 `;
 
 const primaryTextCss = css`
@@ -60,6 +60,6 @@ export const ButtonTextStyled = styled.Text`
   line-height: 52px;
   ${props => props.primary ? primaryTextCss : ''}
   ${props => props.inverted ? invertedTextCss : ''}
-  ${props => props.disabled ? disabledTextCss : ''}
   ${props => props.success ? successTextCss : ''}
+  ${props => props.disabled ? disabledTextCss : ''}
 `;
