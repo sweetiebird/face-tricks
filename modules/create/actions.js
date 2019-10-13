@@ -6,8 +6,13 @@ export const sendImageRequest = image => ({
   type: types.SEND_IMAGE_REQUEST,
 });
 
-export const sendImageSuccess = payload => ({
-  payload,
+export const imageResultId = resultId => ({
+  payload: { resultId },
+  type: types.IMAGE_RESULT_ID,
+});
+
+export const sendImageSuccess = result => ({
+  payload: { result },
   type: types.SEND_IMAGE_SUCCESS,
 });
 

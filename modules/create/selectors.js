@@ -11,6 +11,11 @@ export const getIsFetching = createSelector(
   state => state.isFetching,
 );
 
+export const getResultId = createSelector(
+  [getState],
+  state => state.resultId,
+);
+
 export const getResult = createSelector(
   [getState],
   state => state.result,

@@ -46,7 +46,13 @@ const CreateScreen = (props) => {
         </ButtonViewStyled>
 
         {!!imageData && <PreviewImage uri={imageData.uri} />}
-        {!!result && <PreviewImage uri={result} />}
+
+        {result.map(uri => (
+          <PreviewImage
+            key={uri}
+            uri={uri}
+          />
+        ))}
 
         <ButtonViewStyled>
           <SuccessButton
@@ -68,12 +74,12 @@ const CreateScreen = (props) => {
 CreateScreen.propTypes = {
   isFetching: PropTypes.bool,
   sendImage: PropTypes.func.isRequired,
-  result: PropTypes.any,
+  result: PropTypes.arrayOf(PropTypes.string),
 };
 
 CreateScreen.defaultProps = {
   isFetching: false,
-  result: null,
+  result: [],
 };
 
 CreateScreen.navigationOptions = {
