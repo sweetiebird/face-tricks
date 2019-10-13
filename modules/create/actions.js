@@ -24,3 +24,8 @@ export const sendImageFailure = (message, error) => ({
 export const imageResultFinish = () => ({
   type: types.IMAGE_RESULT_FINISH,
 });
+
+export const imageAdded = uri => ({
+  payload: { uri },
+  type: types.IMAGE_ADDED,
+});

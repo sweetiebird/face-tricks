@@ -4,7 +4,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import { colors, icons } from 'constants';
 
-import { CreateScreen } from 'modules/create/components';
+import { CreateScreen, EditScreen } from 'modules/create/components';
 import { HistoryScreen } from 'modules/history/components';
 import { UserScreen } from 'modules/user/components';
 
@@ -21,8 +21,11 @@ const config = Platform.select({
 // =========
 
 const CreateStack = createStackNavigator(
-  { Create: CreateScreen },
-  config
+  {
+    Create: CreateScreen,
+    Edit: EditScreen,
+  },
+  config,
 );
 
 CreateStack.navigationOptions = {

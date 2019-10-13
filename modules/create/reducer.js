@@ -5,12 +5,19 @@ export const name = 'create';
 
 export const initialState = {
   isFetching: false,
+  imageUri: null,
   resultId: null,
   results: [],
 };
 
 export const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case types.IMAGE_ADDED:
+      return {
+        ...initialState,
+        imageUri: action.payload.uri,
+      };
+
     case types.IMAGE_RESULT_ID:
       return {
         ...state,

@@ -5,13 +5,14 @@ import * as ImagePicker from 'expo-image-picker';
 
 import { icons } from 'constants';
 
+import { Navigation } from 'services';
+
 import { FS } from 'utils';
 
 import {
   DefaultText,
   InvertedButton,
   PreviewImage,
-  Progress,
   SuccessButton,
 } from 'components';
 
@@ -23,7 +24,7 @@ import {
 
 
 const CreateScreen = (props) => {
-  const { isFetching, results, sendImage } = props;
+  const { isFetching, sendImage } = props;
   const [imageData, setImageData] = useState(null);
 
   const { width: size } = Dimensions.get('window');
@@ -66,55 +67,19 @@ const CreateScreen = (props) => {
           </View>
         )}
 
-        {results.length > 0 && (
-          <View
-            style={{
-              position: 'relative',
-              width: size,
-              height: size * 0.8,
-              marginTop: 20,
+        <ButtonViewStyled>
+          <SuccessButton
+            icon={icons.CREATE}
+            isDisabled={!imageData || isFetching}
+            onPress={async () => {
+              const file = await FS.getFile(imageData.uri);
+              sendImage(file);
+              Navigation.navigate('Edit');
             }}
           >
-            {results.map(uri => (
-              <PreviewImage
-                key={uri}
-                uri={uri}
-              />
-            ))}
-          </View>
-        )}
-
-        {isFetching && (
-          <DefaultText
-            italic
-            style={{
-              marginTop: 20,
-              width: '100%',
-              textAlign: 'center',
-            }}
-          >
-            Learning your face (this can take a minute)...
-          </DefaultText>
-        )}
-
-        {isFetching && (
-          <Progress progress={results.length ? results.length * 0.1 : 0} />
-        )}
-
-        {!isFetching && (
-          <ButtonViewStyled>
-            <SuccessButton
-              icon={icons.CREATE}
-              isDisabled={!imageData}
-              onPress={async () => {
-                const file = await FS.getFile(imageData.uri);
-                sendImage(file);
-              }}
-            >
-              Generate
-            </SuccessButton>
-          </ButtonViewStyled>
-        )}
+            Generate
+          </SuccessButton>
+        </ButtonViewStyled>
       </ScrollViewStyled>
     </ContainerStyled>
   );
