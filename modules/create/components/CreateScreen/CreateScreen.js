@@ -93,7 +93,7 @@ const CreateScreen = (props) => {
               textAlign: 'center',
             }}
           >
-            Learning your face...
+            Learning your face (this can take a minute)...
           </DefaultText>
         )}
 
