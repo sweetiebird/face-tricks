@@ -24,7 +24,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.emilykolar.FaceWeave",
+      "supportsTablet": true,
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.1091742301427-r652vosbtsr903m4u8u4tb1i3vafc83b"
+        }
+      }
+    },
+    "android": {
+      "package": "com.emilykolar.FaceWeave",
+      "googleServicesFile": "config/google-services.json"
     },
     "hooks": {
       "postPublish": [
