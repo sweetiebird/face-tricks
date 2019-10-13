@@ -39,8 +39,8 @@ async function socketChannel(id) {
         (set emily (grab-image))
         (for i 5
           (set-latent (optimize-latent 2))
-          (await (send-image (w/size 128 128 (set emily (grab-image))))))
-        (w/size 128 128
+          (await (send-image (w/size 512 512 (set emily (grab-image))))))
+        (w/size 512 512
           emily)
       )`;
 

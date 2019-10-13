@@ -29,16 +29,20 @@ const CreateScreen = (props) => {
         <ButtonViewStyled>
           <InvertedButton
             icon={icons.ADD_IMAGE}
-            onPress={() => {
-              ImagePicker.launchImageLibraryAsync({
-                allowsEditing: true,
-                aspect: [1, 1],
-                exif: true,
-                mediaTypes: ImagePicker.MediaTypeOptions.Images,
-              }).then((result) => {
-                const { cancelled, ...rest } = result;
+            onPress={async () => {
+              try {
+                const result = await ImagePicker.launchImageLibraryAsync({
+                  allowsEditing: true,
+                  aspect: [1, 1],
+                  exif: true,
+                  mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                });
+                const {cancelled, ...rest} = result;
                 if (!cancelled) setImageData(rest);
-              })
+              } catch (err) {
+                console.log('error', error);
+                console.log(error.message);
+              }
             }}
           >
             Add Image
