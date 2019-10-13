@@ -8,6 +8,7 @@ import { icons } from 'constants';
 import { FS } from 'utils';
 
 import {
+  DefaultText,
   InvertedButton,
   PreviewImage,
   SuccessButton,
@@ -53,13 +54,38 @@ const CreateScreen = (props) => {
         </ButtonViewStyled>
 
         {!!imageData && (
-          <View style={{ position: 'relative', width: size, height: size }}>
+          <View
+            style={{
+              position: 'relative',
+              width: size,
+              height: size * 0.8,
+            }}
+          >
             <PreviewImage uri={imageData.uri} />
           </View>
         )}
 
+        {isFetching && (
+          <DefaultText
+            italic
+            style={{
+              marginTop: 20,
+              width: '100%',
+              textAlign: 'center',
+            }}
+          >
+            Learning your face...
+          </DefaultText>
+        )}
+
         {results.length > 0 && (
-          <View style={{ position: 'relative', width: size, height: size }}>
+          <View
+            style={{
+              position: 'relative',
+              width: size,
+              height: size * 0.8,
+            }}
+          >
             {results.map(uri => (
               <PreviewImage
                 key={uri}
@@ -73,6 +99,7 @@ const CreateScreen = (props) => {
           <SuccessButton
             icon={icons.CREATE}
             isDisabled={isFetching || !imageData}
+            isLoading={isFetching}
             onPress={async () => {
               const file = await FS.getFile(imageData.uri);
               sendImage(file);

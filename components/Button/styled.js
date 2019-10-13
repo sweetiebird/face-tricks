@@ -31,6 +31,7 @@ export const ButtonStyled = styled.View`
   flex-direction: row;
   justify-content: center;
   padding: 0 18px;
+  position: relative;
   ${props => props.primary ? primaryCss : ''}
   ${props => props.inverted ? invertedCss : ''}
   ${props => props.success ? successCss : ''}

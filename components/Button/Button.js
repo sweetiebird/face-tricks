@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TouchableHighlight } from 'react-native';
+import { ActivityIndicator, TouchableHighlight, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { colors } from 'constants';
@@ -18,6 +18,7 @@ const Button = (props) => {
     isDisabled,
     isFocused,
     isInverted,
+    isLoading,
     isPrimary,
     isSuccess,
     onPress,
@@ -56,6 +57,19 @@ const Button = (props) => {
         >
           {children}
         </ButtonTextStyled>
+
+        {isLoading && (
+          <View
+            style={{
+              position: 'absolute',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}
+          >
+            <ActivityIndicator size="small" />
+          </View>
+        )}
       </ButtonStyled>
     </TouchableHighlight>
   );
@@ -70,6 +84,7 @@ Button.propTypes = {
   isDisabled: PropTypes.bool,
   isFocused: PropTypes.bool,
   isInverted: PropTypes.bool,
+  isLoading: PropTypes.bool,
   isPrimary: PropTypes.bool,
   isSuccess: PropTypes.bool,
   onPress: PropTypes.func,
@@ -84,6 +99,7 @@ Button.defaultProps = {
   isDisabled: false,
   isFocused: false,
   isInverted: false,
+  isLoading: false,
   isPrimary: false,
   isSuccess: false,
   onPress: undefined,

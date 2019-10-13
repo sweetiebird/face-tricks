@@ -76,8 +76,8 @@ UserStack.path = 'user';
 
 const tabNavigator = createBottomTabNavigator({
   CreateStack,
-  HistoryStack,
-  UserStack,
+  // HistoryStack,
+  // UserStack,
 }, {
   tabBarOptions: {
     activeTintColor: colors.primaryHover,
