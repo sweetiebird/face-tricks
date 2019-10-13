@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Dimensions, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
 import { icons } from 'constants';
@@ -20,8 +21,10 @@ import {
 
 
 const CreateScreen = (props) => {
-  const { isFetching, result, sendImage } = props;
+  const { isFetching, results, sendImage } = props;
   const [imageData, setImageData] = useState(null);
+
+  const { width: size } = Dimensions.get('window');
 
   return (
     <ContainerStyled>
@@ -49,19 +52,27 @@ const CreateScreen = (props) => {
           </InvertedButton>
         </ButtonViewStyled>
 
-        {!!imageData && <PreviewImage uri={imageData.uri} />}
+        {!!imageData && (
+          <View style={{ position: 'relative', width: size, height: size }}>
+            <PreviewImage uri={imageData.uri} />
+          </View>
+        )}
 
-        {result.map(uri => (
-          <PreviewImage
-            key={uri}
-            uri={uri}
-          />
-        ))}
+        {results.length > 0 && (
+          <View style={{ position: 'relative', width: size, height: size }}>
+            {results.map(uri => (
+              <PreviewImage
+                key={uri}
+                uri={uri}
+              />
+            ))}
+          </View>
+        )}
 
         <ButtonViewStyled>
           <SuccessButton
             icon={icons.CREATE}
-            isDisabled={isFetching}
+            isDisabled={isFetching || !imageData}
             onPress={async () => {
               const file = await FS.getFile(imageData.uri);
               sendImage(file);
@@ -77,13 +88,13 @@ const CreateScreen = (props) => {
 
 CreateScreen.propTypes = {
   isFetching: PropTypes.bool,
+  results: PropTypes.arrayOf(PropTypes.string),
   sendImage: PropTypes.func.isRequired,
-  result: PropTypes.arrayOf(PropTypes.string),
 };
 
 CreateScreen.defaultProps = {
   isFetching: false,
-  result: [],
+  results: [],
 };
 
 CreateScreen.navigationOptions = {

@@ -16,7 +16,7 @@ export const getResultId = createSelector(
   state => state.resultId,
 );
 
-export const getResult = createSelector(
+export const getResults = createSelector(
   [getState],
-  state => state.result,
+  state => state.results,
 );

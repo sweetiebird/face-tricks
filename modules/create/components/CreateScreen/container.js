@@ -8,7 +8,7 @@ import presenter from './CreateScreen';
 
 const mapStateToProps = createStructuredSelector({
   isFetching: selectors.getIsFetching,
-  result: selectors.getResult,
+  results: selectors.getResults,
 });
 
 const mapDispatchToProps = {

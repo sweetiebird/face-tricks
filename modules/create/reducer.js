@@ -6,7 +6,7 @@ export const name = 'create';
 export const initialState = {
   isFetching: false,
   resultId: null,
-  result: [],
+  results: [],
 };
 
 export const reducer = (state = initialState, action = {}) => {
@@ -28,7 +28,7 @@ export const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isFetching: true,
-        result: state.result.concat(action.payload.result),
+        results: state.results.concat(action.payload.result),
       };
 
     case types.SEND_IMAGE_FAILURE:
