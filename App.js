@@ -2,11 +2,10 @@ import React from 'react';
 import bugsnag from '@bugsnag/expo';
 import { Provider } from 'react-redux';
 
+import getEnv from 'config/environment';
 import createStore from 'store';
 
 import AppMain from './AppMain';
-
-import getEnv from './environment';
 
 
 const env = getEnv();

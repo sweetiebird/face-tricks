@@ -12,6 +12,7 @@
             <path value="file://$PROJECT_DIR$/services" />
             <path value="file://$PROJECT_DIR$/store" />
             <path value="file://$PROJECT_DIR$/utils" />
+            <path value="file://$PROJECT_DIR$/config" />
           </resourceRoots>
         </entryData>
       </entry>

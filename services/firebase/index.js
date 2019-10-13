@@ -3,7 +3,7 @@ import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/storage';
 
-import getEnv from '../../environment';
+import getEnv from 'config/environment';
 
 import Auth from './auth';
 // import Database from './database';
