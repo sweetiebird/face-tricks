@@ -2,12 +2,15 @@ import { call, fork, put, take } from 'redux-saga/effects';
 
 import * as api from './api';
 import * as actions from './actions';
+import * as parse from './parse';
 import * as types from './types';
 
 
 function* sendImage(image) {
   try {
-    yield call(api.sendImage, image);
+    const result = yield call(api.sendImage, image);
+    const uri = yield call(parse.image, result);
+    yield put(actions.sendImageSuccess({ result: uri }));
   } catch (err) {
     yield put(actions.sendImageFailure(err.message, err));
   }

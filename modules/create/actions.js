@@ -3,7 +3,7 @@ import * as types from './types';
 
 export const sendImageRequest = image => ({
   payload: { image },
-  type: types.SEND_IMAGE_SUCCESS,
+  type: types.SEND_IMAGE_REQUEST,
 });
 
 export const sendImageSuccess = payload => ({

@@ -10,3 +10,8 @@ export const getIsFetching = createSelector(
   [getState],
   state => state.isFetching,
 );
+
+export const getResult = createSelector(
+  [getState],
+  state => state.result,
+);

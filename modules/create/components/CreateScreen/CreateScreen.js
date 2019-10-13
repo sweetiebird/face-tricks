@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import * as ImagePicker from 'expo-image-picker';
 
 import { icons } from 'constants';
 
-import { InvertedButton, PreviewImage } from 'components';
+import { FS } from 'utils';
+
+import {
+  InvertedButton,
+  PreviewImage,
+  SuccessButton,
+} from 'components';
 
 import {
   ButtonViewStyled,
@@ -12,10 +19,9 @@ import {
 } from './styled';
 
 
-const CreateScreen = () => {
+const CreateScreen = (props) => {
+  const { result, sendImage } = props;
   const [imageData, setImageData] = useState(null);
-
-  console.log(imageData);
 
   return (
     <ContainerStyled>
@@ -40,9 +46,31 @@ const CreateScreen = () => {
         </ButtonViewStyled>
 
         {!!imageData && <PreviewImage uri={imageData.uri} />}
+        {!!result && <PreviewImage uri={result} />}
+
+        <ButtonViewStyled>
+          <SuccessButton
+            icon={icons.CREATE}
+            onPress={async () => {
+              const file = await FS.getFile(imageData.uri);
+              sendImage(file);
+            }}
+          >
+            Generate
+          </SuccessButton>
+        </ButtonViewStyled>
       </ScrollViewStyled>
     </ContainerStyled>
   );
+};
+
+CreateScreen.propTypes = {
+  sendImage: PropTypes.func.isRequired,
+  result: PropTypes.any,
+};
+
+CreateScreen.defaultProps = {
+  result: null,
 };
 
 CreateScreen.navigationOptions = {

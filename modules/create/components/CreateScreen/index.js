@@ -1,4 +1,4 @@
-import CreateScreen from './CreateScreen';
+import CreateScreen from './container';
 
 
 export default CreateScreen;

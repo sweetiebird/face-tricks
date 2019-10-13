@@ -8,6 +8,11 @@ const primaryCss = css`
   border-color: ${colors.primary};
 `;
 
+const successCss = css`
+  background-color: ${colors.success};
+  border-color: ${colors.success};
+`;
+
 const invertedCss = css`
   background-color: ${colors.white};
   border-color: ${colors.primary};
@@ -29,9 +34,14 @@ export const ButtonStyled = styled.View`
   ${props => props.primary ? primaryCss : ''}
   ${props => props.inverted ? invertedCss : ''}
   ${props => props.disabled ? disabledCss : ''}
+  ${props => props.success ? successCss : ''}
 `;
 
 const primaryTextCss = css`
+  color: ${colors.white};
+`;
+
+const successTextCss = css`
   color: ${colors.white};
 `;
 
@@ -46,9 +56,10 @@ const disabledTextCss = css`
 export const ButtonTextStyled = styled.Text`
   font-family: roboto-regular;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 52px;
   ${props => props.primary ? primaryTextCss : ''}
   ${props => props.inverted ? invertedTextCss : ''}
   ${props => props.disabled ? disabledTextCss : ''}
+  ${props => props.success ? successTextCss : ''}
 `;

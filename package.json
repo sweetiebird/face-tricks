@@ -18,6 +18,7 @@
     "@react-navigation/web": "^1.0.0-alpha.9",
     "axios": "^0.19.0",
     "base-64": "^0.1.0",
+    "base64-arraybuffer": "^0.2.0",
     "expo": "^35.0.0",
     "expo-app-auth": "~7.0.0",
     "expo-asset": "^7.0.0",
@@ -40,6 +41,7 @@
     "redux": "^4.0.4",
     "redux-saga": "^1.1.1",
     "reselect": "^4.0.0",
+    "shortid": "^2.2.15",
     "styled-components": "^4.4.0"
   },
   "devDependencies": {

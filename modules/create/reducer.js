@@ -5,9 +5,10 @@ export const name = 'create';
 
 export const initialState = {
   isFetching: false,
+  result: null,
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case types.SEND_IMAGE_REQUEST:
       return {
@@ -19,6 +20,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
+        result: action.payload.result,
       };
 
     case types.SEND_IMAGE_FAILURE:

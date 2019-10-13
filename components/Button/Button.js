@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { TouchableHighlight } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -18,6 +19,7 @@ const Button = (props) => {
     isFocused,
     isInverted,
     isPrimary,
+    isSuccess,
     onPress,
   } = props;
 
@@ -32,6 +34,7 @@ const Button = (props) => {
         disabled={isDisabled}
         inverted={isInverted}
         primary={isPrimary}
+        success={isSuccess}
       >
         {!!icon && (
           <Ionicons
@@ -49,12 +52,41 @@ const Button = (props) => {
           disabled={isDisabled}
           inverted={isInverted}
           primary={isPrimary}
+          success={isSuccess}
         >
           {children}
         </ButtonTextStyled>
       </ButtonStyled>
     </TouchableHighlight>
   );
+};
+
+Button.propTypes = {
+  children: PropTypes.node,
+  icon: PropTypes.string,
+  iconColor: PropTypes.string,
+  iconColorFocused: PropTypes.string,
+  iconStyles: PropTypes.shape(),
+  isDisabled: PropTypes.bool,
+  isFocused: PropTypes.bool,
+  isInverted: PropTypes.bool,
+  isPrimary: PropTypes.bool,
+  isSuccess: PropTypes.bool,
+  onPress: PropTypes.func,
+};
+
+Button.defaultProps = {
+  children: undefined,
+  icon: undefined,
+  iconColor: undefined,
+  iconColorFocused: undefined,
+  iconStyles: undefined,
+  isDisabled: false,
+  isFocused: false,
+  isInverted: false,
+  isPrimary: false,
+  isSuccess: false,
+  onPress: undefined,
 };
 
 
