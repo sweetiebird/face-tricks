@@ -8,12 +8,31 @@ import * as actions from './actions';
 import * as parse from './parse';
 import * as types from './types';
 
+
+let socket;
+
 async function socketChannel(id) {
-  const socket = await Socket.init();
   let count = 0;
 
   return () => {
     return eventChannel((emitter) => {
+      const handleResult = async (e) => {
+        const buffer = e.data;
+        const uri = await parse.image(buffer);
+
+        emitter({ resultUri: uri });
+
+        count += 1;
+
+        if (count >= 11) {
+          count = 0;
+          emitter({ finished: true });
+          emitter(END);
+        }
+      };
+
+      socket.setOnMessage(handleResult);
+
       const message = `
       (ado
 
@@ -46,23 +65,6 @@ async function socketChannel(id) {
           emily)
       )`;
 
-      const handleResult = async (e) => {
-        const buffer = e.data;
-        const uri = await parse.image(buffer);
-
-        emitter({ resultUri: uri });
-
-        count += 1;
-
-        if (count >= 11) {
-          count = 0;
-          emitter({ finished: true });
-          emitter(END);
-        }
-      };
-
-      socket.setOnMessage(handleResult);
-
       socket.sendMessage(message);
 
       return () => {
@@ -87,7 +89,7 @@ function* imageSuccess(payload) {
 
 function* sendImage(image) {
   try {
-    const id = yield call(api.sendImage, image);
+    const id = yield call(api.sendImage, socket, image);
     yield put(actions.imageResultId(id));
   } catch (err) {
     yield put(actions.sendImageFailure(err.message, err));
@@ -106,14 +108,37 @@ function* watchForResultId() {
   yield takeLatest(types.IMAGE_RESULT_ID, watchEvents);
 }
 
+function* sendEditorValues(values) {
+  try {
+    const mappedValues = Object.keys(values).reduce((obj, key) => {
+      const mappedVal = (0.5 - values[key]) * -2;
+      return {
+        ...obj,
+        [key]: mappedVal,
+      };
+    }, {});
+    const buffer = yield call(api.sendEditorValues, socket, mappedValues);
+    const uri = yield call(parse.image, buffer);
+    yield put(actions.sendEditorValuesSuccess(uri));
+  } catch (err) {
+    yield put(actions.sendEditorValuesFailure(err.message, err));
+  }
+}
+
 function* watch() {
+  socket = yield call(Socket.init);
+
   while (true) {
     const { payload = {}, type } = yield take([
+      types.SEND_EDITOR_VALUES_REQUEST,
       types.SEND_IMAGE_REQUEST,
     ]);
 
-    console.log(type);
     switch (type) {
+      case types.SEND_EDITOR_VALUES_REQUEST:
+        yield fork(sendEditorValues, payload.values);
+        break;
+
       case types.SEND_IMAGE_REQUEST:
         yield fork(sendImage, payload.image);
         break;

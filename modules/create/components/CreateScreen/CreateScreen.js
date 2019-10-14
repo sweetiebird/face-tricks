@@ -10,7 +10,6 @@ import { Navigation } from 'services';
 import { FS } from 'utils';
 
 import {
-  DefaultText,
   InvertedButton,
   PreviewImage,
   SuccessButton,
@@ -24,7 +23,7 @@ import {
 
 
 const CreateScreen = (props) => {
-  const { isFetching, sendImage } = props;
+  const { imageAdded, isFetching, sendImage } = props;
   const [imageData, setImageData] = useState(null);
 
   const { width: size } = Dimensions.get('window');
@@ -44,7 +43,10 @@ const CreateScreen = (props) => {
                   mediaTypes: ImagePicker.MediaTypeOptions.Images,
                 });
                 const {cancelled, ...rest} = result;
-                if (!cancelled) setImageData(rest);
+                if (!cancelled) {
+                  setImageData(rest);
+                  imageAdded(rest.uri);
+                }
               } catch (err) {
                 console.log('error', error);
                 console.log(error.message);
@@ -72,8 +74,8 @@ const CreateScreen = (props) => {
             icon={icons.CREATE}
             isDisabled={!imageData || isFetching}
             onPress={async () => {
-              // const file = await FS.getFile(imageData.uri);
-              // sendImage(file);
+              const file = await FS.getFile(imageData.uri);
+              sendImage(file);
               Navigation.navigate('Edit');
             }}
           >
@@ -86,6 +88,7 @@ const CreateScreen = (props) => {
 };
 
 CreateScreen.propTypes = {
+  imageAdded: PropTypes.func.isRequired,
   isFetching: PropTypes.bool,
   results: PropTypes.arrayOf(PropTypes.string),
   sendImage: PropTypes.func.isRequired,

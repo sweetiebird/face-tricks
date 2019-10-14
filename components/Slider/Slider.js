@@ -22,7 +22,6 @@ const Slider = (props) => {
         minimumValue={min}
         minimumTrackTintColor={colors.primary}
         onValueChange={(val) => {
-          console.log('on change', val);
           if (onChange) {
             onChange(val);
           }

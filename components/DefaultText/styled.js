@@ -8,9 +8,15 @@ const italicCss = css`
   opacity: 0.8;
 `;
 
+const headingCss = css`
+  font-family: roboto-medium;
+  font-size: 22px;
+`;
+
 export const DefaultTextStyled = styled.Text`
   color: ${colors.text};
   font-weight: 400;
   font-family: roboto-regular;
   ${props => props.italic ? italicCss : ''}
+  ${props => props.heading ? headingCss : ''}
 `;

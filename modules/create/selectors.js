@@ -25,3 +25,13 @@ export const getResults = createSelector(
   [getState],
   state => state.results,
 );
+
+export const getEditorValues = createSelector(
+  [getState],
+  state => state.editorValues,
+);
+
+export const getEditorIsFetching = createSelector(
+  [getState],
+  state => state.editorIsFetching,
+);

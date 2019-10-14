@@ -4,6 +4,8 @@ import * as types from './types';
 export const name = 'create';
 
 export const initialState = {
+  editorValues: {},
+  editorIsFetching: false,
   isFetching: false,
   imageUri: null,
   resultId: null,
@@ -48,6 +50,26 @@ export const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isFetching: false,
+      };
+
+    case types.SEND_EDITOR_VALUES_REQUEST:
+      return {
+        ...state,
+        editorIsFetching: true,
+        editorValues: action.payload.values,
+      };
+
+    case types.SEND_EDITOR_VALUES_SUCCESS:
+      return {
+        ...state,
+        editorIsFetching: false,
+        results: state.results.concat(action.payload.result),
+      };
+
+    case types.SEND_EDITOR_VALUES_FAILURE:
+      return {
+        ...state,
+        editorIsFetching: false,
       };
 
     default:

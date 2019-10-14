@@ -12,6 +12,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
+  imageAdded: actions.imageAdded,
   sendImage: actions.sendImageRequest,
 };
 

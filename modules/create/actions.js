@@ -29,3 +29,18 @@ export const imageAdded = uri => ({
   payload: { uri },
   type: types.IMAGE_ADDED,
 });
+
+export const sendEditorValuesRequest = values => ({
+  payload: { values },
+  type: types.SEND_EDITOR_VALUES_REQUEST,
+});
+
+export const sendEditorValuesSuccess = result => ({
+  payload: { result },
+  type: types.SEND_EDITOR_VALUES_SUCCESS,
+});
+
+export const sendEditorValuesFailure = (message, error) => ({
+  payload: { message, error },
+  type: types.SEND_EDITOR_VALUES_FAILURE,
+});
