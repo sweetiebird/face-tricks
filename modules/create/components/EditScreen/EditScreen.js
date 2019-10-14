@@ -79,33 +79,6 @@ const EditScreen = (props) => {
           </View>
         )}
 
-        <View>
-          <View style={{ display: 'flex', flexDirection: 'row', paddingLeft: 20, marginBottom: 10 }}>
-            <View style={{ paddingTop: 2, marginRight: 10 }}>
-              <TabBarIcon color={colors.text} name={icons.SETTINGS} />
-            </View>
-            <DefaultText heading>
-              Edit
-            </DefaultText>
-          </View>
-          {editorKeys.map((key) => (
-            <React.Fragment key={key}>
-              <DefaultText style={{ paddingLeft: 20, paddingRight: 20 }}>
-                {startCase(key)}
-              </DefaultText>
-
-              <Slider
-                onComplete={(value) => {
-                  setCurrentEditorValues({
-                    ...currentEditorValues,
-                    [key]: Math.round(value * 100) / 100,
-                  });
-                }}
-              />
-            </React.Fragment>
-          ))}
-        </View>
-
         <ButtonViewStyled>
           <SuccessButton
             icon={icons.CREATE}
@@ -117,6 +90,38 @@ const EditScreen = (props) => {
             {editorIsFetching ? 'Updating' : 'Update'}
           </SuccessButton>
         </ButtonViewStyled>
+
+        <View>
+          <View style={{ display: 'flex', flexDirection: 'row', paddingLeft: 20, marginBottom: 10 }}>
+            <View style={{ paddingTop: 2, marginRight: 10 }}>
+              <TabBarIcon color={colors.text} name={icons.SETTINGS} />
+            </View>
+
+            <DefaultText heading>
+              Edit
+            </DefaultText>
+          </View>
+
+          {editorKeys.map((key) => {
+            return (
+              <React.Fragment key={key}>
+                <DefaultText style={{ paddingLeft: 20, paddingRight: 20 }}>
+                  {startCase(key)}
+                </DefaultText>
+
+                <Slider
+                  onComplete={(value) => {
+                    console.log(value);
+                    setCurrentEditorValues({
+                      ...currentEditorValues,
+                      [key]: Math.round(value * 1000) / 1000,
+                    });
+                  }}
+                />
+              </React.Fragment>
+            );
+          })}
+        </View>
       </ScrollViewStyled>
     </ContainerStyled>
   );
