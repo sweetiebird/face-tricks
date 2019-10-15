@@ -23,7 +23,14 @@ const disabledCss = css`
   border-color: ${colors.smoke};
 `;
 
-export const ButtonStyled = styled.View`
+const tinyButtonCss = css`
+  height: 80px;
+  max-height: 80px;
+  max-width: 80px;
+  width: 80px;
+`;
+
+const buttonCss = css`
   align-items: center;
   border-radius: 100px;
   border-width: 2px;
@@ -32,10 +39,15 @@ export const ButtonStyled = styled.View`
   justify-content: center;
   padding: 0 18px;
   position: relative;
+  ${props => props.tiny ? tinyButtonCss : ''}
   ${props => props.primary ? primaryCss : ''}
   ${props => props.inverted ? invertedCss : ''}
   ${props => props.success ? successCss : ''}
   ${props => props.disabled ? disabledCss : ''}
+`;
+
+export const ButtonStyled = styled.View`
+  ${buttonCss}
 `;
 
 const primaryTextCss = css`

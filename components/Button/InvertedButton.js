@@ -2,6 +2,8 @@ import React from 'react';
 
 import { colors } from 'constants';
 
+import { propTypes, defaultProps } from './props';
+
 import Button from './Button';
 
 
@@ -16,6 +18,10 @@ const InvertedButton = ({ children, ...rest }) => {
     </Button>
   );
 };
+
+InvertedButton.propTypes = propTypes;
+
+InvertedButton.defaultProps = defaultProps;
 
 
 export default InvertedButton;

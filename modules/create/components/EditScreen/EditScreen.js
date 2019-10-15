@@ -87,7 +87,19 @@ const EditScreen = (props) => {
               sendEditorValues(currentEditorValues);
             }}
           >
-            {editorIsFetching ? 'Updating' : 'Update'}
+            {isFetching ? 'Working...' : 'Keep Learning'}
+          </SuccessButton>
+        </ButtonViewStyled>
+
+        <ButtonViewStyled>
+          <SuccessButton
+            icon={icons.CREATE}
+            isDisabled={editorIsFetching || isFetching}
+            onPress={() => {
+              sendEditorValues(currentEditorValues);
+            }}
+          >
+            {editorIsFetching ? 'Updating...' : 'Update Features'}
           </SuccessButton>
         </ButtonViewStyled>
 

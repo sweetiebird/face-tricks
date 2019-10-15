@@ -1,9 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { ActivityIndicator, TouchableHighlight, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { colors } from 'constants';
+
+import { propTypes, defaultProps } from './props';
 
 import { ButtonStyled, ButtonTextStyled } from './styled';
 
@@ -75,35 +76,9 @@ const Button = (props) => {
   );
 };
 
-Button.propTypes = {
-  children: PropTypes.node,
-  icon: PropTypes.string,
-  iconColor: PropTypes.string,
-  iconColorFocused: PropTypes.string,
-  iconStyles: PropTypes.shape(),
-  isDisabled: PropTypes.bool,
-  isFocused: PropTypes.bool,
-  isInverted: PropTypes.bool,
-  isLoading: PropTypes.bool,
-  isPrimary: PropTypes.bool,
-  isSuccess: PropTypes.bool,
-  onPress: PropTypes.func,
-};
+Button.propTypes = propTypes;
 
-Button.defaultProps = {
-  children: undefined,
-  icon: undefined,
-  iconColor: undefined,
-  iconColorFocused: undefined,
-  iconStyles: undefined,
-  isDisabled: false,
-  isFocused: false,
-  isInverted: false,
-  isLoading: false,
-  isPrimary: false,
-  isSuccess: false,
-  onPress: undefined,
-};
+Button.defaultProps = defaultProps;
 
 
 export default Button;
