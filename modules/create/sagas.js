@@ -111,7 +111,7 @@ function* watchForResultId() {
 function* sendEditorValues(values) {
   try {
     const mappedValues = Object.keys(values).reduce((obj, key) => {
-      const mappedVal = (0.5 - values[key]) * -2;
+      const mappedVal = (2 - values[key]) * -1;
       return {
         ...obj,
         [key]: mappedVal,

@@ -23,7 +23,7 @@ import {
 
 const editorKeyMap = editorKeys.reduce((obj, key) => ({
   ...obj,
-  [key]: 0.5,
+  [key]: 2,
 }), {});
 
 const EditScreen = (props) => {
@@ -114,7 +114,7 @@ const EditScreen = (props) => {
                     console.log(value);
                     setCurrentEditorValues({
                       ...currentEditorValues,
-                      [key]: Math.round(value * 1000) / 1000,
+                      [key]: Math.round(value * 100) / 100,
                     });
                   }}
                 />

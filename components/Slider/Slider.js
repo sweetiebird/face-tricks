@@ -50,12 +50,12 @@ Slider.propTypes = {
 };
 
 Slider.defaultProps = {
-  initialValue: 0.5,
-  max: 1,
+  initialValue: 2,
+  max: 4,
   min: 0,
   onChange: undefined,
   onComplete: undefined,
-  step: 0.05,
+  step: 0.1,
 };
 
 
