@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, View } from 'react-native';
-import { isEqual, startCase } from 'lodash';
+import { startCase } from 'lodash';
 
 import { colors, editorKeys, icons } from 'constants';
 

@@ -1,18 +1,18 @@
-import { encode as btoa } from 'base-64';
-
-
-const arrayBufferToBase64 = (buffer) => {
-  let binary = '';
-  const bytes = new Uint8Array(buffer);
-  for (let i = 0, len = bytes.byteLength; i < len; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return btoa(binary);
+export const listify = (x) => {
+  return Array.isArray(x) ? x : [x];
 };
 
-
-export default {
-  arrayBuffer: {
-    toBase64: arrayBufferToBase64,
-  },
+export const mapconcat = (f, xs, sep = " ") => {
+  let r = "";
+  let c = "";
+  for (x of xs) {
+    let y = f ? f(x) : x;
+    if (y != null) {
+      for (let z of listify(y)) {
+        r += c + z;
+        c = sep;
+      }
+    }
+  }
+  return r;
 };
