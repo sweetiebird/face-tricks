@@ -117,19 +117,25 @@ const EditScreen = (props) => {
           {editorKeys.map((key) => {
             return (
               <React.Fragment key={key}>
-                <DefaultText style={{ paddingLeft: 20, paddingRight: 20 }}>
-                  {startCase(key)}
-                </DefaultText>
+                <View style={{ display: 'flex', flexDirection: 'row' }}>
+                  <View style={{ flex: 0.5 }}>
+                    <DefaultText style={{ paddingLeft: 10, paddingRight: 5, textAlign: 'right' }}>
+                      {startCase(key)}
+                    </DefaultText>
+                  </View>
 
-                <Slider
-                  onComplete={(value) => {
-                    console.log(value);
-                    setCurrentEditorValues({
-                      ...currentEditorValues,
-                      [key]: Math.round(value * 100) / 100,
-                    });
-                  }}
-                />
+                  <View style={{ flex: 1 }}>
+                    <Slider
+                      onComplete={(value) => {
+                        console.log(value);
+                        setCurrentEditorValues({
+                          ...currentEditorValues,
+                          [key]: Math.round(value * 100) / 100,
+                        });
+                      }}
+                    />
+                  </View>
+                </View>
               </React.Fragment>
             );
           })}
