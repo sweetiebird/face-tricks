@@ -36,7 +36,6 @@ async function socketChannel(id) {
       const message = `
       (ado
 
-
         (mac w/size (w h rest: body)
           \`(let img (do ,@body)
               (if (image? img)
@@ -51,16 +50,18 @@ async function socketChannel(id) {
               (let img (PIL.Image.open fname)
                 (set-raw-image img)))))
 
-        ;(await (set-data ${id}))
-        ;(grab-target)
+        (async def pause (secs)
+          (let n (either secs 0.5)
+            (await (asyncio.sleep n))))
+
         (set-image-from-data ${id})
         (set-latent (grab-estimate))
-        ;(set-latent (optimize-latent 4))
         (set emily (grab-image))
         (await (send-image (w/size 512 512 emily)))
         (for i 10
           (set-latent (optimize-latent 4))
-          (await (send-image (w/size 512 512 (set emily (grab-image))))))
+          (await (send-image (w/size 512 512 (set emily (grab-image)))))
+          (await (pause)))
         (w/size 512 512
           emily)
       )`;
