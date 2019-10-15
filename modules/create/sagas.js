@@ -1,6 +1,8 @@
 import { eventChannel, END } from 'redux-saga'
 import { all, call, fork, put, take, takeEvery, takeLatest } from 'redux-saga/effects';
 
+import { create } from 'constants';
+
 import { Socket } from 'services';
 
 import * as api from './api';
@@ -24,7 +26,7 @@ async function socketChannel(id) {
 
         count += 1;
 
-        if (count >= 11) {
+        if (count >= create.iterations + 1) {
           count = 0;
           emitter({ finished: true });
           emitter(END);
@@ -58,7 +60,7 @@ async function socketChannel(id) {
         (set-latent (grab-estimate))
         (set emily (grab-image))
         (await (send-image (w/size 512 512 emily)))
-        (for i 10
+        (for i ${create.iterations}
           (set-latent (optimize-latent 4))
           (await (send-image (w/size 512 512 (set emily (grab-image)))))
           (await (pause)))
