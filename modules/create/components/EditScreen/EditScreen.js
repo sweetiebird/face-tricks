@@ -74,7 +74,7 @@ const EditScreen = (props) => {
           <KeepLearningSection
             isFetching={isFetching}
             onPress={() => {
-              sendEval(`(do (set-latent (optimize-latent 4)) (grab-image ${grabLatentExpression(currentEditorValues)}))`);
+              sendEval(`(do (set-latent (optimize-latent 4)) (w/size 256 256 (grab-image ${grabLatentExpression(currentEditorValues)})))`);
             }}
           />
         )}
@@ -87,7 +87,7 @@ const EditScreen = (props) => {
         onCommit={() => {
           setCurrentEditorValues(editorKeyMap);
           sendEval(
-            `(do (set-latent ${grabLatentExpression(currentEditorValues)}) (grab-image))`
+            `(do (set-latent ${grabLatentExpression(currentEditorValues)}) (w/size 256 256 (grab-image)))`
           );
           setSlidersKey(slidersKey + 1);
         }}
