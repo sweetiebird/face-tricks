@@ -15,6 +15,7 @@ const ResultImagePreview = ({ onSave, onEye, results }) => {
   const { width: size } = Dimensions.get('window');
 
   const saveViewPadding = (size * 0.1) + 10;
+  const buttonViewSize = size * 0.5;
 
   return (
     <View
@@ -42,8 +43,9 @@ const ResultImagePreview = ({ onSave, onEye, results }) => {
                 icon: icons.EYE,
                 iconColor: colors.white,
                 isPrimary: true,
-                onPress: () => {
-                  onEye(uri);
+                onPress: async () => {
+                  console.log('onEye', uri);
+                  await onEye(uri);
                 },
               }}
               textProps={{
@@ -54,7 +56,7 @@ const ResultImagePreview = ({ onSave, onEye, results }) => {
                 style: {
                   left: saveViewPadding,
                   position: 'absolute',
-                  right: size * 0.1,
+                  right: buttonViewSize,
                   top: 10,
                   zIndex: 20,
                 },
@@ -68,8 +70,8 @@ const ResultImagePreview = ({ onSave, onEye, results }) => {
                 icon: icons.SAVE,
                 iconColor: colors.white,
                 isPrimary: true,
-                onPress: () => {
-                  onSave(uri);
+                onPress: async () => {
+                  await onSave(uri);
                 },
               }}
               textProps={{
@@ -80,7 +82,7 @@ const ResultImagePreview = ({ onSave, onEye, results }) => {
                 style: {
                   position: 'absolute',
                   top: 10,
-                  left: size * 0.1,
+                  left: buttonViewSize,
                   right: saveViewPadding,
                   zIndex: 10,
                 },
