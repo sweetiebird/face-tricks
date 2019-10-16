@@ -17,7 +17,6 @@ import {
 import { ResultImagePreview } from './components';
 
 import {
-  ButtonViewStyled,
   ContainerStyled,
   ScrollViewStyled,
 } from './styled';
@@ -27,6 +26,46 @@ const editorKeyMap = editorKeys.reduce((obj, key) => ({
   ...obj,
   [key]: 2,
 }), {});
+
+const editTitleViewStyles = {
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  marginBottom: 10,
+  paddingLeft: 20,
+  paddingRight: 20,
+};
+
+const textIconViewStyles = {
+  display: 'flex',
+  flexDirection: 'row',
+  paddingTop: 2,
+  width: '40%',
+};
+
+const iconViewStyles = {
+  marginRight: 10,
+  paddingTop: 2,
+};
+
+const learningTextStyle = {
+  marginBottom: 20,
+  marginTop: 20,
+  textAlign: 'center',
+  width: '100%',
+};
+
+const editButtonViewStyles = {
+  width: '60%',
+  flexDirection: 'row',
+  justifyContent: 'flex-end',
+};
+
+const editorValueTextStyles = {
+  paddingLeft: 10,
+  paddingRight: 5,
+  textAlign: 'right',
+};
 
 const EditScreen = (props) => {
   const {
@@ -43,26 +82,21 @@ const EditScreen = (props) => {
 
   const [currentEditorValues, setCurrentEditorValues] = useState(editorKeyMap);
 
+  const progress = ((100 / create.iterations + 1) * results.length) / 100;
+
   return (
     <ContainerStyled>
       <ScrollViewStyled contentContainerStyle={{ paddingTop: 30 }}>
         {isFetching && (
           <DefaultText
             italic
-            style={{
-              marginTop: 20,
-              marginBottom: 20,
-              width: '100%',
-              textAlign: 'center',
-            }}
+            style={learningTextStyle}
           >
-            Learning your face (this can take a minute)...
+            Learning your face! This can take a minute.
           </DefaultText>
         )}
 
-        {isFetching && (
-          <Progress progress={((100 / create.iterations + 1) * results.length) / 100} />
-        )}
+        {isFetching && <Progress progress={progress} />}
 
         <ResultImagePreview results={results} />
 
@@ -75,13 +109,14 @@ const EditScreen = (props) => {
         >
           <TextWithTinyButton
             buttonProps={{
-              icon: isFetching ? icons.HOURGLASS : icons.PLAY,
+              icon: isFetching ? icons.HOURGLASS : icons.CREATE,
               iconColor: colors.white,
               isDisabled: isFetching,
               isPrimary: true,
               onPress: () => iterateAgain(resultId),
             }}
             textProps={{
+              italic: true,
               style: { marginRight: 8 }
             }}
           >
@@ -89,27 +124,30 @@ const EditScreen = (props) => {
           </TextWithTinyButton>
         </View>
 
-        <ButtonViewStyled>
-          <SuccessButton
-            icon={icons.CREATE}
-            isDisabled={editorIsFetching || isFetching}
-            onPress={() => {
-              sendEditorValues(currentEditorValues);
-            }}
-          >
-            {editorIsFetching ? 'Updating...' : 'Update Features'}
-          </SuccessButton>
-        </ButtonViewStyled>
+        <View style={{ marginTop: 20, width: '100%' }}>
+          <View style={editTitleViewStyles}>
+            <View style={textIconViewStyles}>
+              <View style={iconViewStyles}>
+                <TabBarIcon color={colors.text} name={icons.SETTINGS} />
+              </View>
 
-        <View>
-          <View style={{ display: 'flex', flexDirection: 'row', paddingLeft: 20, marginBottom: 10 }}>
-            <View style={{ paddingTop: 2, marginRight: 10 }}>
-              <TabBarIcon color={colors.text} name={icons.SETTINGS} />
+              <DefaultText heading>
+                Edit
+              </DefaultText>
             </View>
 
-            <DefaultText heading>
-              Edit
-            </DefaultText>
+            <View style={editButtonViewStyles}>
+              <SuccessButton
+                iconSize={16}
+                isDisabled={editorIsFetching || isFetching}
+                onPress={() => {
+                  sendEditorValues(currentEditorValues);
+                }}
+                size="S"
+              >
+                {editorIsFetching ? 'Updating...' : 'Update Features'}
+              </SuccessButton>
+            </View>
           </View>
 
           {editorKeys.map((key) => {
@@ -117,7 +155,7 @@ const EditScreen = (props) => {
               <React.Fragment key={key}>
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                   <View style={{ flex: 0.5 }}>
-                    <DefaultText style={{ paddingLeft: 10, paddingRight: 5, textAlign: 'right' }}>
+                    <DefaultText style={editorValueTextStyles}>
                       {startCase(key)}
                     </DefaultText>
                   </View>

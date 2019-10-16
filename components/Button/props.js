@@ -15,6 +15,7 @@ export const propTypes = {
   isPrimary: PropTypes.bool,
   isSuccess: PropTypes.bool,
   isTiny: PropTypes.bool,
+  size: PropTypes.string,
   onPress: PropTypes.func,
 };
 
@@ -32,5 +33,6 @@ export const defaultProps = {
   isPrimary: false,
   isSuccess: false,
   isTiny: false,
+  size: 'L',
   onPress: undefined,
 };

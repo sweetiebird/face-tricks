@@ -15,7 +15,7 @@ const TextWithTinyButton = ({ children, buttonProps, textProps }) => {
         {children}
       </DefaultText>
 
-      <Button iconSize={18} {...buttonProps} isTiny />
+      <Button iconSize={16} {...buttonProps} size="T" />
     </FlexRow>
   );
 };

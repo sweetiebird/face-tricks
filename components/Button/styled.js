@@ -37,7 +37,6 @@ const buttonCss = css`
   justify-content: center;
   padding: 0 18px;
   position: relative;
-  ${props => props.tiny ? tinyButtonCss : ''}
   ${props => props.primary ? primaryCss : ''}
   ${props => props.inverted ? invertedCss : ''}
   ${props => props.success ? successCss : ''}
@@ -64,11 +63,23 @@ const disabledTextCss = css`
   color: ${colors.smoke};
 `;
 
+const smallTextCss = css`
+  font-size: 14px;
+  line-height: 26px;
+`;
+
+const medTextCss = css`
+  font-size: 16px;
+  line-height: 38px;
+`;
+
 export const ButtonTextStyled = styled.Text`
   font-family: roboto-regular;
   font-size: 18px;
   font-weight: 500;
   line-height: 52px;
+  ${props => props.small ? smallTextCss : ''}
+  ${props => props.medium ? medTextCss : ''}
   ${props => props.primary ? primaryTextCss : ''}
   ${props => props.inverted ? invertedTextCss : ''}
   ${props => props.success ? successTextCss : ''}

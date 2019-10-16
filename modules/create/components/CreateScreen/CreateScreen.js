@@ -79,7 +79,7 @@ const CreateScreen = (props) => {
               Navigation.navigate('Edit');
             }}
           >
-            Generate
+            Start Learning
           </SuccessButton>
         </ButtonViewStyled>
       </ScrollViewStyled>

@@ -25,6 +25,7 @@ const Button = (props) => {
     isSuccess,
     isTiny,
     onPress,
+    size,
   } = props;
 
   const highlightStyle = { borderRadius: 100 };
@@ -41,7 +42,10 @@ const Button = (props) => {
         inverted={isInverted}
         primary={isPrimary}
         success={isSuccess}
-        tiny={isTiny}
+        tiny={size === 'T'}
+        small={size === 'S'}
+        medium={size === 'M'}
+        large={size === 'L'}
       >
         {!!icon && (
           <Ionicons
@@ -61,6 +65,9 @@ const Button = (props) => {
             inverted={isInverted}
             primary={isPrimary}
             success={isSuccess}
+            small={size === 'S'}
+            medium={size === 'M'}
+            large={size === 'L'}
           >
             {children}
           </ButtonTextStyled>
