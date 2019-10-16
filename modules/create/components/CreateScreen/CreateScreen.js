@@ -64,7 +64,6 @@ const CreateScreen = (props) => {
               try {
                 const result = await ImagePicker.launchCameraAsync({
                   allowsEditing: true,
-                  aspect: [1, 1],
                   exif: true,
                   mediaTypes: ImagePicker.MediaTypeOptions.Images,
                 });
