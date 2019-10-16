@@ -24,8 +24,8 @@ const disabledCss = css`
 `;
 
 const tinyButtonCss = css`
-  padding: 2px 0 2px 12px;
-  border-radius: 30px;
+  padding: 2px 12px;
+  border-radius: 22px;
 `;
 
 const buttonCss = css`

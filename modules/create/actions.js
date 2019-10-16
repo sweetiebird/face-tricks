@@ -44,3 +44,8 @@ export const sendEditorValuesFailure = (message, error) => ({
   payload: { message, error },
   type: types.SEND_EDITOR_VALUES_FAILURE,
 });
+
+export const iterateAgain = (resultId) => ({
+  payload: { resultId },
+  type: types.ITERATE_AGAIN,
+});

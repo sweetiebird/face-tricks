@@ -33,11 +33,17 @@ export const reducer = (state = initialState, action = {}) => {
         results: [],
       };
 
+    case types.ITERATE_AGAIN:
+      return {
+        ...state,
+        isFetching: true,
+      };
+
     case types.SEND_IMAGE_SUCCESS:
       return {
         ...state,
         isFetching: true,
-        results: state.results.concat(action.payload.result),
+        results: state.results.concat(action.payload.result || []),
       };
 
     case types.SEND_IMAGE_FAILURE:
