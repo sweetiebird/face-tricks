@@ -28,3 +28,13 @@ export const sendEditorValues = async (socket, mappedValues) => {
     socket.sendMessage(message);
   });
 };
+
+export const sendEval = async (socket, message) => {
+  return new Promise((resolve) => {
+    socket.setOnMessage((evt) => {
+      resolve(evt.data);
+    });
+    socket.sendMessage(message);
+  });
+};
+
