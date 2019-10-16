@@ -16,6 +16,10 @@ const centerCss = css`
   justify-content: center;
 `;
 
+const startCss = css`
+  justify-content: flex-start;
+`;
+
 const endCss = css`
   justify-content: flex-end;
 `;
@@ -29,5 +33,6 @@ export const FlexRowStyled = styled.View`
   ${props => props.spaceBetween ? spaceBetweenCss : ''}
   ${props => props.center ? centerCss : ''}
   ${props => props.flexEnd ? endCss : ''}
+  ${props => props.flexStart ? startCss : ''}
   ${props => props.wrap ? wrapCss : ''}
 `;
