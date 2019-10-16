@@ -37,6 +37,7 @@ const EditScreen = (props) => {
   const { height } = Dimensions.get('window');
 
   const [currentEditorValues, setCurrentEditorValues] = useState(editorKeyMap);
+  const [slidersKey, setSlidersKey] = useState(0);
 
   return (
     <ContainerStyled>
@@ -61,11 +62,12 @@ const EditScreen = (props) => {
             editorIsFetching={editorIsFetching}
             editorValues={currentEditorValues}
             isFetching={isFetching}
-            onUpdate={() => sendEditorValues(currentEditorValues)}
+            onCommit={() => setSlidersKey(slidersKey + 1)}
           />
 
           <EditorSliders
             editorValues={currentEditorValues}
+            key={`editor-sliders-${slidersKey}`}
             onSendValues={() => sendEditorValues(currentEditorValues)}
             setEditorValues={setCurrentEditorValues}
           />

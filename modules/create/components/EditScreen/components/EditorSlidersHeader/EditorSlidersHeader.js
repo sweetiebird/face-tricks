@@ -42,7 +42,7 @@ const EditorSlidersHeader = (props) => {
   const {
     editorIsFetching,
     isFetching,
-    onUpdate,
+    onCommit,
   } = props;
 
   return (
@@ -61,10 +61,10 @@ const EditorSlidersHeader = (props) => {
         <SuccessButton
           iconSize={16}
           isDisabled={editorIsFetching || isFetching}
-          onPress={onUpdate}
+          onPress={onCommit}
           size="S"
         >
-          {editorIsFetching ? 'Updating...' : 'Update Features'}
+          {editorIsFetching ? 'Updating...' : 'Commit Features'}
         </SuccessButton>
       </View>
     </View>
@@ -74,7 +74,7 @@ const EditorSlidersHeader = (props) => {
 EditorSlidersHeader.propTypes = {
   editorIsFetching: PropTypes.bool,
   isFetching: PropTypes.bool,
-  onUpdate: PropTypes.func.isRequired,
+  onCommit: PropTypes.func.isRequired,
 };
 
 EditorSlidersHeader.defaultProps = {
