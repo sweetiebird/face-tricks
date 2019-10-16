@@ -5,6 +5,7 @@ const prefix = Platform.OS === 'ios' ? 'ios' : 'md';
 
 
 export const ADD_IMAGE = `${prefix}-image`;
+export const CHECK = `${prefix}-checkmark`;
 export const CREATE = `${prefix}-color-wand`;
 export const HISTORY = `${prefix}-contacts`;
 export const HOURGLASS = `${prefix}-hourglass`;

@@ -2,17 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, View } from 'react-native';
 
-import { PreviewImage } from 'components';
-
-import { CameraRoll } from 'react-native'
-
 import { colors, icons } from 'constants';
+
+import { PreviewImage } from 'components';
 
 import {
   TextWithTinyButton,
 } from 'components';
 
-const ResultImagePreview = ({ results }) => {
+
+const ResultImagePreview = ({ onSave, results }) => {
   const { width: size } = Dimensions.get('window');
 
   if (!results.length) {
@@ -38,7 +37,7 @@ const ResultImagePreview = ({ results }) => {
       }}
     >
       {results.map((uri, i) => (
-        <React.Fragment>
+        <React.Fragment key={uri}>
           {(i >= results.length - 1) && (
             <TextWithTinyButton
               buttonProps={{
@@ -46,8 +45,7 @@ const ResultImagePreview = ({ results }) => {
                 iconColor: colors.white,
                 isPrimary: true,
                 onPress: () => {
-                  console.log('saving', uri);
-                  CameraRoll.saveToCameraRoll(uri);
+                  onSave(uri);
                 },
               }}
               textProps={{
@@ -67,7 +65,6 @@ const ResultImagePreview = ({ results }) => {
           )}
 
           <PreviewImage
-            key={uri}
             uri={uri}
             style={{ zIndex: 1 }}
           />
@@ -78,6 +75,7 @@ const ResultImagePreview = ({ results }) => {
 };
 
 ResultImagePreview.propTypes = {
+  onSave: PropTypes.func.isRequired,
   results: PropTypes.arrayOf(PropTypes.string),
 };
 

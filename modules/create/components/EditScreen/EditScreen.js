@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, View } from 'react-native';
+import { CameraRoll, Dimensions, View } from 'react-native';
 
 import { editorKeys } from 'constants';
 
@@ -46,7 +46,10 @@ const EditScreen = (props) => {
           <LearningTextLoader />
         )}
 
-        <ResultImagePreview results={results} />
+        <ResultImagePreview
+          onSave={CameraRoll.saveToCameraRoll}
+          results={results}
+        />
 
         {!isFetching && (
           <KeepLearningSection
@@ -68,7 +71,7 @@ const EditScreen = (props) => {
           <EditorSliders
             editorValues={currentEditorValues}
             key={`editor-sliders-${slidersKey}`}
-            onSendValues={() => sendEditorValues(currentEditorValues)}
+            onSendValues={sendEditorValues}
             setEditorValues={setCurrentEditorValues}
           />
         </View>
