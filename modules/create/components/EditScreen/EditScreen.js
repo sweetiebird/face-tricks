@@ -4,6 +4,10 @@ import { CameraRoll, Dimensions, View } from 'react-native';
 
 import { editorKeys } from 'constants';
 
+import { System } from 'utils';
+
+import { Error } from 'services';
+
 import {
   EditorSliders,
   EditorSlidersHeader,
@@ -59,7 +63,18 @@ const EditScreen = (props) => {
     <ContainerStyled>
       <View style={{ height: height * 0.55 }}>
         <ResultImagePreview
-          onSave={CameraRoll.saveToCameraRoll}
+          onSave={async (uri) => {
+            try {
+              const granted = await System.requestCameraRollPermissions();
+
+              if (granted) {
+                CameraRoll.saveToCameraRoll(uri);
+              }
+            } catch (err) {
+              console.log(err, err.message);
+              Error.log(err, { message: err.message, location: 'onSave to camera roll' });
+            }
+          }}
           results={results}
         />
 

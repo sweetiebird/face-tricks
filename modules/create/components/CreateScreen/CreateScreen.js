@@ -5,9 +5,9 @@ import * as ImagePicker from 'expo-image-picker';
 
 import { icons } from 'constants';
 
-import { Navigation } from 'services';
+import { Error, Navigation } from 'services';
 
-import { FS } from 'utils';
+import { FS, System } from 'utils';
 
 import {
   InvertedButton,
@@ -36,20 +36,26 @@ const CreateScreen = (props) => {
             icon={icons.ADD_IMAGE}
             onPress={async () => {
               try {
-                const result = await ImagePicker.launchImageLibraryAsync({
-                  allowsEditing: true,
-                  aspect: [1, 1],
-                  exif: true,
-                  mediaTypes: ImagePicker.MediaTypeOptions.Images,
-                });
-                const {cancelled, ...rest} = result;
-                if (!cancelled) {
-                  setImageData(rest);
-                  imageAdded(rest.uri);
+                const granted = await System.requestCameraRollPermissions();
+
+                if (granted) {
+                  const result = await ImagePicker.launchImageLibraryAsync({
+                    allowsEditing: true,
+                    aspect: [1, 1],
+                    exif: true,
+                    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                  });
+
+                  const {cancelled, ...rest} = result;
+
+                  if (!cancelled) {
+                    setImageData(rest);
+                    imageAdded(rest.uri);
+                  }
                 }
               } catch (err) {
-                console.log('error', err);
-                console.log(err.message);
+                console.log('error', err, err.message);
+                Error.log(err, { message: err.message, location: 'onPress pick photo' });
               }
             }}
           >
@@ -62,20 +68,26 @@ const CreateScreen = (props) => {
             icon={icons.TAKE_IMAGE}
             onPress={async () => {
               try {
-                const result = await ImagePicker.launchCameraAsync({
-                  allowsEditing: true,
-                  aspect: [1, 1],
-                  exif: true,
-                  mediaTypes: ImagePicker.MediaTypeOptions.Images,
-                });
-                const {cancelled, ...rest} = result;
-                if (!cancelled) {
-                  setImageData(rest);
-                  imageAdded(rest.uri);
+                const granted = await System.requestCameraPermissions();
+
+                if (granted) {
+                  const result = await ImagePicker.launchCameraAsync({
+                    allowsEditing: true,
+                    aspect: [1, 1],
+                    exif: true,
+                    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                  });
+
+                  const {cancelled, ...rest} = result;
+
+                  if (!cancelled) {
+                    setImageData(rest);
+                    imageAdded(rest.uri);
+                  }
                 }
               } catch (err) {
-                console.log('error', err);
-                console.log(err.message);
+                console.log('error', err, err.message);
+                Error.log(err, { message: err.message, location: 'onPress snap photo' });
               }
             }}
           >
