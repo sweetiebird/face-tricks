@@ -48,14 +48,41 @@ const CreateScreen = (props) => {
                   imageAdded(rest.uri);
                 }
               } catch (err) {
-                console.log('error', error);
-                console.log(error.message);
+                console.log('error', err);
+                console.log(err.message);
               }
             }}
           >
-            Add Image
+            Pick Photo
           </InvertedButton>
         </ButtonViewStyled>
+
+        <ButtonViewStyled>
+          <InvertedButton
+            icon={icons.ADD_IMAGE}
+            onPress={async () => {
+              try {
+                const result = await ImagePicker.launchCameraAsync({
+                  allowsEditing: true,
+                  aspect: [1, 1],
+                  exif: true,
+                  mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                });
+                const {cancelled, ...rest} = result;
+                if (!cancelled) {
+                  setImageData(rest);
+                  imageAdded(rest.uri);
+                }
+              } catch (err) {
+                console.log('error', err);
+                console.log(err.message);
+              }
+            }}
+          >
+            Snap Photo
+          </InvertedButton>
+        </ButtonViewStyled>
+
 
         {!!imageData && (
           <View
