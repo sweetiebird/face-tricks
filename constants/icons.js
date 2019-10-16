@@ -7,5 +7,6 @@ const prefix = Platform.OS === 'ios' ? 'ios' : 'md';
 export const ADD_IMAGE = `${prefix}-cloud-upload`;
 export const CREATE = `${prefix}-color-wand`;
 export const HISTORY = `${prefix}-contacts`;
+export const PLAY = `${prefix}-play`;
 export const SETTINGS = `${prefix}-options`;
 export const USER = `${prefix}-options`;

@@ -24,10 +24,8 @@ const disabledCss = css`
 `;
 
 const tinyButtonCss = css`
-  height: 80px;
-  max-height: 80px;
-  max-width: 80px;
-  width: 80px;
+  padding: 2px 0 2px 12px;
+  border-radius: 30px;
 `;
 
 const buttonCss = css`

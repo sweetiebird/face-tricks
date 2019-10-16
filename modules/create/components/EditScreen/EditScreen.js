@@ -7,12 +7,14 @@ import { colors, editorKeys, icons } from 'constants';
 
 import {
   DefaultText,
-  PreviewImage,
   Progress,
   Slider,
   SuccessButton,
   TabBarIcon,
+  TextWithTinyButton,
 } from 'components';
+
+import { ResultImagePreview } from './components';
 
 import {
   ButtonViewStyled,
@@ -35,9 +37,9 @@ const EditScreen = (props) => {
     sendEditorValues,
   } = props;
 
-  const [currentEditorValues, setCurrentEditorValues] = useState(editorKeyMap);
-
   const { width: size } = Dimensions.get('window');
+
+  const [currentEditorValues, setCurrentEditorValues] = useState(editorKeyMap);
 
   return (
     <ContainerStyled>
@@ -60,36 +62,25 @@ const EditScreen = (props) => {
           <Progress progress={results.length ? results.length * 0.1 : 0} />
         )}
 
-        {results.length > 0 && (
-          <View
-            style={{
-              position: 'relative',
-              width: size,
-              height: size * 0.8,
-              marginTop: 10,
-              marginBottom: 20,
-            }}
-          >
-            {results.map(uri => (
-              <PreviewImage
-                key={uri}
-                uri={uri}
-              />
-            ))}
-          </View>
-        )}
+        <ResultImagePreview results={results} />
 
-        <ButtonViewStyled>
-          <SuccessButton
-            icon={icons.CREATE}
-            isDisabled={editorIsFetching || isFetching}
-            onPress={() => {
-              sendEditorValues(currentEditorValues);
+        <View
+          style={{
+            paddingLeft: size * 0.1,
+            paddingRight: size * 0.1,
+            marginTop: 10,
+          }}
+        >
+          <TextWithTinyButton
+            buttonProps={{
+              icon: icons.PLAY,
+              iconColor: colors.white,
+              isPrimary: true,
             }}
           >
-            {isFetching ? 'Working...' : 'Keep Learning'}
-          </SuccessButton>
-        </ButtonViewStyled>
+            No close enough? Keep learning ->
+          </TextWithTinyButton>
+        </View>
 
         <ButtonViewStyled>
           <SuccessButton

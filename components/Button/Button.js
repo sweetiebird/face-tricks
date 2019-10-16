@@ -15,6 +15,7 @@ const Button = (props) => {
     icon,
     iconColor,
     iconColorFocused,
+    iconSize,
     iconStyles,
     isDisabled,
     isFocused,
@@ -22,14 +23,17 @@ const Button = (props) => {
     isLoading,
     isPrimary,
     isSuccess,
+    isTiny,
     onPress,
   } = props;
+
+  const highlightStyle = { borderRadius: 100 };
 
   return (
     <TouchableHighlight
       activeOpacity={0.75}
       onPress={onPress}
-      style={{ borderRadius: 100 }}
+      style={highlightStyle}
       underlayColor={colors.white}
     >
       <ButtonStyled
@@ -37,11 +41,12 @@ const Button = (props) => {
         inverted={isInverted}
         primary={isPrimary}
         success={isSuccess}
+        tiny={isTiny}
       >
         {!!icon && (
           <Ionicons
             name={icon}
-            size={26}
+            size={iconSize}
             style={{
               marginRight: 8,
               ...(iconStyles || {}),
@@ -50,14 +55,16 @@ const Button = (props) => {
           />
         )}
 
-        <ButtonTextStyled
-          disabled={isDisabled}
-          inverted={isInverted}
-          primary={isPrimary}
-          success={isSuccess}
-        >
-          {children}
-        </ButtonTextStyled>
+        {!!children && (
+          <ButtonTextStyled
+            disabled={isDisabled}
+            inverted={isInverted}
+            primary={isPrimary}
+            success={isSuccess}
+          >
+            {children}
+          </ButtonTextStyled>
+        )}
 
         {isLoading && (
           <View
