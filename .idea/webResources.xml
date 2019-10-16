@@ -5,7 +5,6 @@
       <entry url="file://$PROJECT_DIR$">
         <entryData>
           <resourceRoots>
-            <path value="file://$PROJECT_DIR$/constants" />
             <path value="file://$PROJECT_DIR$/assets" />
             <path value="file://$PROJECT_DIR$/components" />
             <path value="file://$PROJECT_DIR$/modules" />
@@ -14,6 +13,7 @@
             <path value="file://$PROJECT_DIR$/utils" />
             <path value="file://$PROJECT_DIR$/config" />
             <path value="file://$PROJECT_DIR$/hooks" />
+            <path value="file://$PROJECT_DIR$/constants" />
           </resourceRoots>
         </entryData>
       </entry>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { CameraRoll, Dimensions, View } from 'react-native';
 
-import { editorKeys } from 'constants';
+import { create, editorKeys } from 'constants';
 
 import { System } from 'utils';
 
@@ -25,7 +25,6 @@ const editorKeyMap = editorKeys.reduce((obj, [weight, key]) => ({
   ...obj,
   [key]: weight,
 }), {});
-console.log(editorKeyMap);
 
 import { Convert } from 'utils';
 
@@ -62,9 +61,11 @@ const EditScreen = (props) => {
 
   return (
     <ContainerStyled>
-      <View style={{ height: height * 0.55 }}>
+      <View style={{ height: height * 0.5 }}>
         <ResultImagePreview
           onSave={async (uri) => {
+            // sendEval(`(grab-image)`);
+
             try {
               const granted = await System.requestCameraRollPermissions();
 
@@ -90,7 +91,7 @@ const EditScreen = (props) => {
           <KeepLearningSection
             isFetching={isFetching}
             onPress={() => {
-              sendEval(`(do (set-latent (optimize-latent 4)) (w/size 256 256 (grab-image ${grabLatentExpression(currentEditorValues)})))`);
+              sendEval(`(do (set-latent (optimize-latent 4)) (w/size ${create.imageSize} ${create.imageSize} (grab-image ${grabLatentExpression(currentEditorValues)})))`);
             }}
           />
         )}
@@ -103,7 +104,7 @@ const EditScreen = (props) => {
         onCommit={() => {
           setCurrentEditorValues(editorKeyMap);
           sendEval(
-            `(do (set-latent ${grabLatentExpression(currentEditorValues)}) (w/size 256 256 (grab-image)))`
+            `(do (set-latent ${grabLatentExpression(currentEditorValues)}) (w/size ${create.imageSize} ${create.imageSize} (grab-image)))`
           );
           setSlidersKey(slidersKey + 1);
         }}

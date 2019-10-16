@@ -1,1 +1,2 @@
-export const iterations = 4;
+export const iterations = 2;
+export const imageSize = 256;

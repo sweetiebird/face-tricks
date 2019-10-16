@@ -31,7 +31,7 @@ const Slider = (props) => {
            onComplete(val);
          }
         }}
-        thumbTintColor={colors.primaryHover}
+        thumbImage={require('assets/images/slider.png')}
         step={step}
         style={{ width: '100%' }}
         value={initialValue}

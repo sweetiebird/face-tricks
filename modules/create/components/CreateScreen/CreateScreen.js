@@ -112,8 +112,8 @@ const CreateScreen = (props) => {
             icon={icons.CREATE}
             isDisabled={!imageData || isFetching}
             onPress={async () => {
-              const file = await FS.getFile(imageData.uri);
-              sendImage(file);
+              // const file = await FS.getFile(imageData.uri);
+              // sendImage(file);
               Navigation.navigate('Edit');
             }}
           >

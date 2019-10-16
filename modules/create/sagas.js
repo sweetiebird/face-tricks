@@ -59,12 +59,12 @@ async function socketChannel(id) {
         (set-image-from-data ${id})
         (set-latent (grab-estimate))
         (set emily (grab-image))
-        (await (send-image (w/size 512 512 emily)))
+        (await (send-image (w/size ${create.imageSize} ${create.imageSize} emily)))
         (for i ${create.iterations}
           (set-latent (optimize-latent 4))
-          (await (send-image (w/size 512 512 (set emily (grab-image)))))
+          (await (send-image (w/size ${create.imageSize} ${create.imageSize} (set emily (grab-image)))))
           (await (pause)))
-        (w/size 512 512
+        (w/size ${create.imageSize} ${create.imageSize}
           emily)
       )`;
 
