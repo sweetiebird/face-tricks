@@ -11,7 +11,7 @@ import {
 } from 'components';
 
 
-const ResultImagePreview = ({ onSave, results }) => {
+const ResultImagePreview = ({ onSave, onEye, results }) => {
   const { width: size } = Dimensions.get('window');
 
   if (!results.length) {
@@ -38,6 +38,32 @@ const ResultImagePreview = ({ onSave, results }) => {
     >
       {results.map((uri, i) => (
         <React.Fragment key={uri}>
+          {(i >= results.length - 1) && (
+            <TextWithTinyButton
+              buttonProps={{
+                icon: icons.EYE,
+                iconColor: colors.white,
+                isPrimary: true,
+                onPress: () => {
+                  onEye(uri);
+                },
+              }}
+              textProps={{
+                style: { color: colors.white, marginRight: 8 }
+              }}
+              viewProps={{
+                flexStart: true,
+                style: {
+                  position: 'absolute',
+                  top: 10,
+                  left: size * 0.1,
+                  right: saveViewPadding,
+                  zIndex: 20,
+                },
+              }}
+            />
+          )}
+
           {(i >= results.length - 1) && (
             <TextWithTinyButton
               buttonProps={{
@@ -76,6 +102,7 @@ const ResultImagePreview = ({ onSave, results }) => {
 
 ResultImagePreview.propTypes = {
   onSave: PropTypes.func.isRequired,
+  onEye: PropTypes.func.isRequired,
   results: PropTypes.arrayOf(PropTypes.string),
 };
 

@@ -64,6 +64,9 @@ const EditScreen = (props) => {
 
         <ResultImagePreview
           onSave={CameraRoll.saveToCameraRoll}
+          onEye={() => {
+            sendEval(`(grab-target)`);
+          }}
           results={results}
         />
 
