@@ -1,15 +1,16 @@
-import * as FileSystem from 'expo-file-system';
 import { encode } from 'base64-arraybuffer';
 import shortid from 'shortid';
 
+import { FS } from 'utils';
+
 
 export const wipe = async () => {
-  const path = `${FileSystem.documentDirectory}`;
+  const path = `${FS.getIntermediatesDir()}`;
   const files = await FileSystem.readDirectoryAsync(path);
   for (let file of files) {
     console.log('Checking', file);
     if (file.startsWith(`intermediate_`) && file.endsWith('.png')) {
-      const fullPath = `${FileSystem.documentDirectory}${file}`;
+      const fullPath = `${path}/${file}`;
       console.log('Wiping', fullPath);
       await FileSystem.deleteAsync(fullPath);
     }
@@ -18,16 +19,14 @@ export const wipe = async () => {
 
 let shouldWipe = true;
 
-export const image = async (imageBuffer) => {
+export const image = async (imageBuffer, resultId) => {
   if (shouldWipe) {
     shouldWipe = false;
     await wipe();
   }
   const base64 = encode(imageBuffer);
   const str = shortid.generate();
-  const path = `${FileSystem.documentDirectory}intermediate_${str}.png`;
-  await FileSystem.writeAsStringAsync(path, base64, {
-    encoding: FileSystem.EncodingType.Base64,
-  });
+  const path = `${FS.getIntermediatesDir()}/intermediate_${resultId}_${str}.png`;
+  await FS.writeBase64ToFile(path, base64);
   return path;
 };

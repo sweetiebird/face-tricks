@@ -20,7 +20,7 @@ async function socketChannel(id) {
     return eventChannel((emitter) => {
       const handleResult = async (e) => {
         const buffer = e.data;
-        const uri = await parse.image(buffer);
+        const uri = await parse.image(buffer, id);
 
         emitter({ resultUri: uri });
 
@@ -133,10 +133,10 @@ function* sendEditorValues(values) {
 
 function* sendEval(code) {
   try {
-    console.log('sendEval', code);
     const buffer = yield call(api.sendEval, socket, code);
     const uri = yield call(parse.image, buffer);
-    yield put(actions.evalSuccess(uri));
+    yield put(actions.sendImageSuccess(uri));
+    yield put(actions.imageResultFinish());
   } catch (err) {
     console.log('evalFailure');
     console.log(err.message);
@@ -149,18 +149,18 @@ function* watch() {
 
   while (true) {
     const { payload = {}, type } = yield take([
+      types.EVAL_REQUEST,
       types.SEND_EDITOR_VALUES_REQUEST,
       types.SEND_IMAGE_REQUEST,
-      types.EVAL_REQUEST,
     ]);
 
     switch (type) {
-      case types.SEND_EDITOR_VALUES_REQUEST:
-        yield fork(sendEditorValues, payload.values);
-        break;
-
       case types.EVAL_REQUEST:
         yield fork(sendEval, payload.code);
+        break;
+
+      case types.SEND_EDITOR_VALUES_REQUEST:
+        yield fork(sendEditorValues, payload.values);
         break;
 
       case types.SEND_IMAGE_REQUEST:

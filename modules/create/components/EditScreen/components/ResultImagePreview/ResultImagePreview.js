@@ -14,16 +14,6 @@ import {
 const ResultImagePreview = ({ onSave, onEye, results }) => {
   const { width: size } = Dimensions.get('window');
 
-  if (!results.length) {
-    return (
-      <PreviewImage
-        key="placeholder-image"
-        uri={null}
-        style={{ zIndex: 1, marginTop: 10 }}
-      />
-    );
-  }
-
   const saveViewPadding = (size * 0.1) + 10;
 
   return (
@@ -36,7 +26,15 @@ const ResultImagePreview = ({ onSave, onEye, results }) => {
         marginTop: 10,
       }}
     >
-      {results.map((uri, i) => (
+      {results.length === 0 && (
+        <PreviewImage
+          key="placeholder-image"
+          uri={null}
+          style={{ zIndex: 1 }}
+        />
+      )}
+
+      {results.length > 0 && results.map((uri, i) => (
         <React.Fragment key={uri}>
           {(i >= results.length - 1) && (
             <TextWithTinyButton
@@ -54,10 +52,10 @@ const ResultImagePreview = ({ onSave, onEye, results }) => {
               viewProps={{
                 flexStart: true,
                 style: {
+                  left: saveViewPadding,
                   position: 'absolute',
+                  right: size * 0.1,
                   top: 10,
-                  left: size * 0.1,
-                  right: saveViewPadding,
                   zIndex: 20,
                 },
               }}

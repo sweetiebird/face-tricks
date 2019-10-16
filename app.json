@@ -25,12 +25,17 @@
     ],
     "ios": {
       "bundleIdentifier": "com.emilykolar.FaceWeave",
-      "supportsTablet": true,
       "config": {
         "googleSignIn": {
           "reservedClientId": "com.googleusercontent.apps.1091742301427-r652vosbtsr903m4u8u4tb1i3vafc83b"
         }
-      }
+      },
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to let you edit images.",
+        "NSPhotoLibraryUsageDescription": "This app uses the photo library for selecting images to edit.",
+        "NSPhotoLibraryAddUsageDescription": "This app allows you to save your edited images."
+      },
+      "supportsTablet": true
     },
     "android": {
       "package": "com.emilykolar.FaceWeave",
