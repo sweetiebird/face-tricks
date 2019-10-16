@@ -18,6 +18,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   iterateAgain: actions.iterateAgain,
   sendEditorValues: actions.sendEditorValuesRequest,
+  sendEval: actions.evalRequest,
   sendImage: actions.sendImageRequest,
 };
 

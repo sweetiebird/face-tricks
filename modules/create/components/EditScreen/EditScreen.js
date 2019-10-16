@@ -17,11 +17,27 @@ import {
   ScrollViewStyled,
 } from './styled';
 
-
 const editorKeyMap = editorKeys.reduce((obj, key) => ({
   ...obj,
   [key]: 2,
 }), {});
+
+import { Convert } from 'utils';
+
+const grabLatentExpression = (rawValues) => {
+  const mappedValues = Object.keys(rawValues).reduce((obj, key) => {
+    const mappedVal = (2 - rawValues[key]) * -1;
+    return {
+      ...obj,
+      [key]: mappedVal,
+    };
+  }, {});
+  const values = Object.entries(mappedValues).map(([k, v]) => [v, k]);
+  const result = Convert.mapconcat(null, values, " ");
+
+  const message = `(grab-latent nil 1.0 (quote (${result})))`;
+  return message;
+};
 
 const EditScreen = (props) => {
   const {
@@ -32,6 +48,7 @@ const EditScreen = (props) => {
     results,
     resultId,
     sendEditorValues,
+    sendEval,
   } = props;
 
   const { height } = Dimensions.get('window');
@@ -54,7 +71,9 @@ const EditScreen = (props) => {
         {!isFetching && (
           <KeepLearningSection
             isFetching={isFetching}
-            onPress={() => iterateAgain(resultId)}
+            onPress={() => {
+              sendEval(`(do (set-latent (optimize-latent 4)) (grab-image ${grabLatentExpression(currentEditorValues)}))`);
+            }}
           />
         )}
       </View>
@@ -65,7 +84,13 @@ const EditScreen = (props) => {
             editorIsFetching={editorIsFetching}
             editorValues={currentEditorValues}
             isFetching={isFetching}
-            onCommit={() => setSlidersKey(slidersKey + 1)}
+            onCommit={() => {
+              sendEval(
+                `(do (set-latent ${grabLatentExpression(currentEditorValues)}) (grab-image))`,
+                editorKeyMap,
+              );
+              setSlidersKey(slidersKey + 1);
+            }}
           />
 
           <EditorSliders
@@ -89,6 +114,7 @@ EditScreen.propTypes = {
   resultId: PropTypes.string,
   iterateAgain: PropTypes.func.isRequired,
   sendEditorValues: PropTypes.func.isRequired,
+  sendEval: PropTypes.func.isRequired,
   sendImage: PropTypes.func.isRequired,
 };
 

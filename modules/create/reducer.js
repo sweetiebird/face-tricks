@@ -78,6 +78,26 @@ export const reducer = (state = initialState, action = {}) => {
         editorIsFetching: false,
       };
 
+    case types.EVAL_REQUEST:
+      return {
+        ...state,
+        editorIsFetching: true,
+        ...(action.payload.values ? { values: action.payload.values } : {}),
+      };
+
+    case types.EVAL_SUCCESS:
+      return {
+        ...state,
+        editorIsFetching: false,
+        results: state.results.concat(action.payload.result),
+      };
+
+    case types.EVAL_FAILURE:
+      return {
+        ...state,
+        editorIsFetching: false,
+      };
+
     default:
       return state;
   }

@@ -45,6 +45,21 @@ export const sendEditorValuesFailure = (message, error) => ({
   type: types.SEND_EDITOR_VALUES_FAILURE,
 });
 
+export const evalRequest = (code, ...props) => ({
+  payload: { code, ...props },
+  type: types.EVAL_REQUEST,
+});
+
+export const evalSuccess = result => ({
+  payload: { result },
+  type: types.EVAL_SUCCESS,
+});
+
+export const evalFailure = (message, error) => ({
+  payload: { message, error },
+  type: types.EVAL_FAILURE,
+});
+
 export const iterateAgain = (resultId) => ({
   payload: { resultId },
   type: types.ITERATE_AGAIN,
