@@ -85,9 +85,9 @@ const EditScreen = (props) => {
             editorValues={currentEditorValues}
             isFetching={isFetching}
             onCommit={() => {
+              setCurrentEditorValues(editorKeyMap);
               sendEval(
-                `(do (set-latent ${grabLatentExpression(currentEditorValues)}) (grab-image))`,
-                editorKeyMap,
+                `(do (set-latent ${grabLatentExpression(currentEditorValues)}) (grab-image))`
               );
               setSlidersKey(slidersKey + 1);
             }}
