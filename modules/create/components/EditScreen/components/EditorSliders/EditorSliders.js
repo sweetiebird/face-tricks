@@ -23,7 +23,7 @@ const EditorSliders = (props) => {
 
   return (
     <React.Fragment>
-      {editorKeys.map((key) => {
+      {editorKeys.map(([weight, key]) => {
         return (
           <View
             key={key}
@@ -37,6 +37,7 @@ const EditorSliders = (props) => {
 
             <View style={{ flex: 1 }}>
               <Slider
+                initialValue={weight}
                 onComplete={(value) => {
                   console.log(value);
                   const values = {

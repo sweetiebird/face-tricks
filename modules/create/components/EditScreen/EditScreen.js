@@ -17,10 +17,11 @@ import {
   ScrollViewStyled,
 } from './styled';
 
-const editorKeyMap = editorKeys.reduce((obj, key) => ({
+const editorKeyMap = editorKeys.reduce((obj, [weight, key]) => ({
   ...obj,
-  [key]: 2,
+  [key]: weight,
 }), {});
+console.log(editorKeyMap);
 
 import { Convert } from 'utils';
 
