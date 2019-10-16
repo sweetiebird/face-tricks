@@ -35,8 +35,7 @@ const grabLatentExpression = (rawValues) => {
   const values = Object.entries(mappedValues).map(([k, v]) => [v, k]);
   const result = Convert.mapconcat(null, values, " ");
 
-  const message = `(grab-latent nil 1.0 (quote (${result})))`;
-  return message;
+  return `(grab-latent nil 1.0 (quote (${result})))`;
 };
 
 const EditScreen = (props) => {
@@ -78,7 +77,7 @@ const EditScreen = (props) => {
         )}
       </View>
 
-      <ScrollViewStyled contentContainerStyle={{ height: height * 0.45 }}>
+      <ScrollViewStyled contentContainerStyle={{ paddingBottom: 10 }}>
         <View style={{ marginTop: 20, width: '100%' }}>
           <EditorSlidersHeader
             editorIsFetching={editorIsFetching}
