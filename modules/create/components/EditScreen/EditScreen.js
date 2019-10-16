@@ -58,14 +58,14 @@ const EditScreen = (props) => {
   return (
     <ContainerStyled>
       <View style={{ height: height * 0.55 }}>
-        {isFetching && (
-          <LearningTextLoader />
-        )}
-
         <ResultImagePreview
           onSave={CameraRoll.saveToCameraRoll}
           results={results}
         />
+
+        {isFetching && (
+          <LearningTextLoader />
+        )}
 
         {!isFetching && (
           <KeepLearningSection

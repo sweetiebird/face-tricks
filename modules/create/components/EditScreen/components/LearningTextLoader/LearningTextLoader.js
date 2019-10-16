@@ -8,7 +8,6 @@ import {
 
 
 const learningTextStyle = {
-  marginTop: 10,
   marginRight: 8,
   textAlign: 'right',
 };
@@ -23,7 +22,7 @@ const LearningTextLoader = () => {
         Learning your face! This can take a minute.
       </DefaultText>
 
-      <ActivityIndicator style={{ top: 4 }} />
+      <ActivityIndicator />
     </FlexRow>
   );
 };

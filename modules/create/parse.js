@@ -1,14 +1,13 @@
-import * as FileSystem from 'expo-file-system';
 import { encode } from 'base64-arraybuffer';
 import shortid from 'shortid';
 
+import { FS } from 'utils';
 
-export const image = async (imageBuffer) => {
+
+export const image = async (imageBuffer, resultId) => {
   const base64 = encode(imageBuffer);
   const str = shortid.generate();
-  const path = `${FileSystem.documentDirectory}intermediate_${str}.png`;
-  await FileSystem.writeAsStringAsync(path, base64, {
-    encoding: FileSystem.EncodingType.Base64,
-  });
+  const path = `${FS.getIntermediatesDir()}/intermediate_${resultId}_${str}.png`;
+  await FS.writeBase64ToFile(path, base64);
   return path;
 };

@@ -49,12 +49,14 @@ export const reducer = (state = initialState, action = {}) => {
     case types.SEND_IMAGE_FAILURE:
       return {
         ...state,
+        editorIsFetching: false,
         isFetching: false,
       };
 
     case types.IMAGE_RESULT_FINISH:
       return {
         ...state,
+        editorIsFetching: false,
         isFetching: false,
       };
 
@@ -81,8 +83,9 @@ export const reducer = (state = initialState, action = {}) => {
     case types.EVAL_REQUEST:
       return {
         ...state,
-        editorIsFetching: true,
         ...(action.payload.values ? { values: action.payload.values } : {}),
+        editorIsFetching: true,
+        isFetching: true,
       };
 
     case types.EVAL_SUCCESS:

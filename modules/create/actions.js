@@ -60,7 +60,7 @@ export const evalFailure = (message, error) => ({
   type: types.EVAL_FAILURE,
 });
 
-export const iterateAgain = (resultId) => ({
+export const iterateAgain = resultId => ({
   payload: { resultId },
   type: types.ITERATE_AGAIN,
 });

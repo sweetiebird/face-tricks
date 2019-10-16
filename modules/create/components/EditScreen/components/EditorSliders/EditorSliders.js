@@ -27,9 +27,14 @@ const EditorSliders = (props) => {
         return (
           <View
             key={key}
-            style={{ display: 'flex', flexDirection: 'row' }}
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              paddingBottom: 4,
+              paddingTop: 4,
+            }}
           >
-            <View style={{ flex: 0.5 }}>
+            <View style={{ flex: 0.4 }}>
               <DefaultText style={editorValueTextStyles}>
                 {startCase(key)}
               </DefaultText>
