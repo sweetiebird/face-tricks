@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, View } from 'react-native';
+import { Dimensions, View, ActivityIndicator } from 'react-native';
 import { startCase } from 'lodash';
 
 import { colors, create, editorKeys, icons } from 'constants';
@@ -12,6 +12,7 @@ import {
   SuccessButton,
   TabBarIcon,
   TextWithTinyButton,
+  FlexRow,
 } from 'components';
 
 import { ResultImagePreview } from './components';
@@ -51,8 +52,8 @@ const iconViewStyles = {
 const learningTextStyle = {
   marginBottom: 20,
   marginTop: 20,
-  textAlign: 'center',
-  width: '100%',
+  marginRight: 8,
+  textAlign: 'right',
 };
 
 const editButtonViewStyles = {
@@ -64,7 +65,7 @@ const editButtonViewStyles = {
 const editorValueTextStyles = {
   paddingLeft: 10,
   paddingRight: 5,
-  textAlign: 'right',
+  textAlign: 'left',
 };
 
 const EditScreen = (props) => {
@@ -78,7 +79,7 @@ const EditScreen = (props) => {
     sendEditorValues,
   } = props;
 
-  const { width: size } = Dimensions.get('window');
+  const { width: size, height } = Dimensions.get('window');
 
   const [currentEditorValues, setCurrentEditorValues] = useState(editorKeyMap);
 
@@ -86,44 +87,49 @@ const EditScreen = (props) => {
 
   return (
     <ContainerStyled>
-      <ScrollViewStyled contentContainerStyle={{ paddingTop: 30 }}>
+      <View style={{ height: height * 0.6 }}>
         {isFetching && (
-          <DefaultText
-            italic
-            style={learningTextStyle}
-          >
-            Learning your face! This can take a minute.
-          </DefaultText>
-        )}
+          <FlexRow center>
+            <DefaultText
+              italic
+              style={learningTextStyle}
+            >
+              Learning your face! This can take a minute.
+            </DefaultText>
 
-        {isFetching && <Progress progress={progress} />}
+            <ActivityIndicator />
+          </FlexRow>
+        )}
 
         <ResultImagePreview results={results} />
 
-        <View
-          style={{
-            paddingLeft: size * 0.1,
-            paddingRight: size * 0.1,
-            marginTop: 10,
-          }}
-        >
-          <TextWithTinyButton
-            buttonProps={{
-              icon: isFetching ? icons.HOURGLASS : icons.CREATE,
-              iconColor: colors.white,
-              isDisabled: isFetching,
-              isPrimary: true,
-              onPress: () => iterateAgain(resultId),
-            }}
-            textProps={{
-              italic: true,
-              style: { marginRight: 8 }
+        {!isFetching && (
+          <View
+            style={{
+              paddingLeft: size * 0.1,
+              paddingRight: size * 0.1,
             }}
           >
-            Not quite right? Keep learning
-          </TextWithTinyButton>
-        </View>
+            <TextWithTinyButton
+              buttonProps={{
+                icon: isFetching ? icons.HOURGLASS : icons.CREATE,
+                iconColor: colors.white,
+                isDisabled: isFetching,
+                isPrimary: true,
+                onPress: () => iterateAgain(resultId),
+              }}
+              textProps={{
+                italic: true,
+                style: { marginRight: 8 }
+              }}
+            >
+              Not quite right? Keep learning
+            </TextWithTinyButton>
+          </View>
+        )}
+      </View>
 
+      <ScrollViewStyled contentContainerStyle={{ height: height * 0.4 }}>
         <View style={{ marginTop: 20, width: '100%' }}>
           <View style={editTitleViewStyles}>
             <View style={textIconViewStyles}>

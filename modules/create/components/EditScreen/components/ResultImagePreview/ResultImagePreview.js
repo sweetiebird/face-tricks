@@ -17,8 +17,8 @@ const ResultImagePreview = ({ results }) => {
         position: 'relative',
         width: size,
         height: size * 0.8,
-        marginTop: 10,
         marginBottom: 20,
+        marginTop: 10,
       }}
     >
       {results.map(uri => (
