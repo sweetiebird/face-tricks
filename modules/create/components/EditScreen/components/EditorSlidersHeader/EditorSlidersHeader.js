@@ -16,7 +16,8 @@ const editTitleViewStyles = {
   flexDirection: 'row',
   justifyContent: 'space-between',
   marginBottom: 10,
-  paddingLeft: 20,
+  paddingLeft: 10,
+  paddingTop: 10,
   paddingRight: 20,
 };
 

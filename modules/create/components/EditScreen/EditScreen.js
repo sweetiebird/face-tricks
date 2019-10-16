@@ -77,21 +77,21 @@ const EditScreen = (props) => {
         )}
       </View>
 
-      <ScrollViewStyled contentContainerStyle={{ paddingBottom: 10 }}>
-        <View style={{ marginTop: 20, width: '100%' }}>
-          <EditorSlidersHeader
-            editorIsFetching={editorIsFetching}
-            editorValues={currentEditorValues}
-            isFetching={isFetching}
-            onCommit={() => {
-              setCurrentEditorValues(editorKeyMap);
-              sendEval(
-                `(do (set-latent ${grabLatentExpression(currentEditorValues)}) (grab-image))`
-              );
-              setSlidersKey(slidersKey + 1);
-            }}
-          />
+      <EditorSlidersHeader
+        editorIsFetching={editorIsFetching}
+        editorValues={currentEditorValues}
+        isFetching={isFetching}
+        onCommit={() => {
+          setCurrentEditorValues(editorKeyMap);
+          sendEval(
+            `(do (set-latent ${grabLatentExpression(currentEditorValues)}) (grab-image))`
+          );
+          setSlidersKey(slidersKey + 1);
+        }}
+      />
 
+      <ScrollViewStyled contentContainerStyle={{ paddingBottom: 10 }}>
+        <View style={{ width: '100%' }}>
           <EditorSliders
             editorValues={currentEditorValues}
             key={`editor-sliders-${slidersKey}`}
