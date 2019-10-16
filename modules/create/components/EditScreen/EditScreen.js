@@ -164,10 +164,13 @@ const EditScreen = (props) => {
                     <Slider
                       onComplete={(value) => {
                         console.log(value);
-                        setCurrentEditorValues({
+                        const values = {
                           ...currentEditorValues,
                           [key]: Math.round(value * 100) / 100,
-                        });
+                        }
+                        setCurrentEditorValues(values);
+                        sendEditorValues(values);
+                        console.log(values);
                       }}
                     />
                   </View>

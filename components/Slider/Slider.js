@@ -55,7 +55,7 @@ Slider.defaultProps = {
   min: 0,
   onChange: undefined,
   onComplete: undefined,
-  step: 0.1,
+  step: 0.01,
 };
 
 
