@@ -52,10 +52,10 @@ const ResultImagePreview = ({ onSave, onEye, results }) => {
               viewProps={{
                 flexStart: true,
                 style: {
+                  left: saveViewPadding,
                   position: 'absolute',
+                  right: size * 0.1,
                   top: 10,
-                  left: size * 0.1,
-                  right: saveViewPadding,
                   zIndex: 20,
                 },
               }}
