@@ -167,7 +167,7 @@ const EditScreen = (props) => {
                         const values = {
                           ...currentEditorValues,
                           [key]: Math.round(value * 100) / 100,
-                        }
+                        };
                         setCurrentEditorValues(values);
                         sendEditorValues(values);
                         console.log(values);
