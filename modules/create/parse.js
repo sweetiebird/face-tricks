@@ -5,7 +5,7 @@ import shortid from 'shortid';
 import { FS } from 'utils';
 
 export const wipe = async () => {
-  const path = `${FS.getIntermediatesDir()}`;
+  const path = `${await FS.getIntermediatesDir()}`;
   const files = await FileSystem.readDirectoryAsync(path);
   for (let file of files) {
     console.log('Checking', file);
@@ -26,7 +26,7 @@ export const image = async (imageBuffer, resultId) => {
   }
   const base64 = encode(imageBuffer);
   const str = shortid.generate();
-  const path = `${FS.getIntermediatesDir()}/intermediate_${resultId}_${str}.png`;
+  const path = `${await FS.getIntermediatesDir()}/intermediate_${resultId}_${str}.png`;
   await FS.writeBase64ToFile(path, base64);
   return path;
 };

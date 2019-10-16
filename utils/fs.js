@@ -2,9 +2,11 @@ import * as FileSystem from 'expo-file-system';
 import { decode } from 'base64-arraybuffer';
 
 
-export const getIntermediatesDir = () => (
-  `${FileSystem.documentDirectory}weave`
-);
+export const getIntermediatesDir = async () => {
+  const path = `${FileSystem.documentDirectory}weave`;
+  await FileSystem.makeDirectoryAsync(path, { intermediates: true });
+  return path;
+};
 
 export const getFile = async (uri) => {
   const fileStr = await FileSystem.readAsStringAsync(uri, {
