@@ -16,7 +16,7 @@ const Slider = (props) => {
   } = props;
 
   return (
-    <View style={{ width: '100%', padding: 10 }}>
+    <View style={{ width: '100%', paddingTop: 1 }}>
       <RNSlider
         maximumValue={max}
         minimumValue={min}
