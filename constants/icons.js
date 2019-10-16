@@ -15,3 +15,5 @@ export const PLAY = `${prefix}-play-circle`;
 export const SAVE = `${prefix}-save`;
 export const SETTINGS = `${prefix}-options`;
 export const USER = `${prefix}-options`;
+export const EYE = `${prefix}-eye`;
+export const EYE_OFF = `${prefix}-eye-off`;

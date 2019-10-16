@@ -15,6 +15,7 @@ const FlexRow = ({ children, ...rest }) => {
 FlexRow.propTypes = {
   center: PropTypes.bool,
   children: PropTypes.node,
+  flexStart: PropTypes.bool,
   flexEnd: PropTypes.bool,
   spaceBetween: PropTypes.bool,
   wrap: PropTypes.bool,
@@ -23,6 +24,7 @@ FlexRow.propTypes = {
 FlexRow.defaultProps = {
   center: false,
   children: undefined,
+  flexStart: false,
   flexEnd: false,
   spaceBetween: true,
   wrap: true,
