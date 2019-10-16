@@ -6,7 +6,7 @@ import { colors } from 'constants';
 import { ImageWrapperStyled, ImageStyled } from './styled';
 
 
-const PreviewImage = ({ uri }) => {
+const PreviewImage = ({ uri, style }) => {
   const [fadeAnim] = useState(new Animated.Value(0));
   const { width } = Dimensions.get('window');
 
@@ -20,7 +20,7 @@ const PreviewImage = ({ uri }) => {
   }, []);
 
   return (
-    <Animated.View style={{ opacity: fadeAnim }}>
+    <Animated.View style={{ ...style, opacity: fadeAnim }}>
       <ImageWrapperStyled
         size={width}
         style={{
@@ -32,10 +32,12 @@ const PreviewImage = ({ uri }) => {
           shadowOffset: { width: 0, height: 1 },
         }}
       >
-        <ImageStyled
-          size={width}
-          source={{ uri }}
-        />
+        {!!uri && (
+          <ImageStyled
+            size={width}
+            source={{ uri }}
+          />
+        )}
       </ImageWrapperStyled>
     </Animated.View>
   );

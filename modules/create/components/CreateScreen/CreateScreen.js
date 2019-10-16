@@ -59,7 +59,7 @@ const CreateScreen = (props) => {
 
         <ButtonViewStyled>
           <InvertedButton
-            icon={icons.ADD_IMAGE}
+            icon={icons.TAKE_IMAGE}
             onPress={async () => {
               try {
                 const result = await ImagePicker.launchCameraAsync({
@@ -83,18 +83,17 @@ const CreateScreen = (props) => {
           </InvertedButton>
         </ButtonViewStyled>
 
-
-        {!!imageData && (
-          <View
-            style={{
-              position: 'relative',
-              width: size,
-              height: size * 0.8,
-            }}
-          >
-            <PreviewImage uri={imageData.uri} />
-          </View>
-        )}
+        <View
+          style={{
+            position: 'relative',
+            width: size,
+            height: size * 0.8,
+            marginTop: 10,
+            marginBottom: 10,
+          }}
+        >
+          <PreviewImage uri={imageData && imageData.uri} />
+        </View>
 
         <ButtonViewStyled>
           <SuccessButton

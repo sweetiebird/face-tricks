@@ -8,12 +8,14 @@ import DefaultText from '../DefaultText';
 import { FlexRow } from '../layout';
 
 
-const TextWithTinyButton = ({ children, buttonProps, textProps }) => {
+const TextWithTinyButton = ({ children, buttonProps, textProps, viewProps }) => {
   return (
-    <FlexRow center>
-      <DefaultText {...textProps}>
-        {children}
-      </DefaultText>
+    <FlexRow center {...viewProps}>
+      {!!children && (
+        <DefaultText {...textProps}>
+          {children}
+        </DefaultText>
+      )}
 
       <Button iconSize={16} {...buttonProps} size="T" />
     </FlexRow>
@@ -25,6 +27,7 @@ TextWithTinyButton.propTypes = {
   children: PropTypes.string,
   buttonProps: PropTypes.shape(),
   textProps: PropTypes.shape(),
+  viewProps: PropTypes.shape(),
 };
 
 TextWithTinyButton.defaultProps = {
@@ -32,6 +35,7 @@ TextWithTinyButton.defaultProps = {
   children: undefined,
   buttonProps: {},
   textProps: {},
+  viewProps: {},
 };
 
 

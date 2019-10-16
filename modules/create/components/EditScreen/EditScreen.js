@@ -50,8 +50,7 @@ const iconViewStyles = {
 };
 
 const learningTextStyle = {
-  marginBottom: 20,
-  marginTop: 20,
+  marginTop: 10,
   marginRight: 8,
   textAlign: 'right',
 };
@@ -83,11 +82,9 @@ const EditScreen = (props) => {
 
   const [currentEditorValues, setCurrentEditorValues] = useState(editorKeyMap);
 
-  const progress = ((100 / create.iterations + 1) * results.length) / 100;
-
   return (
     <ContainerStyled>
-      <View style={{ height: height * 0.6 }}>
+      <View style={{ height: height * 0.55 }}>
         {isFetching && (
           <FlexRow center>
             <DefaultText
@@ -97,7 +94,7 @@ const EditScreen = (props) => {
               Learning your face! This can take a minute.
             </DefaultText>
 
-            <ActivityIndicator />
+            <ActivityIndicator style={{ top: 4 }} />
           </FlexRow>
         )}
 
@@ -129,7 +126,7 @@ const EditScreen = (props) => {
         )}
       </View>
 
-      <ScrollViewStyled contentContainerStyle={{ height: height * 0.4 }}>
+      <ScrollViewStyled contentContainerStyle={{ height: height * 0.45 }}>
         <View style={{ marginTop: 20, width: '100%' }}>
           <View style={editTitleViewStyles}>
             <View style={textIconViewStyles}>
