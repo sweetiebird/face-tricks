@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Dimensions, View } from 'react-native';
 import { startCase } from 'lodash';
 
-import { colors, editorKeys, icons } from 'constants';
+import { colors, create, editorKeys, icons } from 'constants';
 
 import {
   DefaultText,
@@ -33,7 +33,9 @@ const EditScreen = (props) => {
     editorIsFetching,
     editorValues,
     isFetching,
+    iterateAgain,
     results,
+    resultId,
     sendEditorValues,
   } = props;
 
@@ -59,7 +61,7 @@ const EditScreen = (props) => {
         )}
 
         {isFetching && (
-          <Progress progress={results.length ? results.length * 0.1 : 0} />
+          <Progress progress={((100 / create.iterations + 1) * results.length) / 100} />
         )}
 
         <ResultImagePreview results={results} />
@@ -73,12 +75,17 @@ const EditScreen = (props) => {
         >
           <TextWithTinyButton
             buttonProps={{
-              icon: icons.PLAY,
+              icon: isFetching ? icons.HOURGLASS : icons.PLAY,
               iconColor: colors.white,
+              isDisabled: isFetching,
               isPrimary: true,
+              onPress: () => iterateAgain(resultId),
+            }}
+            textProps={{
+              style: { marginRight: 8 }
             }}
           >
-            No close enough? Keep learning ->
+            Not quite right? Keep learning
           </TextWithTinyButton>
         </View>
 
@@ -142,6 +149,8 @@ EditScreen.propTypes = {
   isFetching: PropTypes.bool,
   imageUri: PropTypes.string,
   results: PropTypes.arrayOf(PropTypes.string),
+  resultId: PropTypes.string,
+  iterateAgain: PropTypes.func.isRequired,
   sendEditorValues: PropTypes.func.isRequired,
   sendImage: PropTypes.func.isRequired,
 };
@@ -151,6 +160,7 @@ EditScreen.defaultProps = {
   isFetching: false,
   imageUri: null,
   results: [],
+  resultId: undefined,
 };
 
 

@@ -108,7 +108,10 @@ function* watchEvents(action) {
 }
 
 function* watchForResultId() {
-  yield takeLatest(types.IMAGE_RESULT_ID, watchEvents);
+  yield takeLatest([
+    types.IMAGE_RESULT_ID,
+    types.ITERATE_AGAIN,
+  ], watchEvents);
 }
 
 function* sendEditorValues(values) {

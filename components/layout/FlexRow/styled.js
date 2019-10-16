@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components/native';
 
 
 const flexRowCss = css`
+  align-items: center;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;

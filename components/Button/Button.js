@@ -48,7 +48,7 @@ const Button = (props) => {
             name={icon}
             size={iconSize}
             style={{
-              marginRight: 8,
+              marginRight: children ? 8 : 0,
               ...(iconStyles || {}),
             }}
             color={isFocused ? iconColorFocused : iconColor}
