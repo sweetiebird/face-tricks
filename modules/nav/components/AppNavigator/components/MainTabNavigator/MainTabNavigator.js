@@ -25,7 +25,7 @@ const CreateStack = createStackNavigator(
     Create: CreateScreen,
     Edit: EditScreen,
   },
-  { ...config, initialRouteName: 'Edit' },
+  config,
 );
 
 CreateStack.navigationOptions = {

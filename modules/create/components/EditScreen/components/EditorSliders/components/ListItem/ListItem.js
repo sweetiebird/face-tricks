@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { startCase } from 'lodash';
 
-import { colors } from 'constants';
-
 import { DefaultText, FlexRow, Slider } from 'components';
 
 
@@ -28,12 +26,10 @@ const ListItem = (props) => {
     index,
     item,
     onSendValues,
-    section,
     setEditorValues,
   } = props;
 
   const [weight, key] = item;
-  const numItems = section.data.length;
   const adjustedWeight = (Math.round((2 - editorValues[key]) * 100) / 100) * -1;
   const displayWeight = adjustedWeight < 0
     ? adjustedWeight

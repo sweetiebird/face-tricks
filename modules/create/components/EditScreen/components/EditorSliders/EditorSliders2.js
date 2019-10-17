@@ -27,7 +27,7 @@ const EditorSliders = (props) => {
     const { title } = section;
     console.log('section', section);
     return (
-      <View>
+      <View style={{ paddingLeft: 10, paddingBottom: 6 }}>
         <DefaultText>{title}</DefaultText>
       </View>
     );

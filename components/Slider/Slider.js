@@ -31,7 +31,7 @@ const Slider = (props) => {
            onComplete(val);
          }
         }}
-        thumbImage={require('assets/images/slider.png')}
+        thumbImage={require('assets/images/slider5.png')}
         step={step}
         style={{ width: '100%' }}
         value={initialValue}
