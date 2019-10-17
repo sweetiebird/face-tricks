@@ -31,7 +31,7 @@
         }
       },
       "infoPlist": {
-        "NSCameraUsageDescription": "This app uses the camera to let you edit images.",
+        "NSCameraUsageDescription": "This app uses the camera to let you capture and edit images.",
         "NSPhotoLibraryUsageDescription": "This app uses the photo library for selecting images to edit.",
         "NSPhotoLibraryAddUsageDescription": "This app allows you to save your edited images."
       },
