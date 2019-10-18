@@ -3,34 +3,33 @@ import styled, { css } from 'styled-components/native';
 import { colors } from 'constants';
 
 
+const tinyButtonCss = css`
+  padding: 2px 12px;
+  border-radius: 22px;
+`;
+
 const primaryCss = css`
-  background-color: ${colors.primary};
   border-color: ${colors.primary};
 `;
 
 const successCss = css`
-  background-color: ${colors.success};
   border-color: ${colors.success};
 `;
 
 const dangerCss = css`
-  background-color: ${colors.danger};
   border-color: ${colors.danger};
 `;
 
 const invertedCss = css`
-  background-color: ${colors.white};
   border-color: ${colors.primary};
 `;
 
 const disabledCss = css`
-  background-color: ${colors.disabled};
   border-color: ${colors.smoke};
 `;
 
-const tinyButtonCss = css`
-  padding: 2px 12px;
-  border-radius: 22px;
+const smButtonCss = css`
+  border-width: 1px;
 `;
 
 const buttonCss = css`
@@ -47,6 +46,7 @@ const buttonCss = css`
   ${props => props.success ? successCss : ''}
   ${props => props.danger ? dangerCss : ''}
   ${props => props.disabled ? disabledCss : ''}
+  ${props => props.small || props.tiny ? smButtonCss : ''}
 `;
 
 export const ButtonStyled = styled.View`
@@ -54,15 +54,15 @@ export const ButtonStyled = styled.View`
 `;
 
 const primaryTextCss = css`
-  color: ${colors.white};
+  color: ${colors.primary};
 `;
 
 const successTextCss = css`
-  color: ${colors.white};
+  color: ${colors.successHover};
 `;
 
 const dangerTextCss = css`
-  color: ${colors.white};
+  color: ${colors.danger};
 `;
 
 const invertedTextCss = css`

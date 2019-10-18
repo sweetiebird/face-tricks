@@ -58,7 +58,6 @@ const CreateScreen = (props) => {
                   }
                 }
               } catch (err) {
-                console.log('error', err, err.message);
                 Error.log(err, { message: err.message, location: 'onPress pick photo' });
               }
             }}
@@ -90,7 +89,6 @@ const CreateScreen = (props) => {
                   }
                 }
               } catch (err) {
-                console.log('error', err, err.message);
                 Error.log(err, { message: err.message, location: 'onPress snap photo' });
               }
             }}

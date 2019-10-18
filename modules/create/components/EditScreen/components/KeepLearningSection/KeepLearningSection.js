@@ -25,7 +25,7 @@ const KeepLearningSection = (props) => {
       <TextWithTinyButton
         buttonProps={{
           icon: isFetching ? icons.HOURGLASS : icons.CREATE,
-          iconColor: colors.white,
+          iconColor: colors.primary,
           isDisabled: isFetching,
           isPrimary: true,
           onPress,

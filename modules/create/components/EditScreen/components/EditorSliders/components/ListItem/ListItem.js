@@ -52,6 +52,7 @@ const ListItem = (props) => {
         <DefaultText style={editorValueLeftStyles}>
           {startCase(name)}
         </DefaultText>
+
         <DefaultText style={editorValueRightStyles}>
           {displayWeight}
         </DefaultText>

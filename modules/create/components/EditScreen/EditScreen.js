@@ -47,9 +47,7 @@ const EditScreen = (props) => {
     editorIsFetching,
     editorValues,
     isFetching,
-    iterateAgain,
     results,
-    resultId,
     sendEditorValues,
     sendEval,
   } = props;
