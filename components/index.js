@@ -1,5 +1,6 @@
 export {
   default as Button,
+  DangerButton,
   InvertedButton,
   PrimaryButton,
   SuccessButton,

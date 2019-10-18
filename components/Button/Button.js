@@ -28,14 +28,16 @@ const Button = (props) => {
     noBorder,
     onPress,
     size,
+    style = {},
     textProps,
   } = props;
 
-  const highlightStyle = { borderRadius: 100 };
+  const highlightStyle = { borderRadius: 100, ...style };
 
   return (
     <TouchableHighlight
       activeOpacity={0.75}
+      disabled={isDisabled}
       onPress={onPress}
       style={highlightStyle}
       underlayColor={colors.smoke}
@@ -60,7 +62,7 @@ const Button = (props) => {
               marginRight: children ? 8 : 0,
               ...(iconStyles || {}),
             }}
-            color={isFocused ? iconColorFocused : iconColor}
+            color={isDisabled ? colors.smoke : iconColor}
           />
         )}
 

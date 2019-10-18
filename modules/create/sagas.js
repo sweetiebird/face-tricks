@@ -45,10 +45,7 @@ async function socketChannel(id) {
       (ado
 
         (mac w/size (w h rest: body)
-          \`(let img (do ,@body)
-              (if (image? img)
-                  (resize-image img '(,w ,h))
-                img)))
+          \`(do ,@body))
 
         (def set-image-from-data (data)
           (with-temp-dir tmp-image-dir
@@ -63,9 +60,11 @@ async function socketChannel(id) {
             (await (asyncio.sleep n))))
 
         (set-image-from-data ${id})
+        (await (send-image (grab-target)))
         (set-latent (grab-estimate))
         (set emily (grab-image))
         (await (send-image (w/size ${create.imageSize} ${create.imageSize} emily)))
+        (await (pause))
         (for i ${create.iterations}
           (set-latent (optimize-latent 4))
           (await (send-image (w/size ${create.imageSize} ${create.imageSize} (set emily (grab-image)))))

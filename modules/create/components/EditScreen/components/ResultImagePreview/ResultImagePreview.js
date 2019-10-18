@@ -38,7 +38,7 @@ const ResultImagePreview = ({ onSave, onEye, results, size, marginH }) => {
         <React.Fragment key={uri}>
           {(i >= results.length - 1) && (
             <View
-              style={{ top: 10, zIndex: 10, width: size, marginLeft: marginH, position: 'absolute', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
+              style={{ bottom: 10, zIndex: 10, width: size, marginLeft: marginH, position: 'absolute', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
             >
               <TextWithTinyButton
                 buttonProps={{

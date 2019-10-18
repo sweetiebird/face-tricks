@@ -9,7 +9,7 @@
       "android",
       "web"
     ],
-    "version": "1.0.1",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -24,6 +24,7 @@
       "**/*"
     ],
     "ios": {
+      "buildNumber": "2",
       "bundleIdentifier": "com.emilykolar.FaceWeave",
       "config": {
         "googleSignIn": {

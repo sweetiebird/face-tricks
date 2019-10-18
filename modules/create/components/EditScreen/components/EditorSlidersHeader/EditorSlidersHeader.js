@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import { colors, icons } from 'constants';
 
 import {
+  DangerButton,
   DefaultText,
   SuccessButton,
   TabBarIcon,
@@ -17,7 +18,6 @@ const editTitleViewStyles = {
   justifyContent: 'space-between',
   marginBottom: 10,
   paddingLeft: 10,
-  paddingTop: 10,
   paddingRight: 20,
 };
 
@@ -25,7 +25,7 @@ const textIconViewStyles = {
   display: 'flex',
   flexDirection: 'row',
   paddingTop: 2,
-  width: '40%',
+  width: '30%',
 };
 
 const iconViewStyles = {
@@ -34,7 +34,7 @@ const iconViewStyles = {
 };
 
 const editButtonViewStyles = {
-  width: '60%',
+  width: '70%',
   flexDirection: 'row',
   justifyContent: 'flex-end',
 };
@@ -44,6 +44,7 @@ const EditorSlidersHeader = (props) => {
     editorIsFetching,
     isFetching,
     onCommit,
+    onReset
   } = props;
 
   return (
@@ -59,13 +60,23 @@ const EditorSlidersHeader = (props) => {
       </View>
 
       <View style={editButtonViewStyles}>
+        <DangerButton
+          iconSize={16}
+          isDisabled={editorIsFetching || isFetching}
+          onPress={onReset}
+          size="S"
+          style={{ marginRight: 12 }}
+        >
+          Reset
+        </DangerButton>
+
         <SuccessButton
           iconSize={16}
           isDisabled={editorIsFetching || isFetching}
           onPress={onCommit}
           size="S"
         >
-          {editorIsFetching ? 'Updating...' : 'Commit Features'}
+          Apply
         </SuccessButton>
       </View>
     </View>
@@ -76,6 +87,7 @@ EditorSlidersHeader.propTypes = {
   editorIsFetching: PropTypes.bool,
   isFetching: PropTypes.bool,
   onCommit: PropTypes.func.isRequired,
+  onReset: PropTypes.func.isRequired,
 };
 
 EditorSlidersHeader.defaultProps = {

@@ -54,7 +54,7 @@ const EditScreen = (props) => {
 
   const { height, width } = Dimensions.get('window');
 
-  const maxImageSize = (height * 0.5) - 60;
+  const maxImageSize = (height * 0.5);
   const imageSize = Math.min(width * 0.8, maxImageSize);
   const imageMarginH = (width - imageSize) * 0.5;
   const topSectionHeight = imageSize + 60;
@@ -110,6 +110,11 @@ const EditScreen = (props) => {
             `(do (set-latent ${grabLatentExpression(currentEditorValues)}) (w/size ${create.imageSize} ${create.imageSize} (grab-image)))`
           );
           setSlidersKey(slidersKey + 1);
+        }}
+        onReset={() => {
+          setSlidersKey(slidersKey + 1);
+          setCurrentEditorValues(editorKeyMap);
+          sendEditorValues(editorKeyMap);
         }}
       />
 

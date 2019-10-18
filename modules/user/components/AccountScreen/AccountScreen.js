@@ -9,6 +9,7 @@ const AccountScreen = () => {
 
 AccountScreen.navigationOptions = {
   title: 'Account',
+  tabBarOnPress: () => null,
 };
 
 
