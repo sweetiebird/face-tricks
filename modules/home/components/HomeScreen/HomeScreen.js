@@ -4,11 +4,11 @@ import { DefaultText } from 'components';
 
 
 const HomeScreen = () => {
-  return <DefaultText>Acct stuff</DefaultText>;
+  return null;
 };
 
 HomeScreen.navigationOptions = {
-  title: 'Account',
+  header: null,
 };
 
 

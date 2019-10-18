@@ -4,7 +4,7 @@ import { DefaultText } from 'components';
 
 
 const AccountScreen = () => {
-  return <DefaultText>Acct stuff</DefaultText>;
+  return null;
 };
 
 AccountScreen.navigationOptions = {

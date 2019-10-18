@@ -97,14 +97,15 @@ AccountStack.path = 'account';
 // =========
 
 const tabNavigator = createBottomTabNavigator({
-  CreateStack,
-  HomeStack,
-  AccountStack,
+  Home: HomeStack,
+  Create: CreateStack,
+  Account: AccountStack,
 }, {
   tabBarOptions: {
     activeTintColor: colors.primaryHover,
     inactiveTintColor: colors.tabIconDefault,
   },
+  initialRouteName: 'Home',
 });
 
 tabNavigator.path = '';
