@@ -19,17 +19,18 @@ async function socketChannel(id) {
   return () => {
     return eventChannel((emitter) => {
       const handleResult = async (e) => {
-        const buffer = e.data;
-        const uri = await parse.image(buffer, id);
+        const buffer = e.data || e;
+        if (buffer) {
+          const buffer = e.data;
+          const uri = await parse.image(buffer, id);
 
-        emitter({ resultUri: uri });
+          emitter({ resultUri: uri });
 
-        count += 1;
+          count += 1;
 
-        if (count >= create.iterations + 1) {
-          count = 0;
-          emitter({ finished: true });
-          emitter(END);
+          if (count >= create.iterations + 1) {
+            emitter({ finished: true });
+          }
         }
       };
 
@@ -79,7 +80,6 @@ async function socketChannel(id) {
 
 function* imageSuccess(payload) {
   try {
-    console.log(payload);
     if (payload.resultUri) {
       yield put(actions.sendImageSuccess(payload.resultUri));
     } else if (payload.finished) {
@@ -92,6 +92,7 @@ function* imageSuccess(payload) {
 
 function* sendImage(image) {
   try {
+    count = 0;
     const id = yield call(api.sendImage, socket, image);
     yield put(actions.imageResultId(id));
   } catch (err) {
@@ -138,8 +139,6 @@ function* sendEval(code) {
     yield put(actions.sendImageSuccess(uri));
     yield put(actions.imageResultFinish());
   } catch (err) {
-    console.log('evalFailure');
-    console.log(err.message);
     yield put(actions.evalFailure(err.message, err));
   }
 }

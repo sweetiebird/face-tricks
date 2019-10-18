@@ -14,29 +14,18 @@ export const sendImage = async (socket, image) => {
 };
 
 export const sendEditorValues = async (socket, mappedValues) => {
-  return new Promise((resolve) => {
-    socket.setOnMessage((evt) => {
-      resolve(evt.data);
-    });
+  const values = Object.entries(mappedValues).map(([k, v]) => [v, k]);
+  const result = Convert.mapconcat(null, values, " ");
 
-    const values = Object.entries(mappedValues).map(([k, v]) => [v, k]);
-    const result = Convert.mapconcat(null, values, " ");
-
-    const message = `
+  const message = `
     (w/size ${create.imageSize} ${create.imageSize}
       (grab-image (set wip (grab-latent nil 1.0 (quote (${result})))))
     )`;
 
-    socket.sendMessage(message);
-  });
+  socket.sendMessage(message);
 };
 
 export const sendEval = async (socket, message) => {
-  return new Promise((resolve) => {
-    socket.setOnMessage((evt) => {
-      resolve(evt.data);
-    });
-    socket.sendMessage(message);
-  });
+  socket.sendMessage(message);
 };
 
