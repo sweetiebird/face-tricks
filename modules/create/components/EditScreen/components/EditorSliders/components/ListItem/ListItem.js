@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { startCase } from 'lodash';
 
-import { DefaultText, FlexRow, Slider } from 'components';
+import { colors, icons } from 'constants';
+
+import { Button, DefaultText, FlexRow, Slider } from 'components';
 
 
 const editorValueStyles = {
@@ -23,7 +25,6 @@ const editorValueRightStyles = {
 const ListItem = (props) => {
   const {
     editorValues,
-    index,
     item,
     onSendValues,
     setEditorValues,
@@ -84,7 +85,9 @@ const ListItem = (props) => {
 
 ListItem.propTypes = {
   editorValues: PropTypes.shape().isRequired,
-  item: PropTypes.shape([PropTypes.number, PropTypes.string]).isRequired,
+  item: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  ).isRequired,
   onSendValues: PropTypes.func.isRequired,
   setEditorValues: PropTypes.func.isRequired,
 };

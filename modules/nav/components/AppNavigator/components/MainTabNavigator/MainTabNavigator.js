@@ -6,7 +6,8 @@ import { colors, icons } from 'constants';
 
 import { CreateScreen, EditScreen } from 'modules/create/components';
 import { HistoryScreen } from 'modules/history/components';
-import { UserScreen } from 'modules/user/components';
+import { HomeScreen } from 'modules/home/components';
+import { AccountScreen } from 'modules/user/components';
 
 import { TabBarIcon } from 'components';
 
@@ -56,22 +57,40 @@ HistoryStack.navigationOptions = {
 HistoryStack.path = 'history';
 
 // =========
+// 'home' tab
+// =========
+
+const HomeStack = createStackNavigator(
+  { Home: HomeScreen },
+  config,
+);
+
+HomeStack.navigationOptions = {
+  tabBarLabel: 'Home',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon isFocused={focused} name={icons.TRENDING} />
+  ),
+};
+
+HomeStack.path = 'home';
+
+// =========
 // 'user' tab
 // =========
 
-const UserStack = createStackNavigator(
-  { User: UserScreen },
+const AccountStack = createStackNavigator(
+  { Account: AccountScreen },
   config
 );
 
-UserStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+AccountStack.navigationOptions = {
+  tabBarLabel: 'Account',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon isFocused={focused} name={icons.USER} />
   ),
 };
 
-UserStack.path = 'user';
+AccountStack.path = 'account';
 
 // =========
 // base stack
@@ -79,8 +98,8 @@ UserStack.path = 'user';
 
 const tabNavigator = createBottomTabNavigator({
   CreateStack,
-  // HistoryStack,
-  // UserStack,
+  HomeStack,
+  AccountStack,
 }, {
   tabBarOptions: {
     activeTintColor: colors.primaryHover,

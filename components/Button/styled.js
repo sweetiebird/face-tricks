@@ -13,6 +13,11 @@ const successCss = css`
   border-color: ${colors.success};
 `;
 
+const dangerCss = css`
+  background-color: ${colors.danger};
+  border-color: ${colors.danger};
+`;
+
 const invertedCss = css`
   background-color: ${colors.white};
   border-color: ${colors.primary};
@@ -40,6 +45,7 @@ const buttonCss = css`
   ${props => props.primary ? primaryCss : ''}
   ${props => props.inverted ? invertedCss : ''}
   ${props => props.success ? successCss : ''}
+  ${props => props.danger ? dangerCss : ''}
   ${props => props.disabled ? disabledCss : ''}
 `;
 
@@ -52,6 +58,10 @@ const primaryTextCss = css`
 `;
 
 const successTextCss = css`
+  color: ${colors.white};
+`;
+
+const dangerTextCss = css`
   color: ${colors.white};
 `;
 
@@ -83,5 +93,6 @@ export const ButtonTextStyled = styled.Text`
   ${props => props.primary ? primaryTextCss : ''}
   ${props => props.inverted ? invertedTextCss : ''}
   ${props => props.success ? successTextCss : ''}
+  ${props => props.danger ? dangerTextCss : ''}
   ${props => props.disabled ? disabledTextCss : ''}
 `;

@@ -17,6 +17,7 @@ const Button = (props) => {
     iconColorFocused,
     iconSize,
     iconStyles,
+    isDanger,
     isDisabled,
     isFocused,
     isInverted,
@@ -38,14 +39,15 @@ const Button = (props) => {
       underlayColor={colors.white}
     >
       <ButtonStyled
+        danger={isDanger}
         disabled={isDisabled}
         inverted={isInverted}
+        large={size === 'L'}
+        medium={size === 'M'}
         primary={isPrimary}
+        small={size === 'S'}
         success={isSuccess}
         tiny={size === 'T'}
-        small={size === 'S'}
-        medium={size === 'M'}
-        large={size === 'L'}
       >
         {!!icon && (
           <Ionicons
@@ -61,13 +63,14 @@ const Button = (props) => {
 
         {!!children && (
           <ButtonTextStyled
+            danger={isDanger}
             disabled={isDisabled}
             inverted={isInverted}
-            primary={isPrimary}
-            success={isSuccess}
-            small={size === 'S'}
-            medium={size === 'M'}
             large={size === 'L'}
+            medium={size === 'M'}
+            primary={isPrimary}
+            small={size === 'S'}
+            success={isSuccess}
           >
             {children}
           </ButtonTextStyled>

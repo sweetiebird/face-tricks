@@ -30,7 +30,7 @@ const textIconViewStyles = {
 
 const iconViewStyles = {
   marginRight: 10,
-  paddingTop: 2,
+  paddingTop: 1,
 };
 
 const editButtonViewStyles = {

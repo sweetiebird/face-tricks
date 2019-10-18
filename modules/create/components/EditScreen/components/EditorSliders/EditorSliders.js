@@ -1,18 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
-import { startCase } from 'lodash';
 
 import { editorKeys } from 'constants';
 
-import { DefaultText, Slider } from 'components';
+import { ListItem } from './components';
 
-
-const editorValueTextStyles = {
-  paddingLeft: 10,
-  paddingRight: 5,
-  textAlign: 'left',
-};
 
 const EditorSliders = (props) => {
   const {
@@ -23,41 +15,15 @@ const EditorSliders = (props) => {
 
   return (
     <React.Fragment>
-      {editorKeys.map(([weight, key]) => {
-        return (
-          <View
-            key={key}
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              paddingBottom: 4,
-              paddingTop: 4,
-            }}
-          >
-            <View style={{ flex: 0.4 }}>
-              <DefaultText style={editorValueTextStyles}>
-                {startCase(key)}
-              </DefaultText>
-            </View>
-
-            <View style={{ flex: 1 }}>
-              <Slider
-                initialValue={weight}
-                onComplete={(value) => {
-                  console.log(value);
-                  const values = {
-                    ...editorValues,
-                    [key]: Math.round(value * 100) / 100,
-                  };
-                  setEditorValues(values);
-                  onSendValues(values);
-                  console.log(values);
-                }}
-              />
-            </View>
-          </View>
-        );
-      })}
+      {editorKeys.map(item => (
+        <ListItem
+          key={item[1]}
+          editorValues={editorValues}
+          item={item}
+          onSendValues={onSendValues}
+          setEditorValues={setEditorValues}
+        />
+      ))}
     </React.Fragment>
   );
 };

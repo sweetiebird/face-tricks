@@ -1,4 +1,4 @@
-import EditorSliders from './EditorSliders2';
+import EditorSliders from './EditorSliders';
 
 
 export default EditorSliders;
