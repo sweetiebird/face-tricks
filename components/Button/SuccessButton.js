@@ -11,7 +11,7 @@ const SuccessButton = ({ children, ...rest }) => {
   return (
     <Button
       {...rest}
-      iconColor={colors.white}
+      iconColor={colors.success}
       isSuccess
     >
       {children}

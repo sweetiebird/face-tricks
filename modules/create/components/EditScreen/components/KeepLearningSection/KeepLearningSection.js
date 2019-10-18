@@ -35,7 +35,7 @@ const KeepLearningSection = (props) => {
           style: { marginRight: 8 }
         }}
       >
-        Not quite right? Keep learning
+        Keep learning
       </TextWithTinyButton>
     </View>
   );

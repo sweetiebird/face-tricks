@@ -11,7 +11,7 @@ const PrimaryButton = ({ children, ...rest }) => {
   return (
     <Button
       {...rest}
-      iconColor={colors.white}
+      iconColor={colors.primary}
       isPrimary
     >
       {children}

@@ -32,6 +32,10 @@ const smButtonCss = css`
   border-width: 1px;
 `;
 
+const noBorderCss = css`
+  border-width: 0;
+`;
+
 const buttonCss = css`
   align-items: center;
   border-radius: 100px;
@@ -47,6 +51,7 @@ const buttonCss = css`
   ${props => props.danger ? dangerCss : ''}
   ${props => props.disabled ? disabledCss : ''}
   ${props => props.small || props.tiny ? smButtonCss : ''}
+  ${props => props.noBorder ? noBorderCss : ''}
 `;
 
 export const ButtonStyled = styled.View`

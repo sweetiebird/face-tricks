@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, View } from 'react-native';
+import { View } from 'react-native';
 
 import { colors, icons } from 'constants';
 
@@ -12,9 +12,6 @@ import {
 
 
 const ResultImagePreview = ({ onSave, onEye, results, size, marginH }) => {
-  const saveViewPadding = marginH + 10;
-  const buttonViewSize = size * 0.5;
-
   return (
     <View
       style={{
@@ -40,56 +37,46 @@ const ResultImagePreview = ({ onSave, onEye, results, size, marginH }) => {
       {results.length > 0 && results.filter(uri => !!uri).map((uri, i) => (
         <React.Fragment key={uri}>
           {(i >= results.length - 1) && (
-            <TextWithTinyButton
-              buttonProps={{
-                icon: icons.EYE,
-                iconColor: colors.white,
-                isPrimary: true,
-                onPress: async () => {
-                  console.log('onEye', uri);
-                  await onEye(uri);
-                },
-              }}
-              textProps={{
-                style: { color: colors.white, marginRight: 8 }
-              }}
-              viewProps={{
-                flexStart: true,
-                style: {
-                  left: saveViewPadding,
-                  position: 'absolute',
-                  right: buttonViewSize,
-                  top: 10,
-                  zIndex: 20,
-                },
-              }}
-            />
-          )}
+            <View
+              style={{ top: 10, zIndex: 10, width: size, marginLeft: marginH, position: 'absolute', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
+            >
+              <TextWithTinyButton
+                buttonProps={{
+                  icon: icons.EYE,
+                  iconColor: colors.white,
+                  isPrimary: true,
+                  noBorder: true,
+                  onPress: async () => {
+                    console.log('onEye', uri);
+                    await onEye(uri);
+                  },
+                }}
+                textProps={{
+                  style: { color: colors.white, marginRight: 8 }
+                }}
+                viewProps={{
+                  flexStart: true,
+                }}
+              />
 
-          {(i >= results.length - 1) && (
-            <TextWithTinyButton
-              buttonProps={{
-                icon: icons.SAVE,
-                iconColor: colors.white,
-                isPrimary: true,
-                onPress: async () => {
-                  await onSave(uri);
-                },
-              }}
-              textProps={{
-                style: { color: colors.white, marginRight: 8 }
-              }}
-              viewProps={{
-                flexEnd: true,
-                style: {
-                  position: 'absolute',
-                  top: 10,
-                  left: buttonViewSize,
-                  right: saveViewPadding,
-                  zIndex: 10,
-                },
-              }}
-            />
+              <TextWithTinyButton
+                buttonProps={{
+                  icon: icons.SAVE,
+                  iconColor: colors.white,
+                  isPrimary: true,
+                  noBorder: true,
+                  onPress: async () => {
+                    await onSave(uri);
+                  },
+                }}
+                textProps={{
+                  style: { color: colors.white, marginRight: 8 }
+                }}
+                viewProps={{
+                  flexEnd: true,
+                }}
+              />
+            </View>
           )}
 
           <PreviewImage

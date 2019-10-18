@@ -25,8 +25,10 @@ const Button = (props) => {
     isPrimary,
     isSuccess,
     isTiny,
+    noBorder,
     onPress,
     size,
+    textProps,
   } = props;
 
   const highlightStyle = { borderRadius: 100 };
@@ -36,7 +38,7 @@ const Button = (props) => {
       activeOpacity={0.75}
       onPress={onPress}
       style={highlightStyle}
-      underlayColor={colors.white}
+      underlayColor={colors.smoke}
     >
       <ButtonStyled
         danger={isDanger}
@@ -44,6 +46,7 @@ const Button = (props) => {
         inverted={isInverted}
         large={size === 'L'}
         medium={size === 'M'}
+        noBorder={noBorder}
         primary={isPrimary}
         small={size === 'S'}
         success={isSuccess}
@@ -71,6 +74,7 @@ const Button = (props) => {
             primary={isPrimary}
             small={size === 'S'}
             success={isSuccess}
+            textProps={textProps}
           >
             {children}
           </ButtonTextStyled>
