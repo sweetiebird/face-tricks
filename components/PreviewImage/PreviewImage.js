@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Animated, Dimensions } from 'react-native';
+import { Animated } from 'react-native';
 
 import { colors } from 'constants';
 
 import { ImageWrapperStyled, ImageStyled } from './styled';
 
 
-const PreviewImage = ({ hasBorder, isBase, uri, style }) => {
+const PreviewImage = ({ hasBorder, isBase, uri, style, size, marginH }) => {
   const [fadeAnim] = useState(new Animated.Value(0));
-  const { width } = Dimensions.get('window');
 
   useEffect(() => {
     Animated.timing(
@@ -35,12 +34,13 @@ const PreviewImage = ({ hasBorder, isBase, uri, style }) => {
   return (
     <Animated.View style={{ ...style, opacity: fadeAnim }}>
       <ImageWrapperStyled
-        size={width}
+        size={size}
+        marginH={marginH}
         style={frameStyles}
       >
         {!!uri && (
           <ImageStyled
-            size={width}
+            size={size}
             source={{ uri }}
           />
         )}

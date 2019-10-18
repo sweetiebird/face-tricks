@@ -8,6 +8,8 @@ import { System } from 'utils';
 
 import { Error } from 'services';
 
+import { FlexCol } from 'components/layout';
+
 import {
   EditorSliders,
   EditorSlidersHeader,
@@ -64,8 +66,6 @@ const EditScreen = (props) => {
       <View style={{ height: height * 0.5 }}>
         <ResultImagePreview
           onSave={async (uri) => {
-            // sendEval(`(grab-image)`);
-
             try {
               const granted = await System.requestCameraRollPermissions();
 

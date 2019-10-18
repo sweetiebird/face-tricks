@@ -15,8 +15,13 @@ const centerCss = css`
   justify-content: center;
 `;
 
+const startCss = css`
+  justify-content: flex-start;
+`;
+
 export const FlexColStyled = styled.View`
   ${flexColCss}
   ${props => props.spaceBetween ? spaceBetweenCss : ''}
   ${props => props.center ? centerCss : ''}
+  ${props => props.flexStart ? startCss : ''}
 `;

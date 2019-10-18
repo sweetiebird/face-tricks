@@ -105,7 +105,7 @@ const tabNavigator = createBottomTabNavigator({
     activeTintColor: colors.primaryHover,
     inactiveTintColor: colors.tabIconDefault,
   },
-  initialRouteName: 'Home',
+  initialRouteName: 'Create',
 });
 
 tabNavigator.path = '';

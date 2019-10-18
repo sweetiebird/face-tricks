@@ -26,7 +26,11 @@ const CreateScreen = (props) => {
   const { imageAdded, isFetching, sendImage } = props;
   const [imageData, setImageData] = useState(null);
 
-  const { width: size } = Dimensions.get('window');
+  const { height, width } = Dimensions.get('window');
+
+  const maxImageSize = (height * 0.5) - 60;
+  const imageSize = Math.min(width * 0.8, maxImageSize);
+  const imageMarginH = (width - imageSize) * 0.5;
 
   return (
     <ContainerStyled>
@@ -98,13 +102,17 @@ const CreateScreen = (props) => {
         <View
           style={{
             position: 'relative',
-            width: size,
-            height: size * 0.8,
+            width: width,
+            height: imageSize,
             marginTop: 10,
             marginBottom: 10,
           }}
         >
-          <PreviewImage uri={imageData && imageData.uri} />
+          <PreviewImage
+            uri={imageData && imageData.uri}
+            size={imageSize}
+            marginH={imageMarginH}
+          />
         </View>
 
         <ButtonViewStyled>
@@ -112,8 +120,8 @@ const CreateScreen = (props) => {
             icon={icons.CREATE}
             isDisabled={!imageData || isFetching}
             onPress={async () => {
-              const file = await FS.getFile(imageData.uri);
-              sendImage(file, true);
+              // const file = await FS.getFile(imageData.uri);
+              // sendImage(file, true);
               Navigation.navigate('Edit');
             }}
           >
