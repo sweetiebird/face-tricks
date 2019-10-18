@@ -8,8 +8,6 @@ import { System } from 'utils';
 
 import { Error } from 'services';
 
-import { FlexCol } from 'components/layout';
-
 import {
   EditorSliders,
   EditorSlidersHeader,
@@ -56,14 +54,19 @@ const EditScreen = (props) => {
     sendEval,
   } = props;
 
-  const { height } = Dimensions.get('window');
+  const { height, width } = Dimensions.get('window');
+
+  const maxImageSize = (height * 0.5) - 60;
+  const imageSize = Math.min(width * 0.8, maxImageSize);
+  const imageMarginH = (width - imageSize) * 0.5;
+  const topSectionHeight = imageSize + 60;
 
   const [currentEditorValues, setCurrentEditorValues] = useState(editorKeyMap);
   const [slidersKey, setSlidersKey] = useState(0);
 
   return (
     <ContainerStyled>
-      <View style={{ height: height * 0.5 }}>
+      <View style={{ height: topSectionHeight }}>
         <ResultImagePreview
           onSave={async (uri) => {
             try {
@@ -81,6 +84,8 @@ const EditScreen = (props) => {
             sendEval(`(grab-target)`);
           }}
           results={results}
+          size={imageSize}
+          marginH={imageMarginH}
         />
 
         {isFetching && (

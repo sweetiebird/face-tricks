@@ -11,23 +11,17 @@ import {
 } from 'components';
 
 
-const ResultImagePreview = ({ onSave, onEye, results }) => {
-  const { height, width } = Dimensions.get('window');
-
-  const maxImageSize = (height * 0.5) - 60;
-  const imageSize = Math.min(width * 0.8, maxImageSize);
-  const imageMarginH = (width - imageSize) * 0.5;
-
-  const saveViewPadding = imageMarginH + 10;
-  const buttonViewSize = imageSize * 0.5;
+const ResultImagePreview = ({ onSave, onEye, results, size, marginH }) => {
+  const saveViewPadding = marginH + 10;
+  const buttonViewSize = size * 0.5;
 
   return (
     <View
       style={{
         position: 'relative',
-        width: imageSize,
-        height: imageSize + 60,
-        // marginBottom: 10,
+        width: size,
+        height: size,
+        marginBottom: 10,
         marginTop: 10,
       }}
     >
@@ -38,8 +32,8 @@ const ResultImagePreview = ({ onSave, onEye, results }) => {
           key="placeholder-image"
           uri={null}
           style={{ zIndex: 1 }}
-          size={imageSize}
-          marginH={imageMarginH}
+          size={size}
+          marginH={marginH}
         />
       )}
 
@@ -102,8 +96,8 @@ const ResultImagePreview = ({ onSave, onEye, results }) => {
             isBase={i === 0}
             uri={uri}
             style={{ zIndex: 1 }}
-            size={imageSize}
-            marginH={imageMarginH}
+            size={size}
+            marginH={marginH}
           />
         </React.Fragment>
       ))}

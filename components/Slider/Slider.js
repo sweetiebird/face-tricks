@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Slider as RNSlider, View } from 'react-native';
+import { Platform, Slider as RNSlider, View } from 'react-native';
 
 import { colors } from 'constants';
 
@@ -31,6 +31,7 @@ const Slider = (props) => {
            onComplete(val);
          }
         }}
+        thumbTintColor={(Platform.OS === 'android' && colors.primaryHover) || undefined}
         thumbImage={require('assets/images/slider5.png')}
         step={step}
         style={{ width: '100%' }}

@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { startCase } from 'lodash';
 
-import { colors, icons } from 'constants';
-
-import { Button, DefaultText, FlexRow, Slider } from 'components';
+import { DefaultText, FlexRow, Slider } from 'components';
 
 
 const editorValueStyles = {
@@ -61,7 +59,7 @@ const ListItem = (props) => {
 
       <View
         style={{
-          marginTop: 8,
+          marginTop: (Platform.OS === 'android' && 16) || 8,
         }}
       >
         <Slider
