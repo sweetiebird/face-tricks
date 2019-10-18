@@ -23,7 +23,7 @@ const EditorSliders = (props) => {
 
   return (
     <React.Fragment>
-      {editorKeys.map(([weight, key]) => {
+      {editorKeys.map(([weight, key, name]) => {
         return (
           <View
             key={key}
@@ -36,7 +36,7 @@ const EditorSliders = (props) => {
           >
             <View style={{ flex: 0.4 }}>
               <DefaultText style={editorValueTextStyles}>
-                {startCase(key)}
+                {name}
               </DefaultText>
             </View>
 
