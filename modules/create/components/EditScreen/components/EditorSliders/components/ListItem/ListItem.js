@@ -30,7 +30,7 @@ const ListItem = (props) => {
     setEditorValues,
   } = props;
 
-  const [weight, key] = item;
+  const [weight, key, name] = item;
   const adjustedWeight = (Math.round((2 - editorValues[key]) * 100) / 100) * -1;
   const displayWeight = adjustedWeight < 0
     ? adjustedWeight
@@ -52,7 +52,7 @@ const ListItem = (props) => {
         }}
       >
         <DefaultText style={editorValueLeftStyles}>
-          {startCase(key)}
+          {startCase(name)}
         </DefaultText>
         <DefaultText style={editorValueRightStyles}>
           {displayWeight}
