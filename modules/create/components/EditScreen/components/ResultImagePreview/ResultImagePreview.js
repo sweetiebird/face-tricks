@@ -29,13 +29,15 @@ const ResultImagePreview = ({ onSave, onEye, results }) => {
     >
       {results.length === 0 && (
         <PreviewImage
+          hasBorder
+          isBase
           key="placeholder-image"
           uri={null}
           style={{ zIndex: 1 }}
         />
       )}
 
-      {results.length > 0 && results.map((uri, i) => (
+      {results.length > 0 && results.filter(uri => !!uri).map((uri, i) => (
         <React.Fragment key={uri}>
           {(i >= results.length - 1) && (
             <TextWithTinyButton
@@ -91,6 +93,7 @@ const ResultImagePreview = ({ onSave, onEye, results }) => {
           )}
 
           <PreviewImage
+            isBase={i === 0}
             uri={uri}
             style={{ zIndex: 1 }}
           />

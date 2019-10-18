@@ -1,8 +1,8 @@
 import * as types from './types';
 
 
-export const sendImageRequest = image => ({
-  payload: { image },
+export const sendImageRequest = (image, isReset) => ({
+  payload: { image, isReset },
   type: types.SEND_IMAGE_REQUEST,
 });
 
@@ -63,4 +63,8 @@ export const evalFailure = (message, error) => ({
 export const iterateAgain = resultId => ({
   payload: { resultId },
   type: types.ITERATE_AGAIN,
+});
+
+export const socketDisconnected = () => ({
+  type: types.SOCKET_DISCONNECTED,
 });

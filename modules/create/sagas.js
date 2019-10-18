@@ -1,4 +1,4 @@
-import { eventChannel, END } from 'redux-saga'
+import { eventChannel } from 'redux-saga'
 import { all, call, fork, put, take, takeEvery, takeLatest } from 'redux-saga/effects';
 
 import { create } from 'constants';
@@ -12,29 +12,34 @@ import * as types from './types';
 
 
 let socket;
+let max = create.iterationsUpperBound;
+let count = 0;
 
 async function socketChannel(id) {
-  let count = 0;
-
   return () => {
     return eventChannel((emitter) => {
       const handleResult = async (e) => {
+        count += 1;
+
         const buffer = e.data || e;
+
         if (buffer) {
           const buffer = e.data;
           const uri = await parse.image(buffer, id);
+          const payload = { finished: false, resultUri: uri };
 
-          emitter({ resultUri: uri });
-
-          count += 1;
-
-          if (count >= create.iterations + 1) {
-            emitter({ finished: true });
+          if (count >= max) {
+            payload.finished = true;
           }
+
+          emitter(payload);
         }
       };
 
       socket.setOnMessage(handleResult);
+      socket.setOnClose(() => {
+        emitter({ disconnected: true });
+      });
 
       const message = `
       (ado
@@ -80,11 +85,9 @@ async function socketChannel(id) {
 
 function* imageSuccess(payload) {
   try {
-    if (payload.resultUri) {
-      yield put(actions.sendImageSuccess(payload.resultUri));
-    } else if (payload.finished) {
-      yield put(actions.imageResultFinish());
-    }
+    yield payload.resultUri ? put(actions.sendImageSuccess(payload.resultUri)) : false;
+    yield payload.finished ? put(actions.imageResultFinish()) : false;
+    yield payload.disconnected ? put(actions.socketDisconnected()) : false;
   } catch (err) {
     yield put(actions.sendImageFailure(err.message, err));
   }
@@ -92,11 +95,35 @@ function* imageSuccess(payload) {
 
 function* sendImage(image) {
   try {
-    count = 0;
     const id = yield call(api.sendImage, socket, image);
     yield put(actions.imageResultId(id));
   } catch (err) {
     yield put(actions.sendImageFailure(err.message, err));
+  }
+}
+
+function* sendEditorValues(values) {
+  try {
+    max += 1;
+    const mappedValues = Object.keys(values).reduce((obj, key) => {
+      const mappedVal = (2 - values[key]) * -1;
+      return {
+        ...obj,
+        [key]: mappedVal,
+      };
+    }, {});
+    yield call(api.sendEditorValues, socket, mappedValues);
+  } catch (err) {
+    yield put(actions.sendEditorValuesFailure(err.message, err));
+  }
+}
+
+function* sendEval(code) {
+  try {
+    max += 1;
+    yield call(api.sendEval, socket, code);
+  } catch (err) {
+    yield put(actions.evalFailure(err.message, err));
   }
 }
 
@@ -115,36 +142,16 @@ function* watchForResultId() {
   ], watchEvents);
 }
 
-function* sendEditorValues(values) {
-  try {
-    const mappedValues = Object.keys(values).reduce((obj, key) => {
-      const mappedVal = (2 - values[key]) * -1;
-      return {
-        ...obj,
-        [key]: mappedVal,
-      };
-    }, {});
-    const buffer = yield call(api.sendEditorValues, socket, mappedValues);
-    const uri = yield call(parse.image, buffer);
-    yield put(actions.sendEditorValuesSuccess(uri));
-  } catch (err) {
-    yield put(actions.sendEditorValuesFailure(err.message, err));
-  }
+function* connectSocket() {
+  socket = yield call(Socket.init);
 }
 
-function* sendEval(code) {
-  try {
-    const buffer = yield call(api.sendEval, socket, code);
-    const uri = yield call(parse.image, buffer);
-    yield put(actions.sendImageSuccess(uri));
-    yield put(actions.imageResultFinish());
-  } catch (err) {
-    yield put(actions.evalFailure(err.message, err));
-  }
+function* watchConnection() {
+  yield takeLatest(types.SOCKET_DISCONNECTED, connectSocket);
 }
 
 function* watch() {
-  socket = yield call(Socket.init);
+  yield call(connectSocket);
 
   while (true) {
     const { payload = {}, type } = yield take([
@@ -163,7 +170,7 @@ function* watch() {
         break;
 
       case types.SEND_IMAGE_REQUEST:
-        yield fork(sendImage, payload.image);
+        yield fork(sendImage, payload.image, payload.isReset);
         break;
 
       default:
@@ -173,5 +180,5 @@ function* watch() {
 }
 
 export default function* rootSaga() {
-  yield all([watch(), watchForResultId()]);
+  yield all([watch(), watchForResultId(), watchConnection()]);
 }

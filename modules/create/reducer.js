@@ -71,7 +71,7 @@ export const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         editorIsFetching: false,
-        results: state.results.concat(action.payload.result),
+        // results: state.results.concat(action.payload.result),
       };
 
     case types.SEND_EDITOR_VALUES_FAILURE:
@@ -88,17 +88,17 @@ export const reducer = (state = initialState, action = {}) => {
         isFetching: true,
       };
 
-    case types.EVAL_SUCCESS:
-      return {
-        ...state,
-        editorIsFetching: false,
-        results: state.results.concat(action.payload.result),
-      };
+    // case types.EVAL_SUCCESS:
+    //   return {
+    //     ...state,
+    //     results: state.results.concat(action.payload.result),
+    //   };
 
     case types.EVAL_FAILURE:
       return {
         ...state,
         editorIsFetching: false,
+        isFetching: false,
       };
 
     default:

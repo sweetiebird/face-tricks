@@ -17,3 +17,5 @@ export const EVAL_REQUEST = '@create/EVAL_REQUEST';
 export const EVAL_SUCCESS = '@create/EVAL_SUCCESS';
 
 export const ITERATE_AGAIN = '@create/ITERATE_AGAIN';
+
+export const SOCKET_DISCONNECTED = '@create/SOCKET_DISCONNECTED';
