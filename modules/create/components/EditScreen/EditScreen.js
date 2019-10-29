@@ -94,7 +94,7 @@ const EditScreen = (props) => {
           <KeepLearningSection
             isFetching={isFetching}
             onPress={() => {
-              sendEval(`(do (set-latent (optimize-latent 4)) (w/size ${create.imageSize} ${create.imageSize} (grab-image ${grabLatentExpression(currentEditorValues)})))`);
+              sendEval(`(do (set-latent (optimize-latent optimize-latent-steps*)) (w/size ${create.imageSize} ${create.imageSize} (grab-image ${grabLatentExpression(currentEditorValues)})))`);
             }}
           />
         )}

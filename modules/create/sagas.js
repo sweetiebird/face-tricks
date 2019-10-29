@@ -59,6 +59,8 @@ async function socketChannel(id) {
           (let n (either secs 0.5)
             (await (asyncio.sleep n))))
 
+        (defvar optimize-latent-steps* 1)
+
         (set-image-from-data ${id})
         (await (send-image (grab-target)))
         (set-latent (grab-estimate))
@@ -66,7 +68,7 @@ async function socketChannel(id) {
         (await (send-image (w/size ${create.imageSize} ${create.imageSize} emily)))
         (await (pause))
         (for i ${create.iterations}
-          (set-latent (optimize-latent 4))
+          (set-latent (optimize-latent optimize-latent-steps*))
           (await (send-image (w/size ${create.imageSize} ${create.imageSize} (set emily (grab-image)))))
           (await (pause)))
         (w/size ${create.imageSize} ${create.imageSize}
