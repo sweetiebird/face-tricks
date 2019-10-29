@@ -60,6 +60,9 @@ const EditScreen = (props) => {
   const [currentEditorValues, setCurrentEditorValues] = useState(editorKeyMap);
   const [slidersKey, setSlidersKey] = useState(0);
 
+  const firstIdx = results.length < 3 ? 0 : results.length - 3;
+  const displayResults = results.slice(firstIdx, results.length);
+
   return (
     <ContainerStyled>
       <StatusBar hidden />
@@ -81,7 +84,7 @@ const EditScreen = (props) => {
             sendEval(`(grab-target)`);
           }}
           original={imageUri}
-          results={results}
+          results={displayResults}
           size={imageSize}
           marginH={imageMarginH}
         />
