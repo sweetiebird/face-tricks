@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FlatList } from 'react-native';
 
 import { editorKeys } from 'constants';
 
@@ -13,18 +14,22 @@ const EditorSliders = (props) => {
     setEditorValues,
   } = props;
 
+  const sum = Object.keys(editorValues).reduce((sum, key) => editorValues[key] + sum, 0);
+
   return (
-    <React.Fragment>
-      {editorKeys.map(item => (
+    <FlatList
+      data={editorKeys}
+      extraData={sum}
+      keyExtractor={item => item[1]}
+      renderItem={({ item }) => (
         <ListItem
-          key={item[1]}
           editorValues={editorValues}
           item={item}
           onSendValues={onSendValues}
           setEditorValues={setEditorValues}
         />
-      ))}
-    </React.Fragment>
+      )}
+    />
   );
 };
 

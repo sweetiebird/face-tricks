@@ -132,11 +132,11 @@ const CreateScreen = (props) => {
           <SuccessButton
             icon={icons.CREATE}
             noBorder
-            isDisabled={!imageData || isFetching}
+            isDisabled={!imageData}
             onPress={async () => {
-              Navigation.navigate('Edit');
               const file = await FS.getFile(imageData.uri);
               sendImage(file, true);
+              Navigation.navigate('Edit');
             }}
           >
             Start Learning

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { CameraRoll, Dimensions, View, StatusBar } from 'react-native';
+import { CameraRoll, Dimensions, View, StatusBar, SafeAreaView } from 'react-native';
 
 import { create, editorKeys } from 'constants';
 
@@ -64,74 +64,76 @@ const EditScreen = (props) => {
   const displayResults = results.slice(firstIdx, results.length);
 
   return (
-    <ContainerStyled>
-      <StatusBar hidden />
-      <View style={{ height: topSectionHeight }}>
-        <ResultImagePreview
-          onSave={async (uri) => {
-            try {
-              const granted = await System.requestCameraRollPermissions();
+    <SafeAreaView style={{ flex: 1, height: '100%' }}>
+      <View style={{ flex: 1, height: '100%' }}>
+        <StatusBar hidden />
+        <View style={{ height: topSectionHeight }}>
+          <ResultImagePreview
+            onSave={async (uri) => {
+              try {
+                const granted = await System.requestCameraRollPermissions();
 
-              if (granted) {
-                CameraRoll.saveToCameraRoll(uri);
+                if (granted) {
+                  CameraRoll.saveToCameraRoll(uri);
+                }
+              } catch (err) {
+                console.log(err, err.message);
+                Error.log(err, { message: err.message, location: 'onSave to camera roll' });
               }
-            } catch (err) {
-              console.log(err, err.message);
-              Error.log(err, { message: err.message, location: 'onSave to camera roll' });
-            }
+            }}
+            onEye={() => {
+              sendEval(`(grab-target)`);
+            }}
+            original={imageUri}
+            results={displayResults}
+            size={imageSize}
+            marginH={imageMarginH}
+          />
+
+          {isFetching && (
+            <LearningTextLoader />
+          )}
+
+          {!isFetching && (
+            <KeepLearningSection
+              isFetching={isFetching}
+              onPress={() => {
+                sendEval(`(do (set-latent (optimize-latent optimize-latent-steps*)) (w/size ${create.imageSize} ${create.imageSize} (grab-image ${grabLatentExpression(currentEditorValues)})))`);
+              }}
+            />
+          )}
+        </View>
+
+        <EditorSlidersHeader
+          editorIsFetching={editorIsFetching}
+          editorValues={currentEditorValues}
+          isFetching={isFetching}
+          onCommit={() => {
+            setCurrentEditorValues(editorKeyMap);
+            sendEval(
+              `(do (set-latent ${grabLatentExpression(currentEditorValues)}) (w/size ${create.imageSize} ${create.imageSize} (grab-image)))`
+            );
+            setSlidersKey(slidersKey + 1);
           }}
-          onEye={() => {
-            sendEval(`(grab-target)`);
+          onReset={() => {
+            setSlidersKey(slidersKey + 1);
+            setCurrentEditorValues(editorKeyMap);
+            sendEditorValues(editorKeyMap);
           }}
-          original={imageUri}
-          results={displayResults}
-          size={imageSize}
-          marginH={imageMarginH}
         />
 
-        {isFetching && (
-          <LearningTextLoader />
-        )}
-
-        {!isFetching && (
-          <KeepLearningSection
-            isFetching={isFetching}
-            onPress={() => {
-              sendEval(`(do (set-latent (optimize-latent optimize-latent-steps*)) (w/size ${create.imageSize} ${create.imageSize} (grab-image ${grabLatentExpression(currentEditorValues)})))`);
-            }}
-          />
-        )}
+        <ScrollViewStyled contentContainerStyle={{ paddingBottom: 10 }}>
+          <View style={{ width: '100%' }}>
+            <EditorSliders
+              editorValues={currentEditorValues}
+              key={`editor-sliders-${slidersKey}`}
+              onSendValues={sendEditorValues}
+              setEditorValues={setCurrentEditorValues}
+            />
+          </View>
+        </ScrollViewStyled>
       </View>
-
-      <EditorSlidersHeader
-        editorIsFetching={editorIsFetching}
-        editorValues={currentEditorValues}
-        isFetching={isFetching}
-        onCommit={() => {
-          setCurrentEditorValues(editorKeyMap);
-          sendEval(
-            `(do (set-latent ${grabLatentExpression(currentEditorValues)}) (w/size ${create.imageSize} ${create.imageSize} (grab-image)))`
-          );
-          setSlidersKey(slidersKey + 1);
-        }}
-        onReset={() => {
-          setSlidersKey(slidersKey + 1);
-          setCurrentEditorValues(editorKeyMap);
-          sendEditorValues(editorKeyMap);
-        }}
-      />
-
-      <ScrollViewStyled contentContainerStyle={{ paddingBottom: 10 }}>
-        <View style={{ width: '100%' }}>
-          <EditorSliders
-            editorValues={currentEditorValues}
-            key={`editor-sliders-${slidersKey}`}
-            onSendValues={sendEditorValues}
-            setEditorValues={setCurrentEditorValues}
-          />
-        </View>
-      </ScrollViewStyled>
-    </ContainerStyled>
+    </SafeAreaView>
   );
 };
 
