@@ -24,7 +24,7 @@
       "**/*"
     ],
     "ios": {
-      "buildNumber": "3",
+      "buildNumber": "4",
       "bundleIdentifier": "com.emilykolar.FaceWeave",
       "config": {
         "googleSignIn": {
