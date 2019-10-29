@@ -6,7 +6,7 @@ import { colors } from 'constants';
 import { ImageWrapperStyled, ImageStyled } from './styled';
 
 
-const PreviewImage = ({ hasBorder, isBase, uri, style, size, marginH }) => {
+const PreviewImage = ({ frameStyle, imgStyle, hasBorder, isBase, uri, style, size, marginH }) => {
   const [fadeAnim] = useState(new Animated.Value(0));
 
   useEffect(() => {
@@ -23,6 +23,8 @@ const PreviewImage = ({ hasBorder, isBase, uri, style, size, marginH }) => {
   if (hasBorder) {
     frameStyles.borderWidth = 2;
     frameStyles.borderColor = colors.smoke
+  } else {
+    frameStyles.borderWidth = 0;
   }
 
   if (isBase) {
@@ -36,12 +38,13 @@ const PreviewImage = ({ hasBorder, isBase, uri, style, size, marginH }) => {
       <ImageWrapperStyled
         size={size}
         marginH={marginH}
-        style={frameStyles}
+        style={{ ...frameStyles, ...frameStyle || {} }}
       >
         {!!uri && (
           <ImageStyled
             size={size}
             source={{ uri }}
+            style={imgStyle || {}}
           />
         )}
       </ImageWrapperStyled>

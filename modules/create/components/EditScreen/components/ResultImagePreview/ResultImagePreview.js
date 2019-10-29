@@ -11,7 +11,7 @@ import {
 } from 'components';
 
 
-const ResultImagePreview = ({ onSave, onEye, results, size, marginH }) => {
+const ResultImagePreview = ({ original, onSave, onEye, results, size, marginH }) => {
   return (
     <View
       style={{
@@ -19,15 +19,13 @@ const ResultImagePreview = ({ onSave, onEye, results, size, marginH }) => {
         width: size,
         height: size,
         marginBottom: 10,
-        marginTop: 10,
       }}
     >
       {results.length === 0 && (
         <PreviewImage
-          hasBorder
           isBase
           key="placeholder-image"
-          uri={null}
+          uri={original}
           style={{ zIndex: 1 }}
           size={size}
           marginH={marginH}
@@ -93,6 +91,7 @@ const ResultImagePreview = ({ onSave, onEye, results, size, marginH }) => {
 };
 
 ResultImagePreview.propTypes = {
+  original: PropTypes.string.isRequired,
   onSave: PropTypes.func.isRequired,
   onEye: PropTypes.func.isRequired,
   results: PropTypes.arrayOf(PropTypes.string),

@@ -36,6 +36,13 @@ const noBorderCss = css`
   border-width: 0;
 `;
 
+const circleButtonCss = css`
+  border-radius: 40px;
+  width: 80px;
+  height: 80px;
+  padding: 0 0 0 0;
+`;
+
 const buttonCss = css`
   align-items: center;
   border-radius: 100px;
@@ -52,6 +59,7 @@ const buttonCss = css`
   ${props => props.disabled ? disabledCss : ''}
   ${props => props.small || props.tiny ? smButtonCss : ''}
   ${props => props.noBorder ? noBorderCss : ''}
+  ${props => props.circle ? circleButtonCss : ''}
 `;
 
 export const ButtonStyled = styled.View`

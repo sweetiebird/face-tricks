@@ -21,6 +21,7 @@ const Button = (props) => {
     isDisabled,
     isFocused,
     isInverted,
+    isLabeledCircle,
     isLoading,
     isPrimary,
     isSuccess,
@@ -43,6 +44,7 @@ const Button = (props) => {
       underlayColor={colors.smoke}
     >
       <ButtonStyled
+        circle={isLabeledCircle}
         danger={isDanger}
         disabled={isDisabled}
         inverted={isInverted}
@@ -59,7 +61,7 @@ const Button = (props) => {
             name={icon}
             size={iconSize}
             style={{
-              marginRight: children ? 8 : 0,
+              marginRight: !!children ? 8 : 0,
               ...(iconStyles || {}),
             }}
             color={isDisabled ? colors.smoke : iconColor}

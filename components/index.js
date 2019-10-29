@@ -4,6 +4,7 @@ export {
   InvertedButton,
   PrimaryButton,
   SuccessButton,
+  LabeledCircleButton,
 } from './Button';
 export { default as DefaultText } from './DefaultText';
 export { default as TabBarIcon } from './TabBarIcon';

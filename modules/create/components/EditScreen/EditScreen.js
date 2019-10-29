@@ -46,6 +46,7 @@ const EditScreen = (props) => {
   const {
     editorIsFetching,
     editorValues,
+    imageUri,
     isFetching,
     results,
     sendEditorValues,
@@ -55,7 +56,7 @@ const EditScreen = (props) => {
   const { height, width } = Dimensions.get('window');
 
   const maxImageSize = (height * 0.5);
-  const imageSize = Math.min(width * 0.8, maxImageSize);
+  const imageSize = width;
   const imageMarginH = (width - imageSize) * 0.5;
   const topSectionHeight = imageSize + 60;
 
@@ -81,6 +82,7 @@ const EditScreen = (props) => {
           onEye={() => {
             sendEval(`(grab-target)`);
           }}
+          original={imageUri}
           results={results}
           size={imageSize}
           marginH={imageMarginH}

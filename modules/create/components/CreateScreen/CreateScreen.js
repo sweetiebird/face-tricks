@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Dimensions, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
-import { icons } from 'constants';
+import { colors, icons } from 'constants';
 
 import { Error, Navigation } from 'services';
 
@@ -13,6 +13,7 @@ import {
   InvertedButton,
   PreviewImage,
   SuccessButton,
+  LabeledCircleButton,
 } from 'components';
 
 import {
@@ -34,10 +35,19 @@ const CreateScreen = (props) => {
 
   return (
     <ContainerStyled>
-      <ScrollViewStyled contentContainerStyle={{ paddingTop: 30 }}>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          marginBottom: imageData ? 20 : 10,
+        }}>
         <ButtonViewStyled>
-          <InvertedButton
+          <LabeledCircleButton
             icon={icons.ADD_IMAGE}
+            iconSize={32}
+            iconColor={colors.primary}
+            isPrimary
             onPress={async () => {
               try {
                 const granted = await System.requestCameraRollPermissions();
@@ -62,13 +72,16 @@ const CreateScreen = (props) => {
               }
             }}
           >
-            Pick Photo
-          </InvertedButton>
+            Photo Library
+          </LabeledCircleButton>
         </ButtonViewStyled>
 
         <ButtonViewStyled>
-          <InvertedButton
+          <LabeledCircleButton
             icon={icons.TAKE_IMAGE}
+            iconColor={colors.primary}
+            iconSize={40}
+            isPrimary
             onPress={async () => {
               try {
                 const granted = await System.requestCameraPermissions();
@@ -93,17 +106,17 @@ const CreateScreen = (props) => {
               }
             }}
           >
-            Snap Photo
-          </InvertedButton>
+            Camera
+          </LabeledCircleButton>
         </ButtonViewStyled>
+      </View>
 
+      {!!imageData && (
         <View
           style={{
             position: 'relative',
             width: width,
             height: imageSize,
-            marginTop: 10,
-            marginBottom: 10,
           }}
         >
           <PreviewImage
@@ -112,21 +125,24 @@ const CreateScreen = (props) => {
             marginH={imageMarginH}
           />
         </View>
+      )}
 
-        <ButtonViewStyled>
+      {!!imageData && (
+        <ButtonViewStyled style={{ marginTop: imageData ? 20 : 10 }}>
           <SuccessButton
             icon={icons.CREATE}
-            isDisabled={!imageData || isFetching}
+            noBorder
+            // isDisabled={!imageData || isFetching}
             onPress={async () => {
-              const file = await FS.getFile(imageData.uri);
-              sendImage(file, true);
+              // const file = await FS.getFile(imageData.uri);
+              // sendImage(file, true);
               Navigation.navigate('Edit');
             }}
           >
             Start Learning
           </SuccessButton>
         </ButtonViewStyled>
-      </ScrollViewStyled>
+      )}
     </ContainerStyled>
   );
 };
