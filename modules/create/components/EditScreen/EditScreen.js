@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { CameraRoll, Dimensions, View } from 'react-native';
+import { CameraRoll, Dimensions, View, StatusBar } from 'react-native';
 
 import { create, editorKeys } from 'constants';
 
-import { System } from 'utils';
+import { Convert, System } from 'utils';
 
 import { Error } from 'services';
 
 import {
+  Actions,
   EditorSliders,
   EditorSlidersHeader,
   KeepLearningSection,
@@ -25,8 +26,6 @@ const editorKeyMap = editorKeys.reduce((obj, [weight, key]) => ({
   ...obj,
   [key]: weight,
 }), {});
-
-import { Convert } from 'utils';
 
 const grabLatentExpression = (rawValues) => {
   const mappedValues = Object.keys(rawValues).reduce((obj, key) => {
@@ -45,7 +44,6 @@ const grabLatentExpression = (rawValues) => {
 const EditScreen = (props) => {
   const {
     editorIsFetching,
-    editorValues,
     imageUri,
     isFetching,
     results,
@@ -53,9 +51,8 @@ const EditScreen = (props) => {
     sendEval,
   } = props;
 
-  const { height, width } = Dimensions.get('window');
+  const { width } = Dimensions.get('window');
 
-  const maxImageSize = (height * 0.5);
   const imageSize = width;
   const imageMarginH = (width - imageSize) * 0.5;
   const topSectionHeight = imageSize + 60;
@@ -65,6 +62,7 @@ const EditScreen = (props) => {
 
   return (
     <ContainerStyled>
+      <StatusBar hidden />
       <View style={{ height: topSectionHeight }}>
         <ResultImagePreview
           onSave={async (uri) => {
@@ -153,6 +151,10 @@ EditScreen.defaultProps = {
   imageUri: null,
   results: [],
   resultId: undefined,
+};
+
+EditScreen.navigationOptions = {
+  header: null,
 };
 
 

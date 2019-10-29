@@ -1,3 +1,4 @@
+export { default as Actions } from './Actions';
 export { default as EditorSliders } from './EditorSliders';
 export { default as EditorSlidersHeader } from './EditorSlidersHeader';
 export { default as KeepLearningSection } from './KeepLearningSection';

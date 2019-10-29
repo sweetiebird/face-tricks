@@ -101,6 +101,12 @@ export const reducer = (state = initialState, action = {}) => {
         isFetching: false,
       };
 
+    case types.POP_LAST_RESULT:
+      return {
+        ...state,
+        results: state.results.splice(state.results.length - 1, 1),
+      };
+
     default:
       return state;
   }

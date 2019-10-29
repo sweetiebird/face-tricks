@@ -27,6 +27,8 @@ const ResultImagePreview = ({ original, onSave, onEye, results, size, marginH })
           key="placeholder-image"
           uri={original}
           style={{ zIndex: 1 }}
+          frameStyle={{ borderRadius: 0 }}
+          imgStyle={{ borderRadius: 0 }}
           size={size}
           marginH={marginH}
         />
@@ -81,6 +83,8 @@ const ResultImagePreview = ({ original, onSave, onEye, results, size, marginH })
             isBase={i === 0}
             uri={uri}
             style={{ zIndex: 1 }}
+            frameStyle={{ borderRadius: 0 }}
+            imgStyle={{ borderRadius: 0 }}
             size={size}
             marginH={marginH}
           />
