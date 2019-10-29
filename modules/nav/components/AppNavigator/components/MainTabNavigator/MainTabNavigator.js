@@ -4,7 +4,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import { colors, icons } from 'constants';
 
-import { CreateScreen, EditScreen } from 'modules/create/components';
+import { CreateScreen } from 'modules/create/components';
 import { HistoryScreen } from 'modules/history/components';
 import { HomeScreen } from 'modules/home/components';
 import { AccountScreen } from 'modules/user/components';
@@ -24,7 +24,6 @@ const config = Platform.select({
 const CreateStack = createStackNavigator(
   {
     Create: CreateScreen,
-    Edit: EditScreen,
   },
   config,
 );
@@ -66,7 +65,7 @@ const HomeStack = createStackNavigator(
 );
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Discover',
+  tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon isFocused={focused} name={icons.TRENDING} />
   ),

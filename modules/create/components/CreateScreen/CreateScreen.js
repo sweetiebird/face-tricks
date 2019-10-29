@@ -72,7 +72,7 @@ const CreateScreen = (props) => {
               }
             }}
           >
-            Photo Library
+            Pick a Photo
           </LabeledCircleButton>
         </ButtonViewStyled>
 
@@ -106,7 +106,7 @@ const CreateScreen = (props) => {
               }
             }}
           >
-            Camera
+            Snap a Photo
           </LabeledCircleButton>
         </ButtonViewStyled>
       </View>
@@ -134,9 +134,9 @@ const CreateScreen = (props) => {
             noBorder
             isDisabled={!imageData || isFetching}
             onPress={async () => {
+              Navigation.navigate('Edit');
               const file = await FS.getFile(imageData.uri);
               sendImage(file, true);
-              Navigation.navigate('Edit');
             }}
           >
             Start Learning

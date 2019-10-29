@@ -33,6 +33,7 @@ const PreviewImage = ({ frameStyle, imgStyle, hasBorder, isBase, uri, style, siz
     frameStyles.shadowOpacity = 1.0;
     frameStyles.shadowOffset = { width: 0, height: 1 };
   }
+
   return (
     <Animated.View style={{ ...style, opacity: fadeAnim }}>
       <ImageWrapperStyled
@@ -42,7 +43,7 @@ const PreviewImage = ({ frameStyle, imgStyle, hasBorder, isBase, uri, style, siz
       >
         {!!uri && (
           <ImageStyled
-            size={size}
+            size={size * 1.05}
             source={{ uri }}
             style={imgStyle || {}}
           />

@@ -43,6 +43,18 @@ const circleButtonCss = css`
   padding: 0 0 0 0;
 `;
 
+// export const buttonStyles = () => ({
+//   alignItems: 'center',
+//   borderRadius: 100,
+//   borderWidth: 2,
+//   display: 'flex',
+//   flexDirection: 'row',
+//   justifyContent: 'center',
+//   paddingLeft: 18,
+//   paddingRight: 18,
+//   position: 'relative',
+// });
+
 const buttonCss = css`
   align-items: center;
   border-radius: 100px;
