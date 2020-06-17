@@ -13,3 +13,5 @@ environment.js
 .idea
 google-services.json
 /platforms
+yarn-error.log
+upgrade.log
