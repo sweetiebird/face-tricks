@@ -3,7 +3,7 @@ import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/storage';
 
-import getEnv from 'config/environment';
+import getEnv from '../../config/environment';
 
 import Auth from './auth';
 import Database from './database';
@@ -16,9 +16,9 @@ const config = {
   apiKey: env.firebase.apiKey,
   appId: env.firebase.appId,
   authDomain: env.firebase.authDomain,
-  databaseURL: env.firebase.dbUrl,
-  measurementId: env.firebase.measureId,
-  messagingSenderId: env.firebase.msgSenderId,
+  databaseURL: env.firebase.databaseURL,
+  measurementId: env.firebase.measurementId,
+  messagingSenderId: env.firebase.messagingSenderId,
   projectId: env.firebase.projectId,
   storageBucket: env.firebase.storageBucket,
 };

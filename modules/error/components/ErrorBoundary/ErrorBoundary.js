@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Error } from 'services';
+import { Error } from '../../../../services';
 
-import { DefaultText } from 'components';
+import { DefaultText } from '../../../../components';
 
 
 class ErrorBoundary extends React.Component {

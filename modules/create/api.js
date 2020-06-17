@@ -1,6 +1,6 @@
-import { create } from 'constants';
+import { create } from '../../constants';
 
-import { Convert } from 'utils';
+import { Convert } from '../../utils';
 
 
 export const sendImage = async (socket, image) => {

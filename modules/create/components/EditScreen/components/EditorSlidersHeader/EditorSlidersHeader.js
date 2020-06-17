@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 
-import { colors, icons } from 'constants';
+import { colors, icons } from '../../../../../../constants';
 
 import {
   DangerButton,
   DefaultText,
   SuccessButton,
   TabBarIcon,
-} from 'components';
+}from '../../../../../../components';
 
 
 const editTitleViewStyles = {

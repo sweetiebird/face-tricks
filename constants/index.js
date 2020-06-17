@@ -1,4 +1,4 @@
-import editorKeys, { sections } from './editorKeys';
+import editorKeys from './editorKeys';
 import layout from './layout';
 import * as api from './api';
 import * as colors from './colors';
@@ -10,7 +10,6 @@ export {
   colors,
   create,
   editorKeys,
-  sections,
   icons,
   layout,
 };

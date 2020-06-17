@@ -2,14 +2,14 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import { colors, icons } from 'constants';
+import { colors, icons } from '../../../../../../constants';
 
-import { CreateScreen, EditScreen } from 'modules/create/components';
-import { HistoryScreen } from 'modules/history/components';
-import { HomeScreen } from 'modules/home/components';
-import { AccountScreen } from 'modules/user/components';
+import { CreateScreen, EditScreen } from '../../../../../../modules/create/components';
+import { HistoryScreen } from '../../../../../../modules/history/components';
+import { HomeScreen } from '../../../../../../modules/home/components';
+import { AccountScreen } from '../../../../../../modules/user/components';
 
-import { TabBarIcon } from 'components';
+import { TabBarIcon } from '../../../../../../components';
 
 
 const config = Platform.select({

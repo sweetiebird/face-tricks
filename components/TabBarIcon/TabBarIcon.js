@@ -1,7 +1,7 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
-import { colors } from 'constants';
+import { colors } from '../../constants';
 
 import { styles } from './styled';
 

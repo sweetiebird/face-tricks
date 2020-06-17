@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/native';
 
-import { colors } from 'constants';
+import { colors } from '../../constants';
 
 
 const italicCss = css`

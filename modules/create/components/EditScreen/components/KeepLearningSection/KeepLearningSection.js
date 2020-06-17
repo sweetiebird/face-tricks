@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, View } from 'react-native';
 
-import { colors, icons } from 'constants';
+import { colors, icons } from '../../../../../../constants';
 
-import { TextWithTinyButton } from 'components';
+import { TextWithTinyButton } from '../../../../../../components';
 
 
 const KeepLearningSection = (props) => {

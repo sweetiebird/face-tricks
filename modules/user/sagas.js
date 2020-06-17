@@ -1,7 +1,7 @@
 import { eventChannel } from 'redux-saga'
 import { call, put, take } from 'redux-saga/effects';
 
-import { Auth } from 'services';
+import { Auth } from '../../services';
 
 import * as actions from './actions';
 import * as parse from './parse';

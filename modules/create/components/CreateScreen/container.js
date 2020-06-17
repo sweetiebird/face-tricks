@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { actions, selectors } from 'modules/create';
+import { actions, selectors } from '../../../../modules/create';
 
 import presenter from './CreateScreen';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { propTypes, defaultProps } from 'components/commonProps';
+import { propTypes, defaultProps } from '../../components/commonProps';
 
 import Button from '../Button';
 import DefaultText from '../DefaultText';

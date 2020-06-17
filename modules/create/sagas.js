@@ -1,9 +1,9 @@
 import { eventChannel } from 'redux-saga'
 import { all, call, fork, put, take, takeEvery, takeLatest } from 'redux-saga/effects';
 
-import { create } from 'constants';
+import { create } from '../../constants';
 
-import { Socket } from 'services';
+import { Socket } from '../../services';
 
 import * as api from './api';
 import * as actions from './actions';

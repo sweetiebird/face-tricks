@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { propTypes, defaultProps } from 'components/commonProps';
+import { propTypes, defaultProps } from '../../components/commonProps';
 
 import { DefaultTextStyled } from './styled';
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Platform, View } from 'react-native';
 import { startCase } from 'lodash';
 
-import { DefaultText, FlexRow, Slider } from 'components';
+import { DefaultText, FlexRow, Slider } from '../../../../../../../../components';
 
 
 const editorValueStyles = {

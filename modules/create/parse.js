@@ -2,7 +2,7 @@ import * as FileSystem from 'expo-file-system';
 import { encode } from 'base64-arraybuffer';
 import shortid from 'shortid';
 
-import { FS } from 'utils';
+import { FS } from '../../utils';
 
 
 export const wipe = async () => {

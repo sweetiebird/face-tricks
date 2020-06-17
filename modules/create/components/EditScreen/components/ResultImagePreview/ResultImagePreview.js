@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 
-import { colors, icons } from 'constants';
+import { colors, icons } from '../../../../../../constants';
 
-import { PreviewImage } from 'components';
+import { PreviewImage } from '../../../../../../components';
 
 import {
   TextWithTinyButton,
-} from 'components';
+} from '../../../../../../components';
 
 
 const ResultImagePreview = ({ onSave, onEye, results, size, marginH }) => {

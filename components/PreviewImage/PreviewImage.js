@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Animated } from 'react-native';
 
-import { colors } from 'constants';
+import { colors } from '../../constants';
 
 import { ImageWrapperStyled, ImageStyled } from './styled';
 

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { selectors as userSelectors } from 'modules/user';
+import { selectors as userSelectors } from '../modules/user';
 
 import presenter from './AppMain';
 

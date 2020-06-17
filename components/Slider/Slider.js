@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Platform, Slider as RNSlider, View } from 'react-native';
 
-import { colors } from 'constants';
+import { colors } from '../../constants';
 
 
 const Slider = (props) => {
@@ -32,7 +32,7 @@ const Slider = (props) => {
          }
         }}
         thumbTintColor={(Platform.OS === 'android' && colors.primaryHover) || undefined}
-        thumbImage={require('assets/images/slider5.png')}
+        thumbImage={require('../../assets/images/slider5.png')}
         step={step}
         style={{ width: '100%' }}
         value={initialValue}

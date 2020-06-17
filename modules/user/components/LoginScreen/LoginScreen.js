@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native';
 
-import { Auth } from 'services';
+import { Auth } from '../../../../services';
 
-import { DefaultText } from 'components';
+import { DefaultText } from '../../../../components';
 
 
 const LoginScreen = () => {

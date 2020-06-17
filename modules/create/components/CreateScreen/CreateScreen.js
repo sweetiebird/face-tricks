@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import { Dimensions, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
-import { icons } from 'constants';
+import { icons } from '../../../../constants';
 
-import { Error, Navigation } from 'services';
+import { Error, Navigation } from '../../../../services';
 
-import { FS, System } from 'utils';
+import { FS, System } from '../../../../utils';
 
 import {
   InvertedButton,
   PreviewImage,
   SuccessButton,
-} from 'components';
+}from '../../../../components';
 
 import {
   ButtonViewStyled,

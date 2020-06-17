@@ -4,7 +4,7 @@ import { ActivityIndicator } from 'react-native';
 import {
   DefaultText,
   FlexRow,
-} from 'components';
+} from '../../../../../../components';
 
 
 const learningTextStyle = {

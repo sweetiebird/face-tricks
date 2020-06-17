@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { CameraRoll, Dimensions, View } from 'react-native';
 
-import { create, editorKeys } from 'constants';
+import { create, editorKeys } from '../../../../constants';
 
-import { System } from 'utils';
+import { System } from '../../../../utils';
 
-import { Error } from 'services';
+import { Error } from '../../../../services';
 
 import {
   EditorSliders,
@@ -26,7 +26,7 @@ const editorKeyMap = editorKeys.reduce((obj, [weight, key]) => ({
   [key]: weight,
 }), {});
 
-import { Convert } from 'utils';
+import { Convert } from '../../../../utils';
 
 const grabLatentExpression = (rawValues) => {
   const mappedValues = Object.keys(rawValues).reduce((obj, key) => {

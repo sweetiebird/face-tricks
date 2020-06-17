@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DefaultText } from 'components';
+import { DefaultText } from '../../../../components';
 
 
 const HomeScreen = () => {
