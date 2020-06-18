@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "build:ios": "export $(grep '' .env); expo build:ios --apple-id $APPLE_ID --team-id $TEAM_ID --type archive"
   },
   "dependencies": {
     "@bugsnag/expo": "^7.1.1",
