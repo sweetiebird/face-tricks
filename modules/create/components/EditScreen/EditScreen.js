@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { CameraRoll, Dimensions, View } from 'react-native';
+import { Dimensions, View } from 'react-native';
+import * as MediaLibrary from 'expo-media-library';
 
 import { create, editorKeys } from 'constants';
 
@@ -71,7 +72,7 @@ const EditScreen = (props) => {
               const granted = await System.requestCameraRollPermissions();
 
               if (granted) {
-                CameraRoll.saveToCameraRoll(uri);
+                await MediaLibrary.saveToLibraryAsync(uri);
               }
             } catch (err) {
               console.log(err, err.message);
