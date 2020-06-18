@@ -1,17 +1,18 @@
 {
   "expo": {
-    "name": "face-weave",
-    "slug": "face-weave",
+    "name": "FaceWeave",
+    "slug": "faceweave",
+    "privacy": "public",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "1.0.4",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -22,7 +23,36 @@
       "**/*"
     ],
     "ios": {
+      "buildNumber": "4",
+      "bundleIdentifier": "com.emilykolar.FaceWeave",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.1091742301427-r652vosbtsr903m4u8u4tb1i3vafc83b"
+        }
+      },
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to let you capture and edit images.",
+        "NSPhotoLibraryUsageDescription": "This app uses the photo library for selecting images to edit.",
+        "NSPhotoLibraryAddUsageDescription": "This app allows you to save your edited images."
+      },
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.emilykolar.FaceWeave",
+      "googleServicesFile": "config/google-services.json"
+    },
+    "extra": {
+      "bugsnag": {
+        "apiKey": "b95c6436c75580ea061b8380aaf446bd"
+      }
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "@bugsnag/expo/hooks/post-publish.js",
+          "config": {}
+        }
+      ]
     }
   }
 }

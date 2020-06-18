@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1091742301427-r652vosbtsr903m4u8u4tb1i3vafc83b.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1091742301427-r652vosbtsr903m4u8u4tb1i3vafc83b</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC9ah9DqW5magqpkAUFJXHBSA2DcxIqjH4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1091742301427</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.emilykolar.FaceWeave</string>
+	<key>PROJECT_ID</key>
+	<string>face-tricks</string>
+	<key>STORAGE_BUCKET</key>
+	<string>face-tricks.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1091742301427:ios:5c5cde047d7b6bd69a0b86</string>
+	<key>DATABASE_URL</key>
+	<string>https://face-tricks.firebaseio.com</string>
+</dict>
+</plist>

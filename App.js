@@ -1,19 +1,30 @@
+import 'config/dev';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import bugsnag from '@bugsnag/expo';
+import { Provider } from 'react-redux';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
-}
+import getEnv from 'config/environment';
+import createStore from 'store';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import AppMain from './AppMain';
+
+import { ErrorBoundary } from 'modules/error/components';
+
+
+const env = getEnv();
+
+const store = createStore();
+
+global.bugsnagClient = bugsnag.start(env.bugsnag.key);
+
+debugger;
+const App = ({ skipLoadingScreen }) => (
+  <ErrorBoundary>
+    <Provider store={store}>
+      <AppMain skipLoadingScreen={skipLoadingScreen} />
+    </Provider>
+  </ErrorBoundary>
+);
+
+
+export default App;
